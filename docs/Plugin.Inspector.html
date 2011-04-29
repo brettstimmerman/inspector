@@ -1,0 +1,320 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html xmlns:yui="http://yuilibrary.com/rdf/1.0/yui.rdf#">
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+	<title>API: gallery-inspector  Plugin.Inspector   (YUI Library)</title>
+
+	<link rel="stylesheet" type="text/css" href="assets/reset-fonts-grids-min.css?stamp=1304104496.41" />
+	<link rel="stylesheet" type="text/css" href="assets/api.css?stamp=1304104496.41" />
+
+    <script type="text/javascript" src="assets/api-js?stamp=1304104496.41"></script>
+    <script type="text/javascript" src="assets/ac-js?stamp=1304104496.41"></script>
+</head>
+
+<body id="yahoo-com">
+
+<div id="doc3" class="yui-t2">
+	<div id="hd">
+        <h1><a href="http://developer.yahoo.com/yui/" title="Yahoo! UI Library">Yahoo! UI Library</a></h1>
+        <h3>gallery-inspector&nbsp; <span class="subtitle">0.1.0</span></h3>
+        <a href="./index.html" title="Yahoo! UI Library">Yahoo! UI Library</a> 
+            &gt; <a href="./module_gallery-inspector.html" title="gallery-inspector">gallery-inspector</a>
+                 &gt; Plugin.Inspector 
+                
+        <form onsubmit="return false">
+            <div id="propertysearch">
+                Search: <input autocomplete="off" id="searchinput" />
+                <div id="searchresults">
+                    &nbsp;
+                </div>
+            </div>
+        </form>
+	</div>
+
+	<div id="bd">
+		<div id="yui-main">
+			<div class="yui-b">
+            <form action="#" name="yui-classopts-form" method="get" id="yui-classopts-form">
+                <fieldset>
+                    <legend>Filters</legend>
+                <span class="classopts"><input type="checkbox" name="show_private" id="show_private" /> <label for="show_private">Show Private</label></span>
+                <span class="classopts"><input type="checkbox" name="show_protected" id="show_protected" /> <label for="show_protected">Show Protected</label></span>
+                <span class="classopts"><input type="checkbox" name="show_deprecated" id="show_deprecated" /> <label for="show_deprecated">Show Deprecated</label></span>
+                </fieldset>
+            </form>
+
+                    <h2>
+                        
+
+                        
+                        
+                            Class <b property="yui:name">Plugin.Inspector</b>
+                        <span class="extends">
+                           - extends <a href="Inspector.html" title="Inspector">Inspector</a>
+                        </span>
+
+                    </h2>
+                    <!-- class tree goes here -->
+                    
+                
+  
+
+                    <div class="summary description" property="yui:description">
+                        <p>Binds a new Inspector instance to an existing object.</p>
+<p>Example:</p>
+<pre>
+myWidget.plug(Y.Plugin.Inspector);
+</pre>
+                    </div>
+
+                    
+                    <div rel="yui:properties" resource="#properties">
+
+                    </div>
+
+                    <div rel="yui:methods" resource="#methods">
+
+                        <div rel="yui:inheritance">                    
+                            <div class="section field inheritance" rel="yui:superclass"  resource="Inspector.html">
+                                <h4>Methods inherited from <a href="Inspector.html" property="yui:name" title="Inspector">Inspector</a>:</h4>
+                                <div class="content" rel="yui:methods">
+                                    <code>
+                                            <span rel="yui:method" resource="Inspector.html#method__afterCollapsedChange">                                        
+                                            <a class="protected" href="Inspector.html#method__afterCollapsedChange" property="yui:name" title="_afterCollapsedChange">_afterCollapsedChange</a><span class="protected">,</span>
+                                            </span>
+                                            <span rel="yui:method" resource="Inspector.html#method__afterDraggableChange">                                        
+                                            <a class="protected" href="Inspector.html#method__afterDraggableChange" property="yui:name" title="_afterDraggableChange">_afterDraggableChange</a><span class="protected">,</span>
+                                            </span>
+                                            <span rel="yui:method" resource="Inspector.html#method__afterExcludeChange">                                        
+                                            <a class="protected" href="Inspector.html#method__afterExcludeChange" property="yui:name" title="_afterExcludeChange">_afterExcludeChange</a><span class="protected">,</span>
+                                            </span>
+                                            <span rel="yui:method" resource="Inspector.html#method__afterFilterChange">                                        
+                                            <a class="protected" href="Inspector.html#method__afterFilterChange" property="yui:name" title="_afterFilterChange">_afterFilterChange</a><span class="protected">,</span>
+                                            </span>
+                                            <span rel="yui:method" resource="Inspector.html#method__afterHostAttrsChange">                                        
+                                            <a class="protected" href="Inspector.html#method__afterHostAttrsChange" property="yui:name" title="_afterHostAttrsChange">_afterHostAttrsChange</a><span class="protected">,</span>
+                                            </span>
+                                            <span rel="yui:method" resource="Inspector.html#method__afterHostAttrValueChange">                                        
+                                            <a class="protected" href="Inspector.html#method__afterHostAttrValueChange" property="yui:name" title="_afterHostAttrValueChange">_afterHostAttrValueChange</a><span class="protected">,</span>
+                                            </span>
+                                            <span rel="yui:method" resource="Inspector.html#method__afterHostDestroyedChange">                                        
+                                            <a class="protected" href="Inspector.html#method__afterHostDestroyedChange" property="yui:name" title="_afterHostDestroyedChange">_afterHostDestroyedChange</a><span class="protected">,</span>
+                                            </span>
+                                            <span rel="yui:method" resource="Inspector.html#method__afterIncludeChange">                                        
+                                            <a class="protected" href="Inspector.html#method__afterIncludeChange" property="yui:name" title="_afterIncludeChange">_afterIncludeChange</a><span class="protected">,</span>
+                                            </span>
+                                            <span rel="yui:method" resource="Inspector.html#method__afterPausedChange">                                        
+                                            <a class="protected" href="Inspector.html#method__afterPausedChange" property="yui:name" title="_afterPausedChange">_afterPausedChange</a><span class="protected">,</span>
+                                            </span>
+                                            <span rel="yui:method" resource="Inspector.html#method__bindHostValueChangeEvents">                                        
+                                            <a class="protected" href="Inspector.html#method__bindHostValueChangeEvents" property="yui:name" title="_bindHostValueChangeEvents">_bindHostValueChangeEvents</a><span class="protected">,</span>
+                                            </span>
+                                            <span rel="yui:method" resource="Inspector.html#method__formatValue">                                        
+                                            <a class="protected" href="Inspector.html#method__formatValue" property="yui:name" title="_formatValue">_formatValue</a><span class="protected">,</span>
+                                            </span>
+                                            <span rel="yui:method" resource="Inspector.html#method__onCollapseClick">                                        
+                                            <a class="protected" href="Inspector.html#method__onCollapseClick" property="yui:name" title="_onCollapseClick">_onCollapseClick</a><span class="protected">,</span>
+                                            </span>
+                                            <span rel="yui:method" resource="Inspector.html#method__onFilter">                                        
+                                            <a class="protected" href="Inspector.html#method__onFilter" property="yui:name" title="_onFilter">_onFilter</a><span class="protected">,</span>
+                                            </span>
+                                            <span rel="yui:method" resource="Inspector.html#method__onFilterEscapeKey">                                        
+                                            <a class="protected" href="Inspector.html#method__onFilterEscapeKey" property="yui:name" title="_onFilterEscapeKey">_onFilterEscapeKey</a><span class="protected">,</span>
+                                            </span>
+                                            <span rel="yui:method" resource="Inspector.html#method__onPauseClick">                                        
+                                            <a class="protected" href="Inspector.html#method__onPauseClick" property="yui:name" title="_onPauseClick">_onPauseClick</a><span class="protected">,</span>
+                                            </span>
+                                            <span rel="yui:method" resource="Inspector.html#method__purgeEvents">                                        
+                                            <a class="protected" href="Inspector.html#method__purgeEvents" property="yui:name" title="_purgeEvents">_purgeEvents</a><span class="protected">,</span>
+                                            </span>
+                                            <span rel="yui:method" resource="Inspector.html#method__renderAttr">                                        
+                                            <a class="protected" href="Inspector.html#method__renderAttr" property="yui:name" title="_renderAttr">_renderAttr</a><span class="protected">,</span>
+                                            </span>
+                                            <span rel="yui:method" resource="Inspector.html#method__renderAttrs">                                        
+                                            <a class="protected" href="Inspector.html#method__renderAttrs" property="yui:name" title="_renderAttrs">_renderAttrs</a><span class="protected">,</span>
+                                            </span>
+                                            <span rel="yui:method" resource="Inspector.html#method__renderBody">                                        
+                                            <a class="protected" href="Inspector.html#method__renderBody" property="yui:name" title="_renderBody">_renderBody</a><span class="protected">,</span>
+                                            </span>
+                                            <span rel="yui:method" resource="Inspector.html#method__renderFoot">                                        
+                                            <a class="protected" href="Inspector.html#method__renderFoot" property="yui:name" title="_renderFoot">_renderFoot</a><span class="protected">,</span>
+                                            </span>
+                                            <span rel="yui:method" resource="Inspector.html#method__renderHead">                                        
+                                            <a class="protected" href="Inspector.html#method__renderHead" property="yui:name" title="_renderHead">_renderHead</a><span class="protected">,</span>
+                                            </span>
+                                            <span rel="yui:method" resource="Inspector.html#method__syncAttrs">                                        
+                                            <a class="protected" href="Inspector.html#method__syncAttrs" property="yui:name" title="_syncAttrs">_syncAttrs</a><span class="protected">,</span>
+                                            </span>
+                                            <span rel="yui:method" resource="Inspector.html#method__uiFilterAttrs">                                        
+                                            <a class="protected" href="Inspector.html#method__uiFilterAttrs" property="yui:name" title="_uiFilterAttrs">_uiFilterAttrs</a><span class="protected">,</span>
+                                            </span>
+                                            <span rel="yui:method" resource="Inspector.html#method__uiSetAttrValue">                                        
+                                            <a class="protected" href="Inspector.html#method__uiSetAttrValue" property="yui:name" title="_uiSetAttrValue">_uiSetAttrValue</a><span class="protected">,</span>
+                                            </span>
+                                            <span rel="yui:method" resource="Inspector.html#method__uiSetAttrValues">                                        
+                                            <a class="protected" href="Inspector.html#method__uiSetAttrValues" property="yui:name" title="_uiSetAttrValues">_uiSetAttrValues</a><span class="protected">,</span>
+                                            </span>
+                                            <span rel="yui:method" resource="Inspector.html#method__uiSetCollapsed">                                        
+                                            <a class="protected" href="Inspector.html#method__uiSetCollapsed" property="yui:name" title="_uiSetCollapsed">_uiSetCollapsed</a><span class="protected">,</span>
+                                            </span>
+                                            <span rel="yui:method" resource="Inspector.html#method__uiSetDraggable">                                        
+                                            <a class="protected" href="Inspector.html#method__uiSetDraggable" property="yui:name" title="_uiSetDraggable">_uiSetDraggable</a><span class="protected">,</span>
+                                            </span>
+                                            <span rel="yui:method" resource="Inspector.html#method__uiSetFilter">                                        
+                                            <a class="protected" href="Inspector.html#method__uiSetFilter" property="yui:name" title="_uiSetFilter">_uiSetFilter</a><span class="protected">,</span>
+                                            </span>
+                                            <span rel="yui:method" resource="Inspector.html#method__uiSetHeight">                                        
+                                            <a class="protected" href="Inspector.html#method__uiSetHeight" property="yui:name" title="_uiSetHeight">_uiSetHeight</a><span class="protected">,</span>
+                                            </span>
+                                            <span rel="yui:method" resource="Inspector.html#method__uiSetHostDestroyed">                                        
+                                            <a class="protected" href="Inspector.html#method__uiSetHostDestroyed" property="yui:name" title="_uiSetHostDestroyed">_uiSetHostDestroyed</a><span class="protected">,</span>
+                                            </span>
+                                            <span rel="yui:method" resource="Inspector.html#method__uiSetPaused">                                        
+                                            <a class="protected" href="Inspector.html#method__uiSetPaused" property="yui:name" title="_uiSetPaused">_uiSetPaused</a><span class="protected">,</span>
+                                            </span>
+                                            <span rel="yui:method" resource="Inspector.html#method__uiSetPosition">                                        
+                                            <a class="protected" href="Inspector.html#method__uiSetPosition" property="yui:name" title="_uiSetPosition">_uiSetPosition</a><span class="protected">,</span>
+                                            </span>
+                                            <span rel="yui:method" resource="Inspector.html#method__uiSyncAttrs">                                        
+                                            <a class="protected" href="Inspector.html#method__uiSyncAttrs" property="yui:name" title="_uiSyncAttrs">_uiSyncAttrs</a>
+                                            </span>
+                                    </code>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div rel="yui:events" resource="#events">
+
+
+                        <div rel="yui:inheritance">                    
+                        <div class="section field inheritance" rel="yui:superclass"  resource="Inspector.html">
+                            <h4>Events inherited from <a href="Inspector.html" property="yui:name" title="Inspector">Inspector</a>:</h4>
+                            <div class="content" rel="yui:events">
+                                <code>
+                                        <span rel="yui:event" resource="Inspector.html#event_collapsedChange">
+                                        <a class="" href="Inspector.html#event_collapsedChange" property="yui:name" title="collapsedChange">collapsedChange</a><span class="">,</span>
+                                        </span>
+                                                                            <span rel="yui:event" resource="Inspector.html#event_draggableChange">
+                                        <a class="" href="Inspector.html#event_draggableChange" property="yui:name" title="draggableChange">draggableChange</a><span class="">,</span>
+                                        </span>
+                                                                            <span rel="yui:event" resource="Inspector.html#event_excludeChange">
+                                        <a class="" href="Inspector.html#event_excludeChange" property="yui:name" title="excludeChange">excludeChange</a><span class="">,</span>
+                                        </span>
+                                                                            <span rel="yui:event" resource="Inspector.html#event_filterChange">
+                                        <a class="" href="Inspector.html#event_filterChange" property="yui:name" title="filterChange">filterChange</a><span class="">,</span>
+                                        </span>
+                                                                            <span rel="yui:event" resource="Inspector.html#event_hostAttrsChange">
+                                        <a class="" href="Inspector.html#event_hostAttrsChange" property="yui:name" title="hostAttrsChange">hostAttrsChange</a><span class="">,</span>
+                                        </span>
+                                                                            <span rel="yui:event" resource="Inspector.html#event_hostChange">
+                                        <a class="" href="Inspector.html#event_hostChange" property="yui:name" title="hostChange">hostChange</a><span class="">,</span>
+                                        </span>
+                                                                            <span rel="yui:event" resource="Inspector.html#event_includeChange">
+                                        <a class="" href="Inspector.html#event_includeChange" property="yui:name" title="includeChange">includeChange</a><span class="">,</span>
+                                        </span>
+                                                                            <span rel="yui:event" resource="Inspector.html#event_nameChange">
+                                        <a class="" href="Inspector.html#event_nameChange" property="yui:name" title="nameChange">nameChange</a><span class="">,</span>
+                                        </span>
+                                                                            <span rel="yui:event" resource="Inspector.html#event_pausedChange">
+                                        <a class="" href="Inspector.html#event_pausedChange" property="yui:name" title="pausedChange">pausedChange</a><span class="">,</span>
+                                        </span>
+                                                                            <span rel="yui:event" resource="Inspector.html#event_stringsChange">
+                                        <a class="" href="Inspector.html#event_stringsChange" property="yui:name" title="stringsChange">stringsChange</a><span class="">,</span>
+                                        </span>
+                                    
+                                </code>
+                            </div>
+                        </div>
+                        </div>
+                    </div>
+
+                    <div rel="yui:attributes" resource="#configattributes">
+
+                        <div rel="yui:inheritance">                    
+                        <div class="section field inheritance" rel="yui:superclass"  resource="Inspector.html">
+                            <h4>Configuration attributes inherited from <a href="Inspector.html" property="yui:name" title="Inspector">Inspector</a>:</h4>
+                            <div class="content" rel="yui:attributes">
+                                <code>
+                                        <span rel="yui:attribute" resource="Inspector.html#config_collapsed">                                        
+                                        <a class="" href="Inspector.html#config_collapsed" property="yui:name" title="collapsed">collapsed</a><span class="">,</span>
+                                        </span>
+                                                                                <span rel="yui:attribute" resource="Inspector.html#config_draggable">                                        
+                                        <a class="" href="Inspector.html#config_draggable" property="yui:name" title="draggable">draggable</a><span class="">,</span>
+                                        </span>
+                                                                                <span rel="yui:attribute" resource="Inspector.html#config_exclude">                                        
+                                        <a class="" href="Inspector.html#config_exclude" property="yui:name" title="exclude">exclude</a><span class="">,</span>
+                                        </span>
+                                                                                <span rel="yui:attribute" resource="Inspector.html#config_filter">                                        
+                                        <a class="" href="Inspector.html#config_filter" property="yui:name" title="filter">filter</a><span class="">,</span>
+                                        </span>
+                                                                                <span rel="yui:attribute" resource="Inspector.html#config_host">                                        
+                                        <a class="" href="Inspector.html#config_host" property="yui:name" title="host">host</a><span class="">,</span>
+                                        </span>
+                                                                                <span rel="yui:attribute" resource="Inspector.html#config_hostAttrs">                                        
+                                        <a class="" href="Inspector.html#config_hostAttrs" property="yui:name" title="hostAttrs">hostAttrs</a><span class="">,</span>
+                                        </span>
+                                                                                <span rel="yui:attribute" resource="Inspector.html#config_include">                                        
+                                        <a class="" href="Inspector.html#config_include" property="yui:name" title="include">include</a><span class="">,</span>
+                                        </span>
+                                                                                <span rel="yui:attribute" resource="Inspector.html#config_name">                                        
+                                        <a class="" href="Inspector.html#config_name" property="yui:name" title="name">name</a><span class="">,</span>
+                                        </span>
+                                                                                <span rel="yui:attribute" resource="Inspector.html#config_paused">                                        
+                                        <a class="" href="Inspector.html#config_paused" property="yui:name" title="paused">paused</a><span class="">,</span>
+                                        </span>
+                                                                                <span rel="yui:attribute" resource="Inspector.html#config_strings">                                        
+                                        <a class="" href="Inspector.html#config_strings" property="yui:name" title="strings">strings</a><span class="">,</span>
+                                        </span>
+                                        
+                                </code>
+                            </div>
+                        </div>
+                        </div>
+                    </div>
+
+			</div>
+		</div>
+		<div class="yui-b">
+            <div class="nav">
+
+                    <div id="moduleList" class="module">
+                        <h4>Modules</h4>
+                        <ul class="content">
+                                <li class="selected"><a href="module_gallery-inspector.html" title="gallery-inspector">gallery-inspector</a></li>
+                        </ul>
+                    </div>
+
+                    <div id="classList" class="module">
+                        <h4>Classes</h4>
+                        <ul class="content">
+                                <li class=""><a href="Inspector.html" title="Inspector">Inspector</a></li>
+                                <li class="selected"><a href="Plugin.Inspector.html" title="Plugin.Inspector">Plugin.Inspector</a></li>
+                        </ul>
+                    </div>
+
+                    <div id="fileList" class="module">
+                        <h4>Files</h4>
+                        <ul class="content">        
+                                <li class=""><a href="inspector-plugin.js.html" title="inspector-plugin.js">inspector-plugin.js</a></li>
+                                <li class=""><a href="inspector.js.html" title="inspector.js">inspector.js</a></li>
+                        </ul>
+                    </div>
+
+
+
+
+
+            </div>
+		</div>
+	</div>
+	<div id="ft">
+        <hr />
+        Copyright &copy; 2011 Yahoo! Inc. All rights reserved.
+	</div>
+</div>
+<script type="text/javascript">
+    ALL_YUI_PROPS = [];
+</script>
+</body>
+</html>

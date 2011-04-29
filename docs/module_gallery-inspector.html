@@ -1,0 +1,132 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html xmlns:yui="http://yuilibrary.com/rdf/1.0/yui.rdf#">
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+	<title>API: gallery-inspector   (YUI Library)</title>
+
+	<link rel="stylesheet" type="text/css" href="assets/reset-fonts-grids-min.css?stamp=1304104496.41" />
+	<link rel="stylesheet" type="text/css" href="assets/api.css?stamp=1304104496.41" />
+
+    <script type="text/javascript" src="assets/api-js?stamp=1304104496.41"></script>
+    <script type="text/javascript" src="assets/ac-js?stamp=1304104496.41"></script>
+</head>
+
+<body id="yahoo-com">
+
+<div id="doc3" class="yui-t2">
+	<div id="hd">
+        <h1><a href="http://developer.yahoo.com/yui/" title="Yahoo! UI Library">Yahoo! UI Library</a></h1>
+        <h3>gallery-inspector&nbsp; <span class="subtitle">0.1.0</span></h3>
+        <a href="./index.html" title="Yahoo! UI Library">Yahoo! UI Library</a> 
+            &gt; <a href="./module_gallery-inspector.html" title="gallery-inspector">gallery-inspector</a>
+                
+                
+        <form onsubmit="return false">
+            <div id="propertysearch">
+                Search: <input autocomplete="off" id="searchinput" />
+                <div id="searchresults">
+                    &nbsp;
+                </div>
+            </div>
+        </form>
+	</div>
+
+	<div id="bd">
+		<div id="yui-main">
+			<div class="yui-b">
+            <form action="#" name="yui-classopts-form" method="get" id="yui-classopts-form">
+                <fieldset>
+                    <legend>Filters</legend>
+                <span class="classopts"><input type="checkbox" name="show_private" id="show_private" /> <label for="show_private">Show Private</label></span>
+                <span class="classopts"><input type="checkbox" name="show_protected" id="show_protected" /> <label for="show_protected">Show Protected</label></span>
+                <span class="classopts"><input type="checkbox" name="show_deprecated" id="show_deprecated" /> <label for="show_deprecated">Show Deprecated</label></span>
+                </fieldset>
+            </form>
+
+                   
+                    <h3>Module: gallery-inspector
+                    
+
+
+                    </h3>
+                    <div class="description summary">
+                        Real-time attribute inspector widget.
+                    </div>
+
+
+
+                <div class="yui-gc">
+                    <div class="yui-u first">
+
+                            <p>This module contains the following classes:</p>
+                            <script>
+                            //var YUI_CLASS_LIST = [{"extends": {"superclass": {}, "events": {}, "configs": {}, "properties": {}, "methods": {}}, "description": "Real-time attribute inspector widget.", "guessedname": "Inspector", "name": "Inspector"}, {"extends": {"superclass": {"Inspector": "Inspector"}, "events": {"Inspector": [{"access": "", "deprecated": false, "name": "collapsedChange"}, {"access": "", "deprecated": false, "name": "draggableChange"}, {"access": "", "deprecated": false, "name": "excludeChange"}, {"access": "", "deprecated": false, "name": "filterChange"}, {"access": "", "deprecated": false, "name": "hostAttrsChange"}, {"access": "", "deprecated": false, "name": "hostChange"}, {"access": "", "deprecated": false, "name": "includeChange"}, {"access": "", "deprecated": false, "name": "nameChange"}, {"access": "", "deprecated": false, "name": "pausedChange"}, {"access": "", "deprecated": false, "name": "stringsChange"}]}, "configs": {"Inspector": [{"access": "", "deprecated": false, "name": "collapsed"}, {"access": "", "deprecated": false, "name": "draggable"}, {"access": "", "deprecated": false, "name": "exclude"}, {"access": "", "deprecated": false, "name": "filter"}, {"access": "", "deprecated": false, "name": "host"}, {"access": "", "deprecated": false, "name": "hostAttrs"}, {"access": "", "deprecated": false, "name": "include"}, {"access": "", "deprecated": false, "name": "name"}, {"access": "", "deprecated": false, "name": "paused"}, {"access": "", "deprecated": false, "name": "strings"}]}, "properties": {}, "methods": {"Inspector": [{"access": "protected", "deprecated": false, "name": "_afterCollapsedChange"}, {"access": "protected", "deprecated": false, "name": "_afterDraggableChange"}, {"access": "protected", "deprecated": false, "name": "_afterExcludeChange"}, {"access": "protected", "deprecated": false, "name": "_afterFilterChange"}, {"access": "protected", "deprecated": false, "name": "_afterHostAttrsChange"}, {"access": "protected", "deprecated": false, "name": "_afterHostAttrValueChange"}, {"access": "protected", "deprecated": false, "name": "_afterHostDestroyedChange"}, {"access": "protected", "deprecated": false, "name": "_afterIncludeChange"}, {"access": "protected", "deprecated": false, "name": "_afterPausedChange"}, {"access": "protected", "deprecated": false, "name": "_bindHostValueChangeEvents"}, {"access": "protected", "deprecated": false, "name": "_formatValue"}, {"access": "protected", "deprecated": false, "name": "_onCollapseClick"}, {"access": "protected", "deprecated": false, "name": "_onFilter"}, {"access": "protected", "deprecated": false, "name": "_onFilterEscapeKey"}, {"access": "protected", "deprecated": false, "name": "_onPauseClick"}, {"access": "protected", "deprecated": false, "name": "_purgeEvents"}, {"access": "protected", "deprecated": false, "name": "_renderAttr"}, {"access": "protected", "deprecated": false, "name": "_renderAttrs"}, {"access": "protected", "deprecated": false, "name": "_renderBody"}, {"access": "protected", "deprecated": false, "name": "_renderFoot"}, {"access": "protected", "deprecated": false, "name": "_renderHead"}, {"access": "protected", "deprecated": false, "name": "_syncAttrs"}, {"access": "protected", "deprecated": false, "name": "_uiFilterAttrs"}, {"access": "protected", "deprecated": false, "name": "_uiSetAttrValue"}, {"access": "protected", "deprecated": false, "name": "_uiSetAttrValues"}, {"access": "protected", "deprecated": false, "name": "_uiSetCollapsed"}, {"access": "protected", "deprecated": false, "name": "_uiSetDraggable"}, {"access": "protected", "deprecated": false, "name": "_uiSetFilter"}, {"access": "protected", "deprecated": false, "name": "_uiSetHeight"}, {"access": "protected", "deprecated": false, "name": "_uiSetHostDestroyed"}, {"access": "protected", "deprecated": false, "name": "_uiSetPaused"}, {"access": "protected", "deprecated": false, "name": "_uiSetPosition"}, {"access": "protected", "deprecated": false, "name": "_uiSyncAttrs"}]}}, "description": "<p>Binds a new Inspector instance to an existing object.</p>\n<p>Example:</p>\n<pre>\nmyWidget.plug(Y.Plugin.Inspector);\n</pre>", "guessedname": "Plugin.Inspector", "name": "Plugin.Inspector"}];
+                            </script>
+                            <div id="splash_classList">
+                                <ul>
+                                    <li><a href="Inspector.html" title="Inspector" id="class_0">Inspector</a></li>
+                                    <li><a href="Plugin.Inspector.html" title="Plugin.Inspector" id="class_1">Plugin.Inspector</a></li>
+                                </ul>
+                            </div>
+                    </div>
+                    <div class="yui-u">
+                                    <div class="submodules">
+                                        <h4>Submodules:</h4> 
+                                        <dl>
+                                            <dt><code><a href="Plugin.Inspector.html" title="gallery-inspector-plugin">gallery-inspector-plugin</a></code></dt>
+                                            <dd><p>Binds a new Inspector instance to an existing object.</p>
+<p>Example:</p>
+<pre>
+myWidget.plug(Y.Plugin.Inspector);
+</pre></dd>
+                                        </dl>
+                                    </div>
+
+                        </div>
+                </div>
+
+			</div>
+		</div>
+		<div class="yui-b">
+            <div class="nav">
+
+                    <div id="moduleList" class="module">
+                        <h4>Modules</h4>
+                        <ul class="content">
+                                <li class="selected"><a href="module_gallery-inspector.html" title="gallery-inspector">gallery-inspector</a></li>
+                        </ul>
+                    </div>
+
+                    <div id="classList" class="module">
+                        <h4>Classes</h4>
+                        <ul class="content">
+                                <li class=""><a href="Inspector.html" title="Inspector">Inspector</a></li>
+                                <li class=""><a href="Plugin.Inspector.html" title="Plugin.Inspector">Plugin.Inspector</a></li>
+                        </ul>
+                    </div>
+
+                    <div id="fileList" class="module">
+                        <h4>Files</h4>
+                        <ul class="content">        
+                                <li class=""><a href="inspector-plugin.js.html" title="inspector-plugin.js">inspector-plugin.js</a></li>
+                                <li class=""><a href="inspector.js.html" title="inspector.js">inspector.js</a></li>
+                        </ul>
+                    </div>
+
+
+
+
+
+            </div>
+		</div>
+	</div>
+	<div id="ft">
+        <hr />
+        Copyright &copy; 2011 Yahoo! Inc. All rights reserved.
+	</div>
+</div>
+<script type="text/javascript">
+    ALL_YUI_PROPS = [{"url": "Inspector.html#method__afterCollapsedChange", "access": "protected", "host": "Inspector", "type": "method", "name": "_afterCollapsedChange"}, {"url": "Inspector.html#method__afterDraggableChange", "access": "protected", "host": "Inspector", "type": "method", "name": "_afterDraggableChange"}, {"url": "Inspector.html#method__afterExcludeChange", "access": "protected", "host": "Inspector", "type": "method", "name": "_afterExcludeChange"}, {"url": "Inspector.html#method__afterFilterChange", "access": "protected", "host": "Inspector", "type": "method", "name": "_afterFilterChange"}, {"url": "Inspector.html#method__afterHostAttrsChange", "access": "protected", "host": "Inspector", "type": "method", "name": "_afterHostAttrsChange"}, {"url": "Inspector.html#method__afterHostAttrValueChange", "access": "protected", "host": "Inspector", "type": "method", "name": "_afterHostAttrValueChange"}, {"url": "Inspector.html#method__afterHostDestroyedChange", "access": "protected", "host": "Inspector", "type": "method", "name": "_afterHostDestroyedChange"}, {"url": "Inspector.html#method__afterIncludeChange", "access": "protected", "host": "Inspector", "type": "method", "name": "_afterIncludeChange"}, {"url": "Inspector.html#method__afterPausedChange", "access": "protected", "host": "Inspector", "type": "method", "name": "_afterPausedChange"}, {"url": "Inspector.html#method__bindHostValueChangeEvents", "access": "protected", "host": "Inspector", "type": "method", "name": "_bindHostValueChangeEvents"}, {"url": "Inspector.html#config_collapsed", "access": "", "host": "Inspector", "type": "config", "name": "collapsed"}, {"url": "Inspector.html#event_collapsedChange", "access": "", "host": "Inspector", "type": "event", "name": "collapsedChange"}, {"url": "Inspector.html#config_draggable", "access": "", "host": "Inspector", "type": "config", "name": "draggable"}, {"url": "Inspector.html#event_draggableChange", "access": "", "host": "Inspector", "type": "event", "name": "draggableChange"}, {"url": "Inspector.html#config_exclude", "access": "", "host": "Inspector", "type": "config", "name": "exclude"}, {"url": "Inspector.html#event_excludeChange", "access": "", "host": "Inspector", "type": "event", "name": "excludeChange"}, {"url": "Inspector.html#config_filter", "access": "", "host": "Inspector", "type": "config", "name": "filter"}, {"url": "Inspector.html#event_filterChange", "access": "", "host": "Inspector", "type": "event", "name": "filterChange"}, {"url": "Inspector.html#method__formatValue", "access": "protected", "host": "Inspector", "type": "method", "name": "_formatValue"}, {"url": "Inspector.html#config_host", "access": "", "host": "Inspector", "type": "config", "name": "host"}, {"url": "Inspector.html#config_hostAttrs", "access": "", "host": "Inspector", "type": "config", "name": "hostAttrs"}, {"url": "Inspector.html#event_hostAttrsChange", "access": "", "host": "Inspector", "type": "event", "name": "hostAttrsChange"}, {"url": "Inspector.html#event_hostChange", "access": "", "host": "Inspector", "type": "event", "name": "hostChange"}, {"url": "Inspector.html#config_include", "access": "", "host": "Inspector", "type": "config", "name": "include"}, {"url": "Inspector.html#event_includeChange", "access": "", "host": "Inspector", "type": "event", "name": "includeChange"}, {"url": "Inspector.html#config_name", "access": "", "host": "Inspector", "type": "config", "name": "name"}, {"url": "Inspector.html#event_nameChange", "access": "", "host": "Inspector", "type": "event", "name": "nameChange"}, {"url": "Inspector.html#method__onCollapseClick", "access": "protected", "host": "Inspector", "type": "method", "name": "_onCollapseClick"}, {"url": "Inspector.html#method__onFilter", "access": "protected", "host": "Inspector", "type": "method", "name": "_onFilter"}, {"url": "Inspector.html#method__onFilterEscapeKey", "access": "protected", "host": "Inspector", "type": "method", "name": "_onFilterEscapeKey"}, {"url": "Inspector.html#method__onPauseClick", "access": "protected", "host": "Inspector", "type": "method", "name": "_onPauseClick"}, {"url": "Inspector.html#config_paused", "access": "", "host": "Inspector", "type": "config", "name": "paused"}, {"url": "Inspector.html#event_pausedChange", "access": "", "host": "Inspector", "type": "event", "name": "pausedChange"}, {"url": "Inspector.html#method__purgeEvents", "access": "protected", "host": "Inspector", "type": "method", "name": "_purgeEvents"}, {"url": "Inspector.html#method__renderAttr", "access": "protected", "host": "Inspector", "type": "method", "name": "_renderAttr"}, {"url": "Inspector.html#method__renderAttrs", "access": "protected", "host": "Inspector", "type": "method", "name": "_renderAttrs"}, {"url": "Inspector.html#method__renderBody", "access": "protected", "host": "Inspector", "type": "method", "name": "_renderBody"}, {"url": "Inspector.html#method__renderFoot", "access": "protected", "host": "Inspector", "type": "method", "name": "_renderFoot"}, {"url": "Inspector.html#method__renderHead", "access": "protected", "host": "Inspector", "type": "method", "name": "_renderHead"}, {"url": "Inspector.html#config_strings", "access": "", "host": "Inspector", "type": "config", "name": "strings"}, {"url": "Inspector.html#event_stringsChange", "access": "", "host": "Inspector", "type": "event", "name": "stringsChange"}, {"url": "Inspector.html#method__syncAttrs", "access": "protected", "host": "Inspector", "type": "method", "name": "_syncAttrs"}, {"url": "Inspector.html#method__uiFilterAttrs", "access": "protected", "host": "Inspector", "type": "method", "name": "_uiFilterAttrs"}, {"url": "Inspector.html#method__uiSetAttrValue", "access": "protected", "host": "Inspector", "type": "method", "name": "_uiSetAttrValue"}, {"url": "Inspector.html#method__uiSetAttrValues", "access": "protected", "host": "Inspector", "type": "method", "name": "_uiSetAttrValues"}, {"url": "Inspector.html#method__uiSetCollapsed", "access": "protected", "host": "Inspector", "type": "method", "name": "_uiSetCollapsed"}, {"url": "Inspector.html#method__uiSetDraggable", "access": "protected", "host": "Inspector", "type": "method", "name": "_uiSetDraggable"}, {"url": "Inspector.html#method__uiSetFilter", "access": "protected", "host": "Inspector", "type": "method", "name": "_uiSetFilter"}, {"url": "Inspector.html#method__uiSetHeight", "access": "protected", "host": "Inspector", "type": "method", "name": "_uiSetHeight"}, {"url": "Inspector.html#method__uiSetHostDestroyed", "access": "protected", "host": "Inspector", "type": "method", "name": "_uiSetHostDestroyed"}, {"url": "Inspector.html#method__uiSetPaused", "access": "protected", "host": "Inspector", "type": "method", "name": "_uiSetPaused"}, {"url": "Inspector.html#method__uiSetPosition", "access": "protected", "host": "Inspector", "type": "method", "name": "_uiSetPosition"}, {"url": "Inspector.html#method__uiSyncAttrs", "access": "protected", "host": "Inspector", "type": "method", "name": "_uiSyncAttrs"}];
+</script>
+</body>
+</html>

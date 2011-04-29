@@ -1,0 +1,1110 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html xmlns:yui="http://yuilibrary.com/rdf/1.0/yui.rdf#">
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+	<title>API: gallery-inspector   inspector.js  (YUI Library)</title>
+
+	<link rel="stylesheet" type="text/css" href="assets/reset-fonts-grids-min.css?stamp=1304104496.41" />
+	<link rel="stylesheet" type="text/css" href="assets/api.css?stamp=1304104496.41" />
+
+    <script type="text/javascript" src="assets/api-js?stamp=1304104496.41"></script>
+    <script type="text/javascript" src="assets/ac-js?stamp=1304104496.41"></script>
+</head>
+
+<body id="yahoo-com">
+
+<div id="doc3" class="yui-t2">
+	<div id="hd">
+        <h1><a href="http://developer.yahoo.com/yui/" title="Yahoo! UI Library">Yahoo! UI Library</a></h1>
+        <h3>gallery-inspector&nbsp; <span class="subtitle">0.1.0</span></h3>
+        <a href="./index.html" title="Yahoo! UI Library">Yahoo! UI Library</a> 
+            &gt; <a href="./module_gallery-inspector.html" title="gallery-inspector">gallery-inspector</a>
+                
+                 &gt; inspector.js (source view) 
+        <form onsubmit="return false">
+            <div id="propertysearch">
+                Search: <input autocomplete="off" id="searchinput" />
+                <div id="searchresults">
+                    &nbsp;
+                </div>
+            </div>
+        </form>
+	</div>
+
+	<div id="bd">
+		<div id="yui-main">
+			<div class="yui-b">
+            <form action="#" name="yui-classopts-form" method="get" id="yui-classopts-form">
+                <fieldset>
+                    <legend>Filters</legend>
+                <span class="classopts"><input type="checkbox" name="show_private" id="show_private" /> <label for="show_private">Show Private</label></span>
+                <span class="classopts"><input type="checkbox" name="show_protected" id="show_protected" /> <label for="show_protected">Show Protected</label></span>
+                <span class="classopts"><input type="checkbox" name="show_deprecated" id="show_deprecated" /> <label for="show_deprecated">Show Deprecated</label></span>
+                </fieldset>
+            </form>
+
+                    <div id="srcout">
+                        <style>
+                            #doc3 .classopts { display:none; }
+                        </style>
+<div class="highlight"><pre><span class="cm">/**</span>
+<span class="cm"> * Real-time attribute inspector widget.</span>
+<span class="cm"> *</span>
+<span class="cm"> * @module gallery-inspector</span>
+<span class="cm"> * @class Inspector</span>
+<span class="cm"> * @extends Widget</span>
+<span class="cm"> * @uses WidgetStack</span>
+<span class="cm"> * @constructor</span>
+<span class="cm"> * @param {Object} config Configuration object.</span>
+<span class="cm"> */</span>
+
+<span class="kd">var</span> <span class="nx">Lang</span>       <span class="o">=</span> <span class="nx">Y</span><span class="p">.</span><span class="nx">Lang</span><span class="p">,</span>
+    <span class="nx">Node</span>       <span class="o">=</span> <span class="nx">Y</span><span class="p">.</span><span class="nx">Node</span><span class="p">,</span>
+    <span class="nx">Widget</span>     <span class="o">=</span> <span class="nx">Y</span><span class="p">.</span><span class="nx">Widget</span><span class="p">,</span>
+    <span class="nx">YArray</span>     <span class="o">=</span> <span class="nx">Y</span><span class="p">.</span><span class="nb">Array</span><span class="p">,</span>
+    <span class="nx">YObject</span>    <span class="o">=</span> <span class="nx">Y</span><span class="p">.</span><span class="nb">Object</span><span class="p">,</span>
+    
+    <span class="c1">// Lots of shorthands.</span>
+    <span class="nx">BOUNDING_BOX</span>  <span class="o">=</span> <span class="s1">&#39;boundingBox&#39;</span><span class="p">,</span>
+    <span class="nx">CHECKED</span>       <span class="o">=</span> <span class="s1">&#39;checked&#39;</span><span class="p">,</span>
+    <span class="nx">COLLAPSED</span>     <span class="o">=</span> <span class="s1">&#39;collapsed&#39;</span><span class="p">,</span>
+    <span class="nx">CONTENT_BOX</span>   <span class="o">=</span> <span class="s1">&#39;contentBox&#39;</span><span class="p">,</span>
+    <span class="nx">DISPLAY</span>       <span class="o">=</span> <span class="s1">&#39;display&#39;</span><span class="p">,</span>
+    <span class="nx">EMPTY_STRING</span>  <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="p">,</span>
+    <span class="nx">EXCLUDE</span>       <span class="o">=</span> <span class="s1">&#39;exclude&#39;</span><span class="p">,</span>
+    <span class="nx">FILTER</span>        <span class="o">=</span> <span class="s1">&#39;filter&#39;</span><span class="p">,</span>
+    <span class="nx">HEIGHT</span>        <span class="o">=</span> <span class="s1">&#39;height&#39;</span><span class="p">,</span>
+    <span class="nx">INCLUDE</span>       <span class="o">=</span> <span class="s1">&#39;include&#39;</span><span class="p">,</span>
+    <span class="nx">HOST</span>          <span class="o">=</span> <span class="s1">&#39;host&#39;</span><span class="p">,</span>
+    <span class="nx">HOST_ATTRS</span>    <span class="o">=</span> <span class="s1">&#39;hostAttrs&#39;</span><span class="p">,</span>
+    <span class="nx">NAME</span>          <span class="o">=</span> <span class="s1">&#39;name&#39;</span><span class="p">,</span>
+    <span class="nx">NONE</span>          <span class="o">=</span> <span class="s1">&#39;none&#39;</span><span class="p">,</span>
+    <span class="nx">OFFSET_HEIGHT</span> <span class="o">=</span> <span class="s1">&#39;offsetHeight&#39;</span><span class="p">,</span>
+    <span class="nx">PAUSED</span>        <span class="o">=</span> <span class="s1">&#39;paused&#39;</span><span class="p">,</span>
+    <span class="nx">STRINGS</span>       <span class="o">=</span> <span class="s1">&#39;strings&#39;</span><span class="p">,</span>
+    <span class="nx">TEXT_CONTENT</span>  <span class="o">=</span> <span class="s1">&#39;textContent&#39;</span><span class="p">,</span>
+    <span class="nx">VALUE</span>         <span class="o">=</span> <span class="s1">&#39;value&#39;</span><span class="p">,</span>
+    
+    <span class="nx">TYPE_ARRAY</span>     <span class="o">=</span> <span class="s1">&#39;array&#39;</span><span class="p">,</span>
+    <span class="nx">TYPE_BOOLEAN</span>   <span class="o">=</span> <span class="s1">&#39;boolean&#39;</span><span class="p">,</span>
+    <span class="nx">TYPE_DATE</span>      <span class="o">=</span> <span class="s1">&#39;date&#39;</span><span class="p">,</span>
+    <span class="nx">TYPE_ERROR</span>     <span class="o">=</span> <span class="s1">&#39;error&#39;</span><span class="p">,</span>
+    <span class="nx">TYPE_FUNCTION</span>  <span class="o">=</span> <span class="s1">&#39;function&#39;</span><span class="p">,</span>
+    <span class="nx">TYPE_NULL</span>      <span class="o">=</span> <span class="s1">&#39;null&#39;</span><span class="p">,</span>
+    <span class="nx">TYPE_NUMBER</span>    <span class="o">=</span> <span class="s1">&#39;number&#39;</span><span class="p">,</span>
+    <span class="nx">TYPE_OBJECT</span>    <span class="o">=</span> <span class="s1">&#39;object&#39;</span><span class="p">,</span>
+    <span class="nx">TYPE_REGEXP</span>    <span class="o">=</span> <span class="s1">&#39;regexp&#39;</span><span class="p">,</span>
+    <span class="nx">TYPE_STRING</span>    <span class="o">=</span> <span class="s1">&#39;string&#39;</span><span class="p">,</span>
+    <span class="nx">TYPE_UNDEFINED</span> <span class="o">=</span> <span class="s1">&#39;undefined&#39;</span><span class="p">,</span>
+    
+    <span class="nx">TYPE_DEFAULT</span> <span class="o">=</span> <span class="s1">&#39;default&#39;</span><span class="p">,</span>
+    <span class="nx">TYPE_YNODE</span>   <span class="o">=</span> <span class="s1">&#39;node&#39;</span><span class="p">,</span>
+    
+    <span class="nx">_CLASS_COLLAPSED</span>     <span class="o">=</span> <span class="s1">&#39;_CLASS_COLLAPSED&#39;</span><span class="p">,</span>
+    <span class="nx">_CLASS_EVEN</span>          <span class="o">=</span> <span class="s1">&#39;_CLASS_EVEN&#39;</span><span class="p">,</span>
+    <span class="nx">_CLASS_FILTER</span>        <span class="o">=</span> <span class="s1">&#39;_CLASS_FILTER&#39;</span><span class="p">,</span>
+    <span class="nx">_CLASS_NAME_CELL</span>     <span class="o">=</span> <span class="s1">&#39;_CLASS_NAME_CELL&#39;</span><span class="p">,</span>
+    <span class="nx">_CLASS_ODD</span>           <span class="o">=</span> <span class="s1">&#39;_CLASS_ODD&#39;</span><span class="p">,</span>
+    <span class="nx">_CLASS_VALUE</span>         <span class="o">=</span> <span class="s1">&#39;_CLASS_VALUE&#39;</span><span class="p">,</span>
+    <span class="nx">_CLASS_VALUE_CELL</span>    <span class="o">=</span> <span class="s1">&#39;_CLASS_VALUE_CELL&#39;</span><span class="p">,</span>
+    <span class="nx">_SELECTOR_COLLAPSE</span>   <span class="o">=</span> <span class="s1">&#39;_SELECTOR_COLLAPSE&#39;</span><span class="p">,</span>
+    <span class="nx">_SELECTOR_FILTER</span>     <span class="o">=</span> <span class="s1">&#39;_SELECTOR_FILTER&#39;</span><span class="p">,</span>
+    <span class="nx">_SELECTOR_NAME_CELL</span>  <span class="o">=</span> <span class="s1">&#39;_SELECTOR_NAME_CELL&#39;</span><span class="p">,</span>
+    <span class="nx">_SELECTOR_PAUSE</span>      <span class="o">=</span> <span class="s1">&#39;_SELECTOR_PAUSE&#39;</span><span class="p">,</span>
+    <span class="nx">_SELECTOR_VALUE_CELL</span> <span class="o">=</span> <span class="s1">&#39;_SELECTOR_VALUE_CELL&#39;</span><span class="p">,</span>
+    
+    <span class="c1">// For stacking multiple Inspector instances upon intitial render.</span>
+    <span class="nx">INSTANCE_COUNT</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
+    
+    <span class="nx">UI_SRC</span> <span class="o">=</span> <span class="nx">Widget</span><span class="p">.</span><span class="nx">UI_SRC</span><span class="p">,</span>
+    
+    <span class="nx">substitute</span> <span class="o">=</span> <span class="nx">Y</span><span class="p">.</span><span class="nx">substitute</span><span class="p">,</span>
+    
+<span class="nx">Inspector</span> <span class="o">=</span> <span class="nx">Y</span><span class="p">.</span><span class="nx">Base</span><span class="p">.</span><span class="nx">create</span><span class="p">(</span><span class="s1">&#39;inspector&#39;</span><span class="p">,</span> <span class="nx">Widget</span><span class="p">,</span> <span class="p">[</span><span class="nx">Y</span><span class="p">.</span><span class="nx">WidgetStack</span><span class="p">],</span> <span class="p">{</span>
+    
+    <span class="c1">// -- Public Lifecycle Methods ---------------------------------------------</span>
+    
+    <span class="nx">initializer</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">config</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">INSTANCE_COUNT</span> <span class="o">+=</span> <span class="mi">1</span><span class="p">;</span>
+        
+        <span class="k">this</span><span class="p">.</span><span class="nx">_events</span>     <span class="o">=</span> <span class="p">[];</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">_hostEvents</span> <span class="o">=</span> <span class="p">[];</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">_attrNodes</span>  <span class="o">=</span> <span class="p">{};</span>
+        
+        <span class="k">this</span><span class="p">[</span><span class="nx">_CLASS_COLLAPSED</span><span class="p">]</span>     <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">getClassName</span><span class="p">(</span><span class="nx">COLLAPSED</span><span class="p">);</span>
+        <span class="k">this</span><span class="p">[</span><span class="nx">_CLASS_EVEN</span><span class="p">]</span>          <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">getClassName</span><span class="p">(</span><span class="s1">&#39;even&#39;</span><span class="p">);</span>
+        <span class="k">this</span><span class="p">[</span><span class="nx">_CLASS_FILTER</span><span class="p">]</span>        <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">getClassName</span><span class="p">(</span><span class="nx">FILTER</span><span class="p">);</span>
+        <span class="k">this</span><span class="p">[</span><span class="nx">_CLASS_NAME_CELL</span><span class="p">]</span>     <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">getClassName</span><span class="p">(</span><span class="s1">&#39;name-cell&#39;</span><span class="p">);</span>
+        <span class="k">this</span><span class="p">[</span><span class="nx">_CLASS_ODD</span><span class="p">]</span>           <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">getClassName</span><span class="p">(</span><span class="s1">&#39;odd&#39;</span><span class="p">);</span>
+        <span class="k">this</span><span class="p">[</span><span class="nx">_CLASS_VALUE</span><span class="p">]</span>         <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">getClassName</span><span class="p">(</span><span class="nx">VALUE</span><span class="p">);</span>
+        <span class="k">this</span><span class="p">[</span><span class="nx">_CLASS_VALUE_CELL</span><span class="p">]</span>    <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">getClassName</span><span class="p">(</span><span class="s1">&#39;value-cell&#39;</span><span class="p">);</span>
+        <span class="k">this</span><span class="p">[</span><span class="nx">_SELECTOR_COLLAPSE</span><span class="p">]</span>   <span class="o">=</span> <span class="s1">&#39;.&#39;</span> <span class="o">+</span> <span class="k">this</span><span class="p">.</span><span class="nx">getClassName</span><span class="p">(</span><span class="s1">&#39;collapse&#39;</span><span class="p">);</span>
+        <span class="k">this</span><span class="p">[</span><span class="nx">_SELECTOR_FILTER</span><span class="p">]</span>     <span class="o">=</span> <span class="s1">&#39;.&#39;</span> <span class="o">+</span> <span class="k">this</span><span class="p">[</span><span class="nx">_CLASS_FILTER</span><span class="p">];</span>
+        <span class="k">this</span><span class="p">[</span><span class="nx">_SELECTOR_NAME_CELL</span><span class="p">]</span>  <span class="o">=</span> <span class="s1">&#39;.&#39;</span> <span class="o">+</span> <span class="k">this</span><span class="p">[</span><span class="nx">_CLASS_NAME_CELL</span><span class="p">];</span>
+        <span class="k">this</span><span class="p">[</span><span class="nx">_SELECTOR_PAUSE</span><span class="p">]</span>      <span class="o">=</span> <span class="s1">&#39;.&#39;</span> <span class="o">+</span> <span class="k">this</span><span class="p">.</span><span class="nx">getClassName</span><span class="p">(</span><span class="s1">&#39;pause&#39;</span><span class="p">);</span>
+        <span class="k">this</span><span class="p">[</span><span class="nx">_SELECTOR_VALUE_CELL</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;.&#39;</span> <span class="o">+</span> <span class="k">this</span><span class="p">[</span><span class="nx">_CLASS_VALUE_CELL</span><span class="p">];</span>
+    <span class="p">},</span>
+    
+    <span class="nx">destructor</span><span class="o">:</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+        <span class="nx">INSTANCE_COUNT</span> <span class="o">-=</span> <span class="mi">1</span><span class="p">;</span>
+        
+        <span class="k">this</span><span class="p">.</span><span class="nx">_purgeEvents</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">_events</span><span class="p">.</span><span class="nx">concat</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">_hostEvents</span><span class="p">));</span>
+        
+        <span class="k">if</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">_dd</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">this</span><span class="p">.</span><span class="nx">_dd</span><span class="p">.</span><span class="nx">destroy</span><span class="p">();</span>
+        <span class="p">}</span>
+    <span class="p">},</span>
+    
+    <span class="nx">renderUI</span><span class="o">:</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">_renderHead</span><span class="p">();</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">_renderBody</span><span class="p">();</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">_renderFoot</span><span class="p">();</span>
+    <span class="p">},</span>
+    
+    <span class="nx">bindUI</span><span class="o">:</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+        <span class="kd">var</span> <span class="nx">contentBox</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">CONTENT_BOX</span><span class="p">),</span>
+            <span class="nx">filterNode</span> <span class="o">=</span> <span class="nx">contentBox</span><span class="p">.</span><span class="nx">one</span><span class="p">(</span><span class="k">this</span><span class="p">[</span><span class="nx">_SELECTOR_FILTER</span><span class="p">]);</span>
+        
+        <span class="k">this</span><span class="p">.</span><span class="nx">_events</span><span class="p">.</span><span class="nx">concat</span><span class="p">([</span>
+            <span class="k">this</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">HOST</span><span class="p">).</span><span class="nx">after</span><span class="p">(</span><span class="s1">&#39;destroyedChange&#39;</span><span class="p">,</span>
+                    <span class="k">this</span><span class="p">.</span><span class="nx">_afterHostDestroyedChange</span><span class="p">,</span> <span class="k">this</span><span class="p">),</span>
+            
+            <span class="nx">contentBox</span><span class="p">.</span><span class="nx">one</span><span class="p">(</span><span class="k">this</span><span class="p">[</span><span class="nx">_SELECTOR_COLLAPSE</span><span class="p">]).</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;click&#39;</span><span class="p">,</span>
+                    <span class="k">this</span><span class="p">.</span><span class="nx">_onCollapseClick</span><span class="p">,</span> <span class="k">this</span><span class="p">),</span>
+            <span class="nx">contentBox</span><span class="p">.</span><span class="nx">one</span><span class="p">(</span><span class="k">this</span><span class="p">[</span><span class="nx">_SELECTOR_PAUSE</span><span class="p">]).</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;click&#39;</span><span class="p">,</span>
+                    <span class="k">this</span><span class="p">.</span><span class="nx">_onPauseClick</span><span class="p">,</span> <span class="k">this</span><span class="p">),</span>
+            
+            <span class="nx">filterNode</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;valueChange&#39;</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">_onFilter</span><span class="p">,</span> <span class="k">this</span><span class="p">),</span>
+            <span class="nx">filterNode</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;key&#39;</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">_onFilterEscapeKey</span><span class="p">,</span> <span class="s1">&#39;up:27&#39;</span><span class="p">,</span> <span class="k">this</span><span class="p">),</span>
+            
+            <span class="k">this</span><span class="p">.</span><span class="nx">after</span><span class="p">({</span>
+                <span class="nx">collapsedChange</span><span class="o">:</span> <span class="k">this</span><span class="p">.</span><span class="nx">_afterCollapsedChange</span><span class="p">,</span>
+                <span class="nx">draggableChange</span><span class="o">:</span> <span class="k">this</span><span class="p">.</span><span class="nx">_afterDraggableChange</span><span class="p">,</span>
+                <span class="nx">hostAttrsChange</span><span class="o">:</span> <span class="k">this</span><span class="p">.</span><span class="nx">_afterHostAttrsChange</span><span class="p">,</span>
+                <span class="nx">excludeChange</span>  <span class="o">:</span> <span class="k">this</span><span class="p">.</span><span class="nx">_afterExcludeChange</span><span class="p">,</span>
+                <span class="nx">filterChange</span>   <span class="o">:</span> <span class="k">this</span><span class="p">.</span><span class="nx">_afterFilterChange</span><span class="p">,</span>
+                <span class="nx">includeChange</span>  <span class="o">:</span> <span class="k">this</span><span class="p">.</span><span class="nx">_afterIncludeChange</span><span class="p">,</span>
+                <span class="nx">pausedChange</span>   <span class="o">:</span> <span class="k">this</span><span class="p">.</span><span class="nx">_afterPausedChange</span>
+            <span class="p">})</span>
+        <span class="p">]);</span>
+    <span class="p">},</span>
+    
+    <span class="nx">syncUI</span><span class="o">:</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">_uiSetCollapsed</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">COLLAPSED</span><span class="p">));</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">_uiSetDraggable</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;draggable&#39;</span><span class="p">));</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">_uiSetFilter</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">FILTER</span><span class="p">));</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">_uiSetPaused</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">PAUSED</span><span class="p">));</span>
+        
+        <span class="k">this</span><span class="p">.</span><span class="nx">_uiSetPosition</span><span class="p">();</span>
+        
+        <span class="k">this</span><span class="p">.</span><span class="nx">_syncAttrs</span><span class="p">();</span>
+    <span class="p">},</span>
+    
+    <span class="c1">// -- Protected Prototype Methods ------------------------------------------</span>
+    
+    <span class="cm">/**</span>
+<span class="cm">     * Sets up event handlers for host attribute value change events.</span>
+<span class="cm">     *</span>
+<span class="cm">     * @method _bindHostValueChangeEvents</span>
+<span class="cm">     * @protected</span>
+<span class="cm">     */</span>
+    <span class="nx">_bindHostValueChangeEvents</span><span class="o">:</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+        <span class="kd">var</span> <span class="nx">attrs</span>  <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">HOST_ATTRS</span><span class="p">),</span>
+            <span class="nx">host</span>   <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">HOST</span><span class="p">),</span>
+            <span class="nx">events</span> <span class="o">=</span> <span class="p">[];</span>
+        
+        <span class="nx">YArray</span><span class="p">.</span><span class="nx">each</span><span class="p">(</span><span class="nx">attrs</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">name</span><span class="p">)</span> <span class="p">{</span>
+            <span class="nx">events</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">host</span><span class="p">.</span><span class="nx">after</span><span class="p">(</span><span class="nx">name</span> <span class="o">+</span> <span class="s1">&#39;Change&#39;</span><span class="p">,</span>
+                    <span class="nx">Y</span><span class="p">.</span><span class="nx">bind</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">_afterHostAttrValueChange</span><span class="p">,</span> <span class="k">this</span><span class="p">,</span> <span class="nx">name</span><span class="p">)));</span>
+        <span class="p">},</span> <span class="k">this</span><span class="p">);</span>
+        
+        <span class="k">this</span><span class="p">.</span><span class="nx">_hostEvents</span> <span class="o">=</span> <span class="nx">events</span><span class="p">;</span>
+    <span class="p">},</span>
+    
+    <span class="cm">/**</span>
+<span class="cm">     * Formats a value for display based on its type.</span>
+<span class="cm">     *</span>
+<span class="cm">     * @method _formatValue</span>
+<span class="cm">     * @param {Any} value The value to format.</span>
+<span class="cm">     * @protected</span>
+<span class="cm">     */</span>
+    <span class="nx">_formatValue</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">value</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kd">var</span> <span class="nx">escapeHtml</span> <span class="o">=</span> <span class="nx">Y</span><span class="p">.</span><span class="nx">Escape</span><span class="p">.</span><span class="nx">html</span><span class="p">,</span>
+            <span class="nx">type</span>       <span class="o">=</span> <span class="nx">Lang</span><span class="p">.</span><span class="nx">type</span><span class="p">(</span><span class="nx">value</span><span class="p">),</span>
+            <span class="nx">subs</span><span class="p">;</span>
+        
+        <span class="k">switch</span> <span class="p">(</span><span class="nx">type</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">case</span> <span class="nx">TYPE_OBJECT</span><span class="o">:</span>
+            <span class="k">if</span> <span class="p">(</span><span class="nx">value</span> <span class="k">instanceof</span> <span class="nx">Node</span><span class="p">)</span> <span class="p">{</span>
+                <span class="nx">type</span>  <span class="o">=</span> <span class="nx">TYPE_YNODE</span><span class="p">;</span>
+                <span class="nx">value</span> <span class="o">=</span> <span class="nx">escapeHtml</span><span class="p">(</span><span class="nx">value</span><span class="p">.</span><span class="nx">toString</span><span class="p">().</span><span class="nx">split</span><span class="p">(</span><span class="s1">&#39; &#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]);</span>
+            <span class="p">}</span>
+            <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="nx">value</span> <span class="k">instanceof</span> <span class="nb">Boolean</span><span class="p">)</span> <span class="p">{</span>
+                <span class="nx">type</span>  <span class="o">=</span> <span class="nx">TYPE_BOOLEAN</span><span class="p">;</span>
+                <span class="nx">value</span> <span class="o">=</span> <span class="nx">value</span><span class="p">.</span><span class="nx">toString</span><span class="p">();</span>
+            <span class="p">}</span>
+            <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="nx">value</span> <span class="k">instanceof</span> <span class="nb">Number</span><span class="p">)</span> <span class="p">{</span>
+                <span class="nx">type</span>  <span class="o">=</span> <span class="nx">TYPE_NUMBER</span><span class="p">;</span>
+                <span class="nx">value</span> <span class="o">=</span> <span class="nx">value</span><span class="p">.</span><span class="nx">toString</span><span class="p">();</span>
+            <span class="p">}</span>
+            <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="nx">value</span> <span class="k">instanceof</span> <span class="nb">String</span><span class="p">)</span> <span class="p">{</span>
+                <span class="nx">type</span>  <span class="o">=</span> <span class="nx">TYPE_STRING</span><span class="p">;</span>
+                <span class="nx">value</span> <span class="o">=</span> <span class="s1">&#39;&quot;&#39;</span> <span class="o">+</span> <span class="nx">escapeHtml</span><span class="p">(</span><span class="nx">value</span><span class="p">.</span><span class="nx">toString</span><span class="p">())</span> <span class="o">+</span> <span class="s1">&#39;&quot;&#39;</span><span class="p">;</span>
+            <span class="p">}</span>
+            <span class="k">else</span> <span class="p">{</span>
+                <span class="c1">// TODO: Support more objects</span>
+                <span class="nx">value</span> <span class="o">=</span> <span class="s1">&#39;[object]&#39;</span><span class="p">;</span>
+            <span class="p">}</span>
+            <span class="k">break</span><span class="p">;</span>
+            
+        <span class="k">case</span> <span class="nx">TYPE_ARRAY</span><span class="o">:</span>
+            <span class="c1">// TODO: Support arrays</span>
+            <span class="nx">value</span> <span class="o">=</span> <span class="s1">&#39;[array]&#39;</span><span class="p">;</span>
+            <span class="k">break</span><span class="p">;</span>
+            
+        <span class="k">case</span> <span class="nx">TYPE_FUNCTION</span><span class="o">:</span>
+            <span class="c1">// TODO: Support functions</span>
+            <span class="nx">value</span> <span class="o">=</span> <span class="s1">&#39;[function]&#39;</span><span class="p">;</span>
+            <span class="k">break</span><span class="p">;</span>
+            
+        <span class="k">case</span> <span class="nx">TYPE_BOOLEAN</span><span class="o">:</span>
+            <span class="nx">value</span> <span class="o">=</span> <span class="nx">value</span><span class="p">.</span><span class="nx">toString</span><span class="p">();</span>
+            <span class="k">break</span><span class="p">;</span>
+            
+        <span class="k">case</span> <span class="nx">TYPE_STRING</span><span class="o">:</span>
+            <span class="nx">value</span> <span class="o">=</span> <span class="s1">&#39;&quot;&#39;</span> <span class="o">+</span> <span class="nx">escapeHtml</span><span class="p">(</span><span class="nx">value</span><span class="p">.</span><span class="nx">toString</span><span class="p">())</span> <span class="o">+</span> <span class="s1">&#39;&quot;&#39;</span><span class="p">;</span>
+            <span class="k">break</span><span class="p">;</span>
+            
+        <span class="k">case</span> <span class="nx">TYPE_NUMBER</span><span class="o">:</span>
+            <span class="nx">value</span> <span class="o">=</span> <span class="nx">escapeHtml</span><span class="p">(</span><span class="nx">value</span><span class="p">.</span><span class="nx">toString</span><span class="p">());</span>
+            <span class="k">break</span><span class="p">;</span>
+            
+        <span class="k">case</span> <span class="nx">TYPE_NULL</span><span class="o">:</span>
+        <span class="k">case</span> <span class="nx">TYPE_UNDEFINED</span><span class="o">:</span>
+            <span class="nx">value</span> <span class="o">=</span> <span class="nx">type</span><span class="p">;</span>
+            <span class="k">break</span><span class="p">;</span>
+            
+        <span class="k">case</span> <span class="nx">TYPE_ERROR</span><span class="o">:</span>
+        <span class="k">case</span> <span class="nx">TYPE_REGEXP</span><span class="o">:</span>
+            <span class="nx">value</span> <span class="o">=</span> <span class="nx">escapeHtml</span><span class="p">(</span><span class="nx">value</span><span class="p">.</span><span class="nx">toString</span><span class="p">());</span>
+            <span class="k">break</span><span class="p">;</span>
+        
+        <span class="k">case</span> <span class="nx">TYPE_DATE</span><span class="o">:</span>
+            <span class="nx">type</span>  <span class="o">=</span> <span class="nx">TYPE_DATE</span><span class="p">;</span>
+            <span class="nx">value</span> <span class="o">=</span> <span class="nx">escapeHtml</span><span class="p">(</span><span class="nx">value</span><span class="p">.</span><span class="nx">toString</span><span class="p">());</span>
+            <span class="k">break</span><span class="p">;</span>
+            
+        <span class="k">default</span><span class="o">:</span>
+            <span class="nx">type</span>  <span class="o">=</span> <span class="nx">TYPE_DEFAULT</span><span class="p">;</span>
+            <span class="nx">value</span> <span class="o">=</span> <span class="nx">escapeHtml</span><span class="p">(</span><span class="nx">value</span><span class="p">.</span><span class="nx">toString</span><span class="p">());</span>
+        <span class="p">}</span>
+        
+        <span class="nx">subs</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="nx">inspector_value_class</span><span class="o">:</span> <span class="k">this</span><span class="p">[</span><span class="nx">_CLASS_VALUE</span><span class="p">],</span>
+            <span class="nx">inspector_type_class</span> <span class="o">:</span> <span class="k">this</span><span class="p">.</span><span class="nx">getClassName</span><span class="p">(</span><span class="s1">&#39;type-&#39;</span> <span class="o">+</span> <span class="nx">type</span><span class="p">),</span>
+            <span class="nx">str_value</span>         <span class="o">:</span> <span class="nx">value</span>
+        <span class="p">};</span>
+        
+        <span class="k">return</span> <span class="nx">substitute</span><span class="p">(</span><span class="nx">Inspector</span><span class="p">.</span><span class="nx">VALUE_TEMPLATE</span><span class="p">,</span> <span class="nx">subs</span><span class="p">);</span>
+        
+        <span class="c1">// These old ideas might be useful for better array/object support.</span>
+        
+        <span class="c1">// if (Lang.isArray(value)) {</span>
+        <span class="c1">//     YArray.each(value, function (v, i) {</span>
+        <span class="c1">//         var tmp = this._formatValue(v, depth);</span>
+        <span class="c1">//         </span>
+        <span class="c1">//         if (tmp) {</span>
+        <span class="c1">//             formattedValue += &#39;&lt;li&gt;&lt;b&gt;&#39; + escape(i.toString()) + &#39;&lt;/b&gt; &#39; + tmp + &#39;&lt;/li&gt;&#39;;</span>
+        <span class="c1">//         }</span>
+        <span class="c1">//     }, this);</span>
+        <span class="c1">// }</span>
+        <span class="c1">// else if (Lang.isObject(value)) {</span>
+        <span class="c1">//     YObject.each(value, function (v, k) {</span>
+        <span class="c1">//         var tmp = this._formatValue(v, depth);</span>
+        <span class="c1">//         </span>
+        <span class="c1">//         if (tmp) {</span>
+        <span class="c1">//             formattedValue += &#39;&lt;li&gt;&lt;b&gt;&#39; + escape(k) + &#39;&lt;/b&gt; &#39; + tmp + &#39;&lt;/li&gt;&#39;;</span>
+        <span class="c1">//         }</span>
+        <span class="c1">//     }, this);</span>
+        <span class="c1">// }</span>
+    <span class="p">},</span>
+    
+    <span class="cm">/**</span>
+<span class="cm">     * Detaches all event handles in the given array.</span>
+<span class="cm">     *</span>
+<span class="cm">     * @method _purgeEvents</span>
+<span class="cm">     * @param {Array} events Array of event handles.</span>
+<span class="cm">     * @protected</span>
+<span class="cm">     */</span>
+    <span class="nx">_purgeEvents</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">events</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">while</span> <span class="p">(</span><span class="nx">events</span> <span class="o">&amp;&amp;</span> <span class="nx">events</span><span class="p">.</span><span class="nx">length</span><span class="p">)</span> <span class="p">{</span>
+            <span class="nx">events</span><span class="p">.</span><span class="nx">pop</span><span class="p">().</span><span class="nx">detach</span><span class="p">();</span>
+        <span class="p">}</span>
+    <span class="p">},</span>
+    
+    <span class="cm">/**</span>
+<span class="cm">     * Renders a single row (name column only) for the given attribute name.</span>
+<span class="cm">     *</span>
+<span class="cm">     * @method _renderAttr</span>
+<span class="cm">     * @param {String} name Attribute name.</span>
+<span class="cm">     * @param {Number} i Index.</span>
+<span class="cm">     * @protected</span>
+<span class="cm">     */</span>
+    <span class="nx">_renderAttr</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">i</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kd">var</span> <span class="nx">guid</span>        <span class="o">=</span> <span class="nx">Y</span><span class="p">.</span><span class="nx">guid</span><span class="p">(),</span>
+            <span class="nx">parityClass</span> <span class="o">=</span> <span class="nx">i</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">===</span> <span class="mi">0</span> <span class="o">?</span> <span class="k">this</span><span class="p">[</span><span class="nx">_CLASS_EVEN</span><span class="p">]</span> <span class="o">:</span> <span class="k">this</span><span class="p">[</span><span class="nx">_CLASS_ODD</span><span class="p">],</span>
+            <span class="nx">subs</span>        <span class="o">=</span> <span class="p">{</span>
+                <span class="nx">inspector_row_parity_class</span><span class="o">:</span> <span class="nx">parityClass</span><span class="p">,</span>
+                <span class="nx">inspector_name_cell_class</span> <span class="o">:</span> <span class="k">this</span><span class="p">[</span><span class="nx">_CLASS_NAME_CELL</span><span class="p">],</span>
+                <span class="nx">inspector_value_cell_class</span><span class="o">:</span> <span class="k">this</span><span class="p">[</span><span class="nx">_CLASS_VALUE_CELL</span><span class="p">],</span>
+                <span class="nx">str_name</span><span class="o">:</span> <span class="nx">name</span><span class="p">,</span>
+                <span class="nx">id_guid</span> <span class="o">:</span> <span class="nx">guid</span>
+            <span class="p">},</span>
+            <span class="nx">node</span>  <span class="o">=</span> <span class="nx">Node</span><span class="p">.</span><span class="nx">create</span><span class="p">(</span><span class="nx">substitute</span><span class="p">(</span><span class="nx">Inspector</span><span class="p">.</span><span class="nx">ATTR_TEMPLATE</span><span class="p">,</span> <span class="nx">subs</span><span class="p">)),</span>
+            <span class="nx">tbody</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">_tbody</span><span class="p">;</span>
+            
+        <span class="nx">tbody</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="nx">node</span><span class="p">);</span>
+        
+        <span class="k">this</span><span class="p">.</span><span class="nx">_attrNodes</span><span class="p">[</span><span class="nx">name</span><span class="p">]</span> <span class="o">=</span> <span class="nx">tbody</span><span class="p">.</span><span class="nx">one</span><span class="p">(</span><span class="s1">&#39;#&#39;</span> <span class="o">+</span> <span class="nx">guid</span><span class="p">);</span>
+    <span class="p">},</span>
+    
+    <span class="cm">/**</span>
+<span class="cm">     * Renders all rows (name column only) for all attributes.</span>
+<span class="cm">     *</span>
+<span class="cm">     * @method _renderAttrs</span>
+<span class="cm">     * @protected</span>
+<span class="cm">     */</span>
+    <span class="nx">_renderAttrs</span><span class="o">:</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+        <span class="kd">var</span> <span class="nx">attrs</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">HOST_ATTRS</span><span class="p">).</span><span class="nx">sort</span><span class="p">();</span>
+        
+        <span class="k">this</span><span class="p">.</span><span class="nx">_tbody</span><span class="p">.</span><span class="nx">empty</span><span class="p">(</span><span class="kc">true</span><span class="p">);</span>
+        
+        <span class="nx">YArray</span><span class="p">.</span><span class="nx">each</span><span class="p">(</span><span class="nx">attrs</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">_renderAttr</span><span class="p">,</span> <span class="k">this</span><span class="p">);</span>
+    <span class="p">},</span>
+    
+    <span class="cm">/**</span>
+<span class="cm">     * Renders the body section of the UI. Intended for use only during the</span>
+<span class="cm">     * render lifecycle.</span>
+<span class="cm">     *</span>
+<span class="cm">     * @method _renderBody</span>
+<span class="cm">     * @protected</span>
+<span class="cm">     */</span>
+    <span class="nx">_renderBody</span><span class="o">:</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+        <span class="kd">var</span> <span class="nx">contentBox</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">CONTENT_BOX</span><span class="p">),</span>
+            <span class="nx">strings</span>    <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">STRINGS</span><span class="p">),</span>
+            <span class="nx">subs</span>       <span class="o">=</span> <span class="p">{</span>
+                <span class="nx">str_name</span>          <span class="o">:</span> <span class="nx">strings</span><span class="p">.</span><span class="nx">name</span><span class="p">,</span>
+                <span class="nx">str_value</span>         <span class="o">:</span> <span class="nx">strings</span><span class="p">.</span><span class="nx">value</span><span class="p">,</span>
+                <span class="nx">inspector_bd_class</span><span class="o">:</span> <span class="k">this</span><span class="p">.</span><span class="nx">getClassName</span><span class="p">(</span><span class="s1">&#39;bd&#39;</span><span class="p">)</span>
+            <span class="p">},</span>
+            <span class="nx">body</span> <span class="o">=</span> <span class="nx">Node</span><span class="p">.</span><span class="nx">create</span><span class="p">(</span><span class="nx">substitute</span><span class="p">(</span><span class="nx">Inspector</span><span class="p">.</span><span class="nx">BODY_TEMPLATE</span><span class="p">,</span> <span class="nx">subs</span><span class="p">));</span>
+        
+        <span class="k">this</span><span class="p">.</span><span class="nx">_body</span>  <span class="o">=</span> <span class="nx">body</span><span class="p">;</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">_tbody</span> <span class="o">=</span> <span class="nx">body</span><span class="p">.</span><span class="nx">one</span><span class="p">(</span><span class="s1">&#39;tbody&#39;</span><span class="p">);</span>
+        
+        <span class="nx">contentBox</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="nx">body</span><span class="p">);</span>
+    <span class="p">},</span>
+    
+    <span class="cm">/**</span>
+<span class="cm">     * Renders the footer section of the UI. Intended for use only during the</span>
+<span class="cm">     * render lifecycle.</span>
+<span class="cm">     *</span>
+<span class="cm">     * @method _renderFoot</span>
+<span class="cm">     * @protected</span>
+<span class="cm">     */</span>
+    <span class="nx">_renderFoot</span><span class="o">:</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+        <span class="kd">var</span> <span class="nx">contentBox</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">CONTENT_BOX</span><span class="p">),</span>
+            <span class="nx">strings</span>    <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">STRINGS</span><span class="p">),</span>
+            <span class="nx">subs</span>       <span class="o">=</span> <span class="p">{</span>
+                <span class="nx">str_filter</span>                 <span class="o">:</span> <span class="nx">strings</span><span class="p">.</span><span class="nx">filter_attrs</span><span class="p">,</span>
+                <span class="nx">str_pause</span>                  <span class="o">:</span> <span class="nx">strings</span><span class="p">.</span><span class="nx">pause</span><span class="p">,</span>
+                <span class="nx">inspector_checkbox_class</span>   <span class="o">:</span> <span class="k">this</span><span class="p">.</span><span class="nx">getClassName</span><span class="p">(</span><span class="s1">&#39;checkbox&#39;</span><span class="p">),</span>
+                <span class="nx">inspector_controls_class</span>   <span class="o">:</span> <span class="k">this</span><span class="p">.</span><span class="nx">getClassName</span><span class="p">(</span><span class="s1">&#39;controls&#39;</span><span class="p">),</span>
+                <span class="nx">inspector_ft_class</span>         <span class="o">:</span> <span class="k">this</span><span class="p">.</span><span class="nx">getClassName</span><span class="p">(</span><span class="s1">&#39;ft&#39;</span><span class="p">),</span>
+                <span class="nx">inspector_pause_class</span>      <span class="o">:</span> <span class="k">this</span><span class="p">.</span><span class="nx">getClassName</span><span class="p">(</span><span class="s1">&#39;pause&#39;</span><span class="p">),</span>
+                <span class="nx">inspector_pause_label_class</span><span class="o">:</span> <span class="k">this</span><span class="p">.</span><span class="nx">getClassName</span><span class="p">(</span><span class="s1">&#39;pause-label&#39;</span><span class="p">),</span>
+                <span class="nx">inspector_searchbox_class</span>  <span class="o">:</span> <span class="k">this</span><span class="p">[</span><span class="nx">_CLASS_FILTER</span><span class="p">]</span>
+            <span class="p">};</span>
+        
+        <span class="k">this</span><span class="p">.</span><span class="nx">_foot</span> <span class="o">=</span> <span class="nx">Node</span><span class="p">.</span><span class="nx">create</span><span class="p">(</span><span class="nx">substitute</span><span class="p">(</span><span class="nx">Inspector</span><span class="p">.</span><span class="nx">FOOTER_TEMPLATE</span><span class="p">,</span> <span class="nx">subs</span><span class="p">));</span>
+        
+        <span class="nx">contentBox</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">_foot</span><span class="p">);</span>
+    <span class="p">},</span>
+    
+    <span class="cm">/**</span>
+<span class="cm">     * Renders the header section of the UI. Intended for use only during the</span>
+<span class="cm">     * render lifecycle.</span>
+<span class="cm">     *</span>
+<span class="cm">     * @method _renderHead</span>
+<span class="cm">     * @protected</span>
+<span class="cm">     */</span>
+    <span class="nx">_renderHead</span><span class="o">:</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+        <span class="kd">var</span> <span class="nx">contentBox</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">CONTENT_BOX</span><span class="p">),</span>
+            <span class="nx">strings</span>    <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">STRINGS</span><span class="p">),</span>
+            <span class="nx">subs</span>       <span class="o">=</span> <span class="p">{</span>
+                <span class="nx">str_collapse</span>            <span class="o">:</span> <span class="nx">strings</span><span class="p">.</span><span class="nx">collapse</span><span class="p">,</span>
+                <span class="nx">str_name</span>                <span class="o">:</span> <span class="k">this</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">NAME</span><span class="p">),</span>
+                <span class="nx">str_title</span>               <span class="o">:</span> <span class="nx">strings</span><span class="p">.</span><span class="nx">title</span><span class="p">,</span>
+                <span class="nx">inspector_button_class</span>  <span class="o">:</span> <span class="k">this</span><span class="p">.</span><span class="nx">getClassName</span><span class="p">(</span><span class="s1">&#39;button&#39;</span><span class="p">),</span>
+                <span class="nx">inspector_collapse_class</span><span class="o">:</span> <span class="k">this</span><span class="p">.</span><span class="nx">getClassName</span><span class="p">(</span><span class="s1">&#39;collapse&#39;</span><span class="p">),</span>
+                <span class="nx">inspector_hd_class</span>      <span class="o">:</span> <span class="k">this</span><span class="p">.</span><span class="nx">getClassName</span><span class="p">(</span><span class="s1">&#39;hd&#39;</span><span class="p">),</span>
+                <span class="nx">inspector_name_class</span>    <span class="o">:</span> <span class="k">this</span><span class="p">.</span><span class="nx">getClassName</span><span class="p">(</span><span class="nx">NAME</span><span class="p">),</span>
+                <span class="nx">inspector_title_class</span>   <span class="o">:</span> <span class="k">this</span><span class="p">.</span><span class="nx">getClassName</span><span class="p">(</span><span class="s1">&#39;title&#39;</span><span class="p">)</span>
+            <span class="p">};</span>
+
+        <span class="k">this</span><span class="p">.</span><span class="nx">_head</span> <span class="o">=</span> <span class="nx">Node</span><span class="p">.</span><span class="nx">create</span><span class="p">(</span><span class="nx">substitute</span><span class="p">(</span><span class="nx">Inspector</span><span class="p">.</span><span class="nx">HEADER_TEMPLATE</span><span class="p">,</span> <span class="nx">subs</span><span class="p">));</span>
+
+        <span class="nx">contentBox</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">_head</span><span class="p">);</span>
+    <span class="p">},</span>
+    
+    <span class="cm">/**</span>
+<span class="cm">     * Syncs the host&#39;s attributes with the Inspector instance and applies any</span>
+<span class="cm">     * &lt;code&gt;include&lt;/code&gt; or &lt;code&gt;exclude&lt;/code&gt; filters.</span>
+<span class="cm">     *</span>
+<span class="cm">     * @method _syncAttrs</span>
+<span class="cm">     * @protected</span>
+<span class="cm">     */</span>
+    <span class="nx">_syncAttrs</span><span class="o">:</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+        <span class="kd">var</span> <span class="nx">host</span>    <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">HOST</span><span class="p">),</span>
+            <span class="nx">attrs</span>   <span class="o">=</span> <span class="nx">host</span><span class="p">.</span><span class="nx">getAttrs</span><span class="p">(),</span>
+            <span class="nx">exclude</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">EXCLUDE</span><span class="p">),</span>
+            <span class="nx">include</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">INCLUDE</span><span class="p">);</span>
+        
+        <span class="nx">YObject</span><span class="p">.</span><span class="nx">each</span><span class="p">(</span><span class="nx">attrs</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">value</span><span class="p">,</span> <span class="nx">name</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">if</span> <span class="p">(</span><span class="nx">include</span><span class="p">.</span><span class="nx">length</span> <span class="o">&amp;&amp;</span> <span class="nx">include</span><span class="p">.</span><span class="nx">indexOf</span><span class="p">(</span><span class="nx">name</span><span class="p">)</span> <span class="o">===</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+                <span class="k">delete</span> <span class="nx">attrs</span><span class="p">[</span><span class="nx">name</span><span class="p">];</span>
+            <span class="p">}</span>
+            <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="nx">exclude</span><span class="p">.</span><span class="nx">length</span> <span class="o">&amp;&amp;</span> <span class="nx">exclude</span><span class="p">.</span><span class="nx">indexOf</span><span class="p">(</span><span class="nx">name</span><span class="p">)</span> <span class="o">!==</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+                <span class="k">delete</span> <span class="nx">attrs</span><span class="p">[</span><span class="nx">name</span><span class="p">];</span>
+            <span class="p">}</span>
+        <span class="p">});</span>
+        
+        <span class="k">this</span><span class="p">.</span><span class="nx">_set</span><span class="p">(</span><span class="nx">HOST_ATTRS</span><span class="p">,</span> <span class="nx">YObject</span><span class="p">.</span><span class="nx">keys</span><span class="p">(</span><span class="nx">attrs</span><span class="p">));</span>
+    <span class="p">},</span>
+    
+    <span class="c1">// -- Protected UI Methods -------------------------------------------------</span>
+    
+    <span class="cm">/**</span>
+<span class="cm">     * Filters visible attributes by the given filter value.</span>
+<span class="cm">     *</span>
+<span class="cm">     * @method _uiFilterAttrs</span>
+<span class="cm">     * @param {String} value Filter value.</span>
+<span class="cm">     * @protected</span>
+<span class="cm">     */</span>
+    <span class="nx">_uiFilterAttrs</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">value</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kd">var</span> <span class="nx">selector</span> <span class="o">=</span> <span class="k">this</span><span class="p">[</span><span class="nx">_SELECTOR_NAME_CELL</span><span class="p">],</span>
+            <span class="nx">hide</span>     <span class="o">=</span> <span class="p">[],</span>
+            <span class="nx">show</span>     <span class="o">=</span> <span class="p">[],</span>
+            <span class="nx">cell</span><span class="p">;</span>
+            
+        <span class="nx">YObject</span><span class="p">.</span><span class="nx">each</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">_attrNodes</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">node</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">if</span> <span class="p">(</span><span class="nx">value</span><span class="p">)</span> <span class="p">{</span>
+                <span class="nx">cell</span> <span class="o">=</span> <span class="nx">node</span><span class="p">.</span><span class="nx">one</span><span class="p">(</span><span class="nx">selector</span><span class="p">);</span>
+                
+                <span class="k">if</span> <span class="p">(</span><span class="nx">cell</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">TEXT_CONTENT</span><span class="p">).</span><span class="nx">indexOf</span><span class="p">(</span><span class="nx">value</span><span class="p">)</span> <span class="o">!==</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+                    <span class="nx">show</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">node</span><span class="p">);</span>
+                <span class="p">}</span>
+                <span class="k">else</span> <span class="p">{</span>
+                    <span class="nx">hide</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">node</span><span class="p">);</span>
+                <span class="p">}</span>
+            <span class="p">}</span>
+            <span class="k">else</span> <span class="p">{</span>
+                <span class="nx">show</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">node</span><span class="p">);</span>
+            <span class="p">}</span>
+        <span class="p">});</span>
+        
+        <span class="nx">Y</span><span class="p">.</span><span class="nx">all</span><span class="p">(</span><span class="nx">hide</span><span class="p">).</span><span class="nx">setStyle</span><span class="p">(</span><span class="nx">DISPLAY</span><span class="p">,</span> <span class="nx">NONE</span><span class="p">);</span>
+        <span class="nx">Y</span><span class="p">.</span><span class="nx">all</span><span class="p">(</span><span class="nx">show</span><span class="p">).</span><span class="nx">setStyle</span><span class="p">(</span><span class="nx">DISPLAY</span><span class="p">,</span> <span class="nx">EMPTY_STRING</span><span class="p">);</span>
+    <span class="p">},</span>
+    
+    <span class="cm">/**</span>
+<span class="cm">     * Sets the host destroyed state in the UI.</span>
+<span class="cm">     *</span>
+<span class="cm">     * @method _uiSetHostDestroyed</span>
+<span class="cm">     * @protected</span>
+<span class="cm">     */</span>
+    <span class="nx">_uiSetHostDestroyed</span><span class="o">:</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+        <span class="kd">var</span> <span class="nx">node</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">_head</span><span class="p">.</span><span class="nx">one</span><span class="p">(</span><span class="s1">&#39;.&#39;</span> <span class="o">+</span> <span class="k">this</span><span class="p">.</span><span class="nx">getClassName</span><span class="p">(</span><span class="nx">NAME</span><span class="p">));</span>
+        
+        <span class="k">if</span> <span class="p">(</span><span class="nx">node</span><span class="p">)</span> <span class="p">{</span>
+            <span class="nx">node</span><span class="p">.</span><span class="nx">addClass</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">getClassName</span><span class="p">(</span><span class="s1">&#39;destroyed&#39;</span><span class="p">));</span>
+        <span class="p">}</span>
+    <span class="p">},</span>
+    
+    <span class="cm">/**</span>
+<span class="cm">     * Sets the value for the given attribute name.</span>
+<span class="cm">     *</span>
+<span class="cm">     * @method _uiSetAttrValue</span>
+<span class="cm">     * @param {String} name Attribute name.</span>
+<span class="cm">     * @param {Any} value Attribute value.</span>
+<span class="cm">     * @protected</span>
+<span class="cm">     */</span>
+    <span class="nx">_uiSetAttrValue</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">value</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kd">var</span> <span class="nx">node</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">_attrNodes</span><span class="p">[</span><span class="nx">name</span><span class="p">],</span>
+            <span class="nx">cell</span> <span class="o">=</span> <span class="nx">node</span><span class="p">.</span><span class="nx">one</span><span class="p">(</span><span class="k">this</span><span class="p">[</span><span class="nx">_SELECTOR_VALUE_CELL</span><span class="p">]);</span>
+        
+        <span class="nx">cell</span><span class="p">.</span><span class="nx">setContent</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">_formatValue</span><span class="p">(</span><span class="nx">value</span><span class="p">));</span>
+    <span class="p">},</span>
+    
+    <span class="cm">/**</span>
+<span class="cm">     * Sets the value for all attributes.</span>
+<span class="cm">     *</span>
+<span class="cm">     * @method _uiSetAttrValues</span>
+<span class="cm">     * @protected</span>
+<span class="cm">     */</span>
+    <span class="nx">_uiSetAttrValues</span><span class="o">:</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+        <span class="kd">var</span> <span class="nx">host</span>  <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">HOST</span><span class="p">),</span>
+            <span class="nx">attrs</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">HOST_ATTRS</span><span class="p">);</span>
+        
+        <span class="nx">YArray</span><span class="p">.</span><span class="nx">each</span><span class="p">(</span><span class="nx">attrs</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">name</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">this</span><span class="p">.</span><span class="nx">_uiSetAttrValue</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">host</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">name</span><span class="p">));</span>
+        <span class="p">},</span> <span class="k">this</span><span class="p">);</span>
+    <span class="p">},</span>
+    
+    <span class="cm">/**</span>
+<span class="cm">     * Sets the height of the UI. Sets the body height to the specified height</span>
+<span class="cm">     * minus the combined heights of the header and footer. Overrides</span>
+<span class="cm">     * &lt;code&gt;Widget.prototype._uiSetHeight&lt;/code&gt;.</span>
+<span class="cm">     *</span>
+<span class="cm">     * @method _uiSetHeight</span>
+<span class="cm">     * @param {Number} height Height.</span>
+<span class="cm">     * @protected</span>
+<span class="cm">     */</span>
+    <span class="nx">_uiSetHeight</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">height</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">Inspector</span><span class="p">.</span><span class="nx">superclass</span><span class="p">.</span><span class="nx">_uiSetHeight</span><span class="p">.</span><span class="nx">apply</span><span class="p">(</span><span class="k">this</span><span class="p">,</span> <span class="nx">arguments</span><span class="p">);</span>
+
+        <span class="k">if</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">_head</span> <span class="o">&amp;&amp;</span> <span class="k">this</span><span class="p">.</span><span class="nx">_foot</span><span class="p">)</span> <span class="p">{</span>
+            <span class="nx">height</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">BOUNDING_BOX</span><span class="p">).</span><span class="nx">get</span><span class="p">(</span><span class="nx">OFFSET_HEIGHT</span><span class="p">)</span> <span class="o">-</span>
+                    <span class="k">this</span><span class="p">.</span><span class="nx">_head</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">OFFSET_HEIGHT</span><span class="p">)</span> <span class="o">-</span>
+                    <span class="k">this</span><span class="p">.</span><span class="nx">_foot</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">OFFSET_HEIGHT</span><span class="p">);</span>
+                    
+            <span class="k">this</span><span class="p">.</span><span class="nx">_body</span><span class="p">.</span><span class="nx">setStyle</span><span class="p">(</span><span class="nx">HEIGHT</span><span class="p">,</span> <span class="nx">height</span> <span class="o">-</span> <span class="mi">2</span> <span class="o">+</span> <span class="s1">&#39;px&#39;</span><span class="p">);</span>
+        <span class="p">}</span>
+    <span class="p">},</span>
+    
+    <span class="cm">/**</span>
+<span class="cm">     * Sets the UI collapsed state.</span>
+<span class="cm">     *</span>
+<span class="cm">     * @method _uiSetCollapsed</span>
+<span class="cm">     * @param {Boolean} collapsed Whether the UI should be collapsed.</span>
+<span class="cm">     * @protected</span>
+<span class="cm">     */</span>
+    <span class="nx">_uiSetCollapsed</span> <span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">collapsed</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kd">var</span> <span class="nx">boundingBox</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">BOUNDING_BOX</span><span class="p">),</span>
+            <span class="nx">button</span>      <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">_head</span><span class="p">.</span><span class="nx">one</span><span class="p">(</span><span class="k">this</span><span class="p">[</span><span class="nx">_SELECTOR_COLLAPSE</span><span class="p">]),</span>
+            <span class="nx">buttonText</span><span class="p">,</span> <span class="nx">height</span><span class="p">,</span> <span class="nx">method</span><span class="p">;</span>
+            
+        <span class="k">if</span> <span class="p">(</span><span class="nx">collapsed</span><span class="p">)</span> <span class="p">{</span>
+            <span class="nx">buttonText</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">STRINGS</span> <span class="o">+</span> <span class="s1">&#39;.expand&#39;</span><span class="p">);</span>
+            <span class="nx">height</span>     <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">_head</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">OFFSET_HEIGHT</span><span class="p">);</span>
+            <span class="nx">method</span>     <span class="o">=</span> <span class="s1">&#39;addClass&#39;</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="k">else</span> <span class="p">{</span>
+            <span class="nx">buttonText</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">STRINGS</span> <span class="o">+</span> <span class="s1">&#39;.collapse&#39;</span><span class="p">);</span>
+            <span class="nx">height</span>     <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">HEIGHT</span><span class="p">);</span>
+            <span class="nx">method</span>     <span class="o">=</span> <span class="s1">&#39;removeClass&#39;</span><span class="p">;</span>
+        <span class="p">}</span>
+        
+        <span class="nx">boundingBox</span><span class="p">[</span><span class="nx">method</span><span class="p">](</span><span class="k">this</span><span class="p">[</span><span class="nx">_CLASS_COLLAPSED</span><span class="p">]);</span>
+        <span class="nx">button</span><span class="p">.</span><span class="nx">setContent</span><span class="p">(</span><span class="nx">buttonText</span><span class="p">);</span>
+        
+        <span class="k">this</span><span class="p">.</span><span class="nx">_uiSetHeight</span><span class="p">(</span><span class="nx">height</span><span class="p">);</span>
+    <span class="p">},</span>
+    
+    <span class="cm">/**</span>
+<span class="cm">     * Sets the UI draggable state.</span>
+<span class="cm">     *</span>
+<span class="cm">     * @method _uiSetDraggable</span>
+<span class="cm">     * @param {Boolean} draggable Whether the UI should be draggable.</span>
+<span class="cm">     * @protected</span>
+<span class="cm">     */</span>
+    <span class="nx">_uiSetDraggable</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">draggable</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">_dd</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">this</span><span class="p">.</span><span class="nx">_dd</span><span class="p">.</span><span class="nx">set</span><span class="p">(</span><span class="s1">&#39;lock&#39;</span><span class="p">,</span> <span class="o">!</span><span class="nx">draggable</span><span class="p">);</span>
+        <span class="p">}</span>
+        <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="nx">draggable</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">this</span><span class="p">.</span><span class="nx">_dd</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Y</span><span class="p">.</span><span class="nx">DD</span><span class="p">.</span><span class="nx">Drag</span><span class="p">({</span>
+                <span class="nx">node</span>   <span class="o">:</span> <span class="k">this</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">BOUNDING_BOX</span><span class="p">),</span>
+                <span class="nx">handles</span><span class="o">:</span> <span class="p">[</span><span class="s1">&#39;.&#39;</span> <span class="o">+</span> <span class="k">this</span><span class="p">.</span><span class="nx">getClassName</span><span class="p">(</span><span class="s1">&#39;hd&#39;</span><span class="p">)]</span>
+            <span class="p">}).</span><span class="nx">plug</span><span class="p">(</span><span class="nx">Y</span><span class="p">.</span><span class="nx">Plugin</span><span class="p">.</span><span class="nx">DDConstrained</span><span class="p">);</span>
+        <span class="p">}</span>
+    <span class="p">},</span>
+    
+    <span class="cm">/**</span>
+<span class="cm">     * Sets the UI filter input witht the given filter value.</span>
+<span class="cm">     *</span>
+<span class="cm">     * @method _uiSetFilter</span>
+<span class="cm">     * @param {String} value Filter value.</span>
+<span class="cm">     * @protected</span>
+<span class="cm">     */</span>
+    <span class="nx">_uiSetFilter</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">value</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kd">var</span> <span class="nx">node</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">_foot</span><span class="p">.</span><span class="nx">one</span><span class="p">(</span><span class="k">this</span><span class="p">[</span><span class="nx">_SELECTOR_FILTER</span><span class="p">]);</span>
+        
+        <span class="k">if</span> <span class="p">(</span><span class="nx">node</span><span class="p">)</span> <span class="p">{</span>
+            <span class="nx">node</span><span class="p">.</span><span class="nx">set</span><span class="p">(</span><span class="nx">VALUE</span><span class="p">,</span> <span class="nx">value</span><span class="p">);</span>
+        <span class="p">}</span>
+    <span class="p">},</span>
+    
+    <span class="cm">/**</span>
+<span class="cm">     * Sets the UI paused state.</span>
+<span class="cm">     *</span>
+<span class="cm">     * @method _uiSetPaused</span>
+<span class="cm">     * @param {Boolean} paused Whether the UI should be paused.</span>
+<span class="cm">     * @protected</span>
+<span class="cm">     */</span>
+    <span class="nx">_uiSetPaused</span> <span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">paused</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kd">var</span> <span class="nx">node</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">_foot</span><span class="p">.</span><span class="nx">one</span><span class="p">(</span><span class="k">this</span><span class="p">[</span><span class="nx">_SELECTOR_PAUSE</span><span class="p">]);</span>
+
+        <span class="k">if</span> <span class="p">(</span><span class="nx">node</span><span class="p">)</span> <span class="p">{</span>
+            <span class="nx">node</span><span class="p">.</span><span class="nx">set</span><span class="p">(</span><span class="nx">CHECKED</span><span class="p">,</span> <span class="nx">paused</span><span class="p">);</span>
+        <span class="p">}</span>
+    <span class="p">},</span>
+    
+    <span class="cm">/**</span>
+<span class="cm">     * Sets the UI position and zIndex, adjusting for the presence of other</span>
+<span class="cm">     * Inspector instances, such that they appear to stack. Intended to be</span>
+<span class="cm">     * called during the syncUI lifecycle event.</span>
+<span class="cm">     *</span>
+<span class="cm">     * @method _uiSetPosition</span>
+<span class="cm">     * @protected</span>
+<span class="cm">     */</span>
+    <span class="nx">_uiSetPosition</span><span class="o">:</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+        <span class="kd">var</span> <span class="nx">boundingBox</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">BOUNDING_BOX</span><span class="p">),</span>
+            <span class="nx">count</span>       <span class="o">=</span> <span class="nx">INSTANCE_COUNT</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span>
+            <span class="nx">offset</span>      <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">_head</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">OFFSET_HEIGHT</span><span class="p">);</span>
+            
+        <span class="nx">boundingBox</span><span class="p">.</span><span class="nx">setStyle</span><span class="p">(</span><span class="s1">&#39;top&#39;</span><span class="p">,</span> <span class="p">(</span><span class="nx">count</span> <span class="o">*</span> <span class="nx">offset</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;px&#39;</span><span class="p">);</span>
+        
+        <span class="k">this</span><span class="p">.</span><span class="nx">set</span><span class="p">(</span><span class="s1">&#39;zIndex&#39;</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;zIndex&#39;</span><span class="p">)</span> <span class="o">+</span> <span class="nx">count</span><span class="p">);</span>
+    <span class="p">},</span>
+    
+    <span class="cm">/**</span>
+<span class="cm">     * Mini lifecycle for updating all attributes. Purges existing host events,</span>
+<span class="cm">     * re-renders all attributes, then binds new host events.</span>
+<span class="cm">     *</span>
+<span class="cm">     * @method _uiSyncAttrs</span>
+<span class="cm">     * @protected</span>
+<span class="cm">     */</span>
+    <span class="nx">_uiSyncAttrs</span><span class="o">:</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">_purgeEvents</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">_hostEvents</span><span class="p">);</span>
+        
+        <span class="k">this</span><span class="p">.</span><span class="nx">_renderAttrs</span><span class="p">();</span>
+        
+        <span class="k">this</span><span class="p">.</span><span class="nx">_uiSetAttrValues</span><span class="p">();</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">_uiFilterAttrs</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">FILTER</span><span class="p">));</span>
+        
+        <span class="k">this</span><span class="p">.</span><span class="nx">_bindHostValueChangeEvents</span><span class="p">();</span>
+    <span class="p">},</span>
+    
+    <span class="c1">// -- Protected Host Event Handlers ----------------------------------------</span>
+    
+    <span class="cm">/**</span>
+<span class="cm">     * Handles &lt;code&gt;[attribute]Change&lt;/code&gt; events on the host.</span>
+<span class="cm">     *</span>
+<span class="cm">     * @method _afterHostAttrValueChange</span>
+<span class="cm">     * @param {String} name Attribute name.</span>
+<span class="cm">     * @param {EventFacade} e</span>
+<span class="cm">     * @protected</span>
+<span class="cm">     */</span>
+    <span class="nx">_afterHostAttrValueChange</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="k">this</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">PAUSED</span><span class="p">))</span> <span class="p">{</span>
+            <span class="k">this</span><span class="p">.</span><span class="nx">_uiSetAttrValue</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">e</span><span class="p">.</span><span class="nx">newVal</span><span class="p">);</span>
+        <span class="p">}</span>
+    <span class="p">},</span>
+    
+    <span class="cm">/**</span>
+<span class="cm">     * Handles &lt;code&gt;destroyedChange&lt;/code&gt; events on the host.</span>
+<span class="cm">     *</span>
+<span class="cm">     * @method _afterHostDestroyedChange</span>
+<span class="cm">     * @param {EventFacade} e</span>
+<span class="cm">     * @protected</span>
+<span class="cm">     */</span>
+    <span class="nx">_afterHostDestroyedChange</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nx">e</span><span class="p">.</span><span class="nx">newVal</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">this</span><span class="p">.</span><span class="nx">_uiSetHostDestroyed</span><span class="p">();</span>
+        <span class="p">}</span>
+    <span class="p">},</span>
+    
+    <span class="c1">// -- Protected Event Handlers ---------------------------------------------</span>
+    
+    <span class="cm">/**</span>
+<span class="cm">     * Handles &lt;code&gt;collaspedChange&lt;/code&gt; events.</span>
+<span class="cm">     *</span>
+<span class="cm">     * @method _afterCollapsedChange</span>
+<span class="cm">     * @param {EventFacade} e</span>
+<span class="cm">     * @protected</span>
+<span class="cm">     */</span>
+    <span class="nx">_afterCollapsedChange</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">_uiSetCollapsed</span><span class="p">(</span><span class="nx">e</span><span class="p">.</span><span class="nx">newVal</span><span class="p">);</span>
+    <span class="p">},</span>
+    
+    <span class="cm">/**</span>
+<span class="cm">     * Handles &lt;code&gt;draggableChange&lt;/code&gt; events.</span>
+<span class="cm">     *</span>
+<span class="cm">     * @method _afterDraggableChange</span>
+<span class="cm">     * @param {EventFacade} e</span>
+<span class="cm">     * @protected</span>
+<span class="cm">     */</span>
+    <span class="nx">_afterDraggableChange</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">_uiSetDraggable</span><span class="p">(</span><span class="nx">e</span><span class="p">.</span><span class="nx">newVal</span><span class="p">);</span>
+    <span class="p">},</span>
+    
+    <span class="cm">/**</span>
+<span class="cm">     * Handles &lt;code&gt;excludeChange&lt;/code&gt; events.</span>
+<span class="cm">     *</span>
+<span class="cm">     * @method _afterExcludeChange</span>
+<span class="cm">     * @param {EventFacade} e</span>
+<span class="cm">     * @protected</span>
+<span class="cm">     */</span>
+    <span class="nx">_afterExcludeChange</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">_syncAttrs</span><span class="p">();</span>
+    <span class="p">},</span>
+    
+    <span class="cm">/**</span>
+<span class="cm">     * Handles &lt;code&gt;filterChange&lt;/code&gt; events.</span>
+<span class="cm">     *</span>
+<span class="cm">     * @method _afterFilterChange</span>
+<span class="cm">     * @param {EventFacade} e</span>
+<span class="cm">     * @protected</span>
+<span class="cm">     */</span>
+    <span class="nx">_afterFilterChange</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kd">var</span> <span class="nx">filter</span> <span class="o">=</span> <span class="nx">e</span><span class="p">.</span><span class="nx">newVal</span><span class="p">;</span>
+        
+        <span class="k">if</span> <span class="p">(</span><span class="nx">e</span><span class="p">.</span><span class="nx">src</span> <span class="o">!==</span> <span class="nx">UI_SRC</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">this</span><span class="p">.</span><span class="nx">_uiSetFilter</span><span class="p">(</span><span class="nx">filter</span><span class="p">);</span>
+        <span class="p">}</span>
+        
+        <span class="k">this</span><span class="p">.</span><span class="nx">_uiFilterAttrs</span><span class="p">(</span><span class="nx">filter</span><span class="p">);</span>
+    <span class="p">},</span>
+    
+    <span class="cm">/**</span>
+<span class="cm">     * Handles &lt;code&gt;hostAttrsChange&lt;/code&gt; events.</span>
+<span class="cm">     *</span>
+<span class="cm">     * @method _afterHostAttrsChange</span>
+<span class="cm">     * @param {EventFacade} e</span>
+<span class="cm">     * @protected</span>
+<span class="cm">     */</span>
+    <span class="nx">_afterHostAttrsChange</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">_uiSyncAttrs</span><span class="p">();</span>
+    <span class="p">},</span>
+    
+    <span class="cm">/**</span>
+<span class="cm">     * Handles &lt;code&gt;includeChange&lt;/code&gt; events.</span>
+<span class="cm">     *</span>
+<span class="cm">     * @method _afterIncludeChange</span>
+<span class="cm">     * @param {EventFacade} e</span>
+<span class="cm">     * @protected</span>
+<span class="cm">     */</span>
+    <span class="nx">_afterIncludeChange</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">_syncAttrs</span><span class="p">();</span>
+    <span class="p">},</span>
+    
+    <span class="cm">/**</span>
+<span class="cm">     * Handles &lt;code&gt;pausedChange&lt;/code&gt; events.</span>
+<span class="cm">     *</span>
+<span class="cm">     * @method _afterPausedChange</span>
+<span class="cm">     * @param {EventFacade} e</span>
+<span class="cm">     * @protected</span>
+<span class="cm">     */</span>
+    <span class="nx">_afterPausedChange</span> <span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kd">var</span> <span class="nx">paused</span> <span class="o">=</span> <span class="nx">e</span><span class="p">.</span><span class="nx">newVal</span><span class="p">;</span>
+
+        <span class="k">if</span> <span class="p">(</span><span class="nx">e</span><span class="p">.</span><span class="nx">src</span> <span class="o">!==</span> <span class="nx">UI_SRC</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">this</span><span class="p">.</span><span class="nx">_uiSetPaused</span><span class="p">(</span><span class="nx">paused</span><span class="p">);</span>
+        <span class="p">}</span>
+        
+        <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">paused</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">this</span><span class="p">.</span><span class="nx">_syncAttrs</span><span class="p">();</span>
+        <span class="p">}</span>
+    <span class="p">},</span>
+    
+    <span class="cm">/**</span>
+<span class="cm">     * Handles &lt;code&gt;click&lt;/code&gt; events on the collapse button.</span>
+<span class="cm">     *</span>
+<span class="cm">     * @method _onCollapseClick</span>
+<span class="cm">     * @param {EventFacade} e</span>
+<span class="cm">     * @protected</span>
+<span class="cm">     */</span>
+    <span class="nx">_onCollapseClick</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">set</span><span class="p">(</span><span class="nx">COLLAPSED</span><span class="p">,</span> <span class="o">!</span><span class="k">this</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">COLLAPSED</span><span class="p">));</span>
+    <span class="p">},</span>
+    
+    <span class="cm">/**</span>
+<span class="cm">     * Handles &lt;code&gt;click&lt;/code&gt; events on the pause checkbox.</span>
+<span class="cm">     *</span>
+<span class="cm">     * @method _onPauseClick</span>
+<span class="cm">     * @param {EventFacade} e</span>
+<span class="cm">     * @protected</span>
+<span class="cm">     */</span>
+    <span class="nx">_onPauseClick</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">set</span><span class="p">(</span><span class="nx">PAUSED</span><span class="p">,</span> <span class="nx">e</span><span class="p">.</span><span class="nx">target</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">CHECKED</span><span class="p">),</span> <span class="p">{</span><span class="nx">src</span><span class="o">:</span> <span class="nx">UI_SRC</span><span class="p">});</span>
+    <span class="p">},</span>
+    
+    <span class="cm">/**</span>
+<span class="cm">     * Handles &lt;code&gt;valueChange&lt;/code&gt; events on the filter input.</span>
+<span class="cm">     *</span>
+<span class="cm">     * @method _onFilter</span>
+<span class="cm">     * @param {EventFacade} e</span>
+<span class="cm">     * @protected</span>
+<span class="cm">     */</span>
+    <span class="nx">_onFilter</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">set</span><span class="p">(</span><span class="nx">FILTER</span><span class="p">,</span> <span class="nx">e</span><span class="p">.</span><span class="nx">newVal</span><span class="p">);</span>
+    <span class="p">},</span>
+    
+    <span class="cm">/**</span>
+<span class="cm">     * Handles &lt;code&gt;esc&lt;/code&gt; &lt;code&gt;keyUp&lt;/code&gt; events on the filter input.</span>
+<span class="cm">     *</span>
+<span class="cm">     * @method _onFilterEscapeKey</span>
+<span class="cm">     * @param {EventFacade} e</span>
+<span class="cm">     * @protected</span>
+<span class="cm">     */</span>
+    <span class="nx">_onFilterEscapeKey</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">set</span><span class="p">(</span><span class="nx">FILTER</span><span class="p">,</span> <span class="kc">null</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">},</span>
+<span class="p">{</span>
+    <span class="nx">ATTRS</span><span class="o">:</span> <span class="p">{</span>
+        <span class="cm">/**</span>
+<span class="cm">         * If &lt;code&gt;true&lt;/code&gt;, Inspector will initially render collapsed.</span>
+<span class="cm">         *</span>
+<span class="cm">         * @attribute collapsed</span>
+<span class="cm">         * @type Boolean</span>
+<span class="cm">         * @default false</span>
+<span class="cm">         */</span>
+        <span class="nx">collapsed</span><span class="o">:</span> <span class="p">{</span>
+            <span class="nx">value</span>    <span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
+            <span class="nx">validator</span><span class="o">:</span> <span class="nx">Lang</span><span class="p">.</span><span class="nx">isBoolean</span>
+        <span class="p">},</span>
+        
+        <span class="cm">/**</span>
+<span class="cm">         * If &lt;code&gt;true&lt;/code&gt; Inspector will be draggable, with the header</span>
+<span class="cm">         * node as the drag handle.</span>
+<span class="cm">         *</span>
+<span class="cm">         * @attribute draggable</span>
+<span class="cm">         * @type Boolean</span>
+<span class="cm">         * @default true</span>
+<span class="cm">         */</span>
+        <span class="nx">draggable</span><span class="o">:</span> <span class="p">{</span>
+            <span class="nx">value</span>    <span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
+            <span class="nx">validator</span><span class="o">:</span> <span class="nx">Lang</span><span class="p">.</span><span class="nx">isBoolean</span>
+        <span class="p">},</span>
+        
+        <span class="cm">/**</span>
+<span class="cm">         * Array of attribute names to exclude from being displayed.</span>
+<span class="cm">         *</span>
+<span class="cm">         * @attribute exclude</span>
+<span class="cm">         * @type Array</span>
+<span class="cm">         */</span>
+        <span class="nx">exclude</span><span class="o">:</span> <span class="p">{</span>
+            <span class="nx">value</span>    <span class="o">:</span> <span class="p">[],</span>
+            <span class="nx">validator</span><span class="o">:</span> <span class="nx">Lang</span><span class="p">.</span><span class="nx">isArray</span>
+        <span class="p">},</span>
+        
+        <span class="cm">/**</span>
+<span class="cm">         * Filter text value.</span>
+<span class="cm">         *</span>
+<span class="cm">         * @attribute filter</span>
+<span class="cm">         * @type String</span>
+<span class="cm">         */</span>
+        <span class="nx">filter</span><span class="o">:</span> <span class="p">{</span>
+            <span class="nx">value</span><span class="o">:</span> <span class="s1">&#39;&#39;</span>
+        <span class="p">},</span>
+        
+        <span class="c1">// The &quot;height&quot; attribute is documented in Widget.</span>
+        <span class="nx">height</span><span class="o">:</span> <span class="p">{</span>
+            <span class="nx">value</span><span class="o">:</span> <span class="s1">&#39;300px&#39;</span>
+        <span class="p">},</span>
+        
+        <span class="cm">/**</span>
+<span class="cm">         * The object to inspect.</span>
+<span class="cm">         *</span>
+<span class="cm">         * @attribute host</span>
+<span class="cm">         * @type Object</span>
+<span class="cm">         * @writeonce</span>
+<span class="cm">         */</span>
+        <span class="nx">host</span><span class="o">:</span> <span class="p">{</span>
+            <span class="nx">value</span>    <span class="o">:</span> <span class="kc">null</span><span class="p">,</span>
+            <span class="nx">writeOnce</span><span class="o">:</span> <span class="s1">&#39;initOnly&#39;</span><span class="p">,</span>
+            <span class="nx">validator</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">v</span><span class="p">)</span> <span class="p">{</span>
+                <span class="k">return</span> <span class="nx">v</span> <span class="k">instanceof</span> <span class="nx">Y</span><span class="p">.</span><span class="nx">Base</span><span class="p">;</span>
+            <span class="p">}</span>
+        <span class="p">},</span>
+        
+        <span class="cm">/**</span>
+<span class="cm">         * Name/value pairs of the host object&#39;s attributes.</span>
+<span class="cm">         *</span>
+<span class="cm">         * @attribute hostAttrs</span>
+<span class="cm">         * @type Object</span>
+<span class="cm">         * @readonly</span>
+<span class="cm">         */</span>
+        <span class="nx">hostAttrs</span><span class="o">:</span> <span class="p">{</span>
+            <span class="nx">value</span>   <span class="o">:</span> <span class="p">{},</span>
+            <span class="nx">readOnly</span><span class="o">:</span> <span class="kc">true</span>
+        <span class="p">},</span>
+        
+        <span class="cm">/**</span>
+<span class="cm">         * Array of attribute names to include. Opposite of, and overrides</span>
+<span class="cm">         * &lt;code&gt;exclude&lt;/code&gt;.</span>
+<span class="cm">         *</span>
+<span class="cm">         * @attribute include</span>
+<span class="cm">         * @type Array</span>
+<span class="cm">         */</span>
+        <span class="nx">include</span><span class="o">:</span> <span class="p">{</span>
+            <span class="nx">value</span>    <span class="o">:</span> <span class="p">[],</span>
+            <span class="nx">validator</span><span class="o">:</span> <span class="nx">Lang</span><span class="p">.</span><span class="nx">isArray</span>
+        <span class="p">},</span>
+        
+        <span class="cm">/**</span>
+<span class="cm">         * Display name of the Inspector instance. If not specified, the host</span>
+<span class="cm">         * object&#39;s &lt;code&gt;name&lt;/code&gt; property will be used if present.</span>
+<span class="cm">         *</span>
+<span class="cm">         * @attribute name</span>
+<span class="cm">         * @type String</span>
+<span class="cm">         * @writeonce</span>
+<span class="cm">         */</span>
+        <span class="nx">name</span><span class="o">:</span> <span class="p">{</span>
+            <span class="nx">value</span>    <span class="o">:</span> <span class="kc">null</span><span class="p">,</span>
+            <span class="nx">writeOnce</span><span class="o">:</span> <span class="s1">&#39;initOnly&#39;</span><span class="p">,</span>
+            <span class="nx">getter</span>   <span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">value</span><span class="p">)</span> <span class="p">{</span>
+                <span class="kd">var</span> <span class="nx">host</span><span class="p">,</span> <span class="nx">name</span><span class="p">;</span>
+                
+                <span class="k">if</span> <span class="p">(</span><span class="nx">value</span><span class="p">)</span> <span class="p">{</span>
+                    <span class="nx">name</span> <span class="o">=</span> <span class="nx">value</span><span class="p">;</span>
+                <span class="p">}</span>
+                <span class="k">else</span> <span class="p">{</span>
+                    <span class="nx">host</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">HOST</span><span class="p">);</span>
+                    <span class="nx">name</span> <span class="o">=</span> <span class="nx">host</span><span class="p">.</span><span class="nx">name</span> <span class="o">?</span> <span class="nx">host</span><span class="p">.</span><span class="nx">name</span> <span class="o">:</span> <span class="s1">&#39;[No name]&#39;</span><span class="p">;</span>
+                <span class="p">}</span>
+                
+                <span class="k">return</span> <span class="nx">name</span><span class="p">;</span>
+            <span class="p">}</span>
+        <span class="p">},</span>
+        
+        <span class="cm">/**</span>
+<span class="cm">         * If &lt;code&gt;true&lt;/code&gt;, Inspector will intitally be paused.</span>
+<span class="cm">         *</span>
+<span class="cm">         * @attribute paused</span>
+<span class="cm">         * @type Boolean</span>
+<span class="cm">         * @default false</span>
+<span class="cm">         */</span>
+        <span class="nx">paused</span><span class="o">:</span> <span class="p">{</span>
+            <span class="nx">value</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
+            <span class="nx">validator</span> <span class="o">:</span> <span class="nx">Lang</span><span class="p">.</span><span class="nx">isBoolean</span>
+        <span class="p">},</span>
+        
+        <span class="cm">/**</span>
+<span class="cm">         * Translatable strings used by Inspector.</span>
+<span class="cm">         *</span>
+<span class="cm">         * @attribute strings</span>
+<span class="cm">         * @type Object</span>
+<span class="cm">         */</span>
+        <span class="nx">strings</span><span class="o">:</span> <span class="p">{</span>
+            <span class="nx">valueFn</span><span class="o">:</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+                <span class="k">return</span> <span class="nx">Y</span><span class="p">.</span><span class="nx">Intl</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;gallery-inspector&#39;</span><span class="p">);</span>
+            <span class="p">}</span>
+        <span class="p">},</span>
+        
+        <span class="c1">// The &quot;width&quot; attribute is documented in Widget.</span>
+        <span class="nx">width</span><span class="o">:</span> <span class="p">{</span>
+            <span class="nx">value</span><span class="o">:</span> <span class="s1">&#39;275px&#39;</span>
+        <span class="p">}</span>
+        
+        <span class="c1">// The &quot;zIndex&quot; attribute is documented in WidgetStack.</span>
+    <span class="p">},</span>
+    
+    <span class="nx">CSS_PREFIX</span><span class="o">:</span> <span class="nx">Y</span><span class="p">.</span><span class="nx">ClassNameManager</span><span class="p">.</span><span class="nx">getClassName</span><span class="p">(</span><span class="s1">&#39;inspector&#39;</span><span class="p">),</span>
+    
+    <span class="nx">BODY_TEMPLATE</span><span class="o">:</span>
+        <span class="s1">&#39;&lt;div class=&quot;{inspector_bd_class}&quot;&gt;&#39;</span> <span class="o">+</span>
+            <span class="s1">&#39;&lt;table&gt;&#39;</span> <span class="o">+</span>
+                <span class="s1">&#39;&lt;thead&gt;&#39;</span> <span class="o">+</span>
+                    <span class="s1">&#39;&lt;tr&gt;&#39;</span> <span class="o">+</span>
+                        <span class="s1">&#39;&lt;th scope=&quot;col&quot;&gt;{str_name}&lt;/th&gt;&#39;</span> <span class="o">+</span>
+                        <span class="s1">&#39;&lt;th scope=&quot;col&quot;&gt;{str_value}&lt;/th&gt;&#39;</span> <span class="o">+</span>
+                    <span class="s1">&#39;&lt;/tr&gt;&#39;</span> <span class="o">+</span>
+                <span class="s1">&#39;&lt;/thead&gt;&#39;</span> <span class="o">+</span>
+                <span class="s1">&#39;&lt;tbody&gt;&lt;/tbody&gt;&#39;</span> <span class="o">+</span>
+            <span class="s1">&#39;&lt;/table&gt;&#39;</span> <span class="o">+</span>
+        <span class="s1">&#39;&lt;/div&gt;&#39;</span><span class="p">,</span>
+    
+    <span class="nx">FOOTER_TEMPLATE</span><span class="o">:</span>
+        <span class="s1">&#39;&lt;div class=&quot;{inspector_ft_class}&quot;&gt;&#39;</span> <span class="o">+</span>
+            <span class="s1">&#39;&lt;div class=&quot;{inspector_controls_class}&quot;&gt;&#39;</span> <span class="o">+</span>
+                <span class="s1">&#39;&lt;label class=&quot;{inspector_pause_label_class}&quot;&gt;&#39;</span> <span class="o">+</span>
+                    <span class="s1">&#39;&lt;input type=&quot;checkbox&quot; class=&quot;{inspector_checkbox_class} &#39;</span> <span class="o">+</span>
+                        <span class="s1">&#39;{inspector_pause_class}&quot; value=&quot;1&quot;&gt;{str_pause}&#39;</span> <span class="o">+</span>
+                <span class="s1">&#39;&lt;/label&gt;&#39;</span> <span class="o">+</span>
+                <span class="s1">&#39;&lt;input type=&quot;search&quot; class=&quot;{inspector_searchbox_class}&quot;&#39;</span> <span class="o">+</span>
+                    <span class="s1">&#39;placeholder=&quot;{str_filter}&quot;/&gt;&#39;</span> <span class="o">+</span>
+            <span class="s1">&#39;&lt;/div&gt;&#39;</span><span class="o">+</span>
+        <span class="s1">&#39;&lt;/div&gt;&#39;</span><span class="p">,</span>
+    
+    <span class="nx">HEADER_TEMPLATE</span><span class="o">:</span>
+        <span class="s1">&#39;&lt;div class=&quot;{inspector_hd_class}&quot;&gt;&#39;</span> <span class="o">+</span>
+            <span class="s1">&#39;&lt;h4 class=&quot;{inspector_title_class}&quot;&gt;{str_title}: &#39;</span> <span class="o">+</span>
+                <span class="s1">&#39;&lt;span class=&quot;{inspector_name_class}&quot;&gt;{str_name}&lt;/span&gt;&lt;/h4&gt;&#39;</span> <span class="o">+</span>
+            <span class="s1">&#39;&lt;button type=&quot;button&quot; class=&quot;&#39;</span> <span class="o">+</span>
+               <span class="s1">&#39;{inspector_button_class} {inspector_collapse_class}&quot;&gt;{str_collapse}&#39;</span> <span class="o">+</span>
+           <span class="s1">&#39;&lt;/button&gt;&#39;</span> <span class="o">+</span>
+        <span class="s1">&#39;&lt;/div&gt;&#39;</span><span class="p">,</span>
+    
+    <span class="nx">ATTR_TEMPLATE</span><span class="o">:</span>
+        <span class="s1">&#39;&lt;tr id=&quot;{id_guid}&quot; class=&quot;{inspector_row_parity_class}&quot;&gt;&#39;</span> <span class="o">+</span>
+            <span class="s1">&#39;&lt;th class=&quot;{inspector_name_cell_class}&quot; scope=&quot;row&quot;&gt;{str_name}&lt;/th&gt;&#39;</span> <span class="o">+</span>
+            <span class="s1">&#39;&lt;td class=&quot;{inspector_value_cell_class}&quot;&gt;&lt;/td&gt;&#39;</span> <span class="o">+</span>
+        <span class="s1">&#39;&lt;/tr&gt;&#39;</span><span class="p">,</span>
+            
+    <span class="nx">VALUE_TEMPLATE</span><span class="o">:</span>
+        <span class="s1">&#39;&lt;span class=&quot;{inspector_value_class} {inspector_type_class}&quot;&gt;&#39;</span> <span class="o">+</span>
+            <span class="s1">&#39;{str_value}&#39;</span> <span class="o">+</span>
+        <span class="s1">&#39;&lt;/span&gt;&#39;</span>
+<span class="p">});</span>
+
+<span class="nx">Y</span><span class="p">.</span><span class="nx">Inspector</span> <span class="o">=</span> <span class="nx">Inspector</span><span class="p">;</span>
+</pre></div>
+                    </div>
+			</div>
+		</div>
+		<div class="yui-b">
+            <div class="nav">
+
+                    <div id="moduleList" class="module">
+                        <h4>Modules</h4>
+                        <ul class="content">
+                                <li class="selected"><a href="module_gallery-inspector.html" title="gallery-inspector">gallery-inspector</a></li>
+                        </ul>
+                    </div>
+
+                    <div id="classList" class="module">
+                        <h4>Classes</h4>
+                        <ul class="content">
+                                <li class=""><a href="Inspector.html" title="Inspector">Inspector</a></li>
+                                <li class=""><a href="Plugin.Inspector.html" title="Plugin.Inspector">Plugin.Inspector</a></li>
+                        </ul>
+                    </div>
+
+                    <div id="fileList" class="module">
+                        <h4>Files</h4>
+                        <ul class="content">        
+                                <li class=""><a href="inspector-plugin.js.html" title="inspector-plugin.js">inspector-plugin.js</a></li>
+                                <li class="selected"><a href="inspector.js.html" title="inspector.js">inspector.js</a></li>
+                        </ul>
+                    </div>
+
+
+
+
+
+            </div>
+		</div>
+	</div>
+	<div id="ft">
+        <hr />
+        Copyright &copy; 2011 Yahoo! Inc. All rights reserved.
+	</div>
+</div>
+<script type="text/javascript">
+    ALL_YUI_PROPS = [{"url": "Inspector.html#method__afterCollapsedChange", "access": "protected", "host": "Inspector", "type": "method", "name": "_afterCollapsedChange"}, {"url": "Inspector.html#method__afterDraggableChange", "access": "protected", "host": "Inspector", "type": "method", "name": "_afterDraggableChange"}, {"url": "Inspector.html#method__afterExcludeChange", "access": "protected", "host": "Inspector", "type": "method", "name": "_afterExcludeChange"}, {"url": "Inspector.html#method__afterFilterChange", "access": "protected", "host": "Inspector", "type": "method", "name": "_afterFilterChange"}, {"url": "Inspector.html#method__afterHostAttrsChange", "access": "protected", "host": "Inspector", "type": "method", "name": "_afterHostAttrsChange"}, {"url": "Inspector.html#method__afterHostAttrValueChange", "access": "protected", "host": "Inspector", "type": "method", "name": "_afterHostAttrValueChange"}, {"url": "Inspector.html#method__afterHostDestroyedChange", "access": "protected", "host": "Inspector", "type": "method", "name": "_afterHostDestroyedChange"}, {"url": "Inspector.html#method__afterIncludeChange", "access": "protected", "host": "Inspector", "type": "method", "name": "_afterIncludeChange"}, {"url": "Inspector.html#method__afterPausedChange", "access": "protected", "host": "Inspector", "type": "method", "name": "_afterPausedChange"}, {"url": "Inspector.html#method__bindHostValueChangeEvents", "access": "protected", "host": "Inspector", "type": "method", "name": "_bindHostValueChangeEvents"}, {"url": "Inspector.html#config_collapsed", "access": "", "host": "Inspector", "type": "config", "name": "collapsed"}, {"url": "Inspector.html#event_collapsedChange", "access": "", "host": "Inspector", "type": "event", "name": "collapsedChange"}, {"url": "Inspector.html#config_draggable", "access": "", "host": "Inspector", "type": "config", "name": "draggable"}, {"url": "Inspector.html#event_draggableChange", "access": "", "host": "Inspector", "type": "event", "name": "draggableChange"}, {"url": "Inspector.html#config_exclude", "access": "", "host": "Inspector", "type": "config", "name": "exclude"}, {"url": "Inspector.html#event_excludeChange", "access": "", "host": "Inspector", "type": "event", "name": "excludeChange"}, {"url": "Inspector.html#config_filter", "access": "", "host": "Inspector", "type": "config", "name": "filter"}, {"url": "Inspector.html#event_filterChange", "access": "", "host": "Inspector", "type": "event", "name": "filterChange"}, {"url": "Inspector.html#method__formatValue", "access": "protected", "host": "Inspector", "type": "method", "name": "_formatValue"}, {"url": "Inspector.html#config_host", "access": "", "host": "Inspector", "type": "config", "name": "host"}, {"url": "Inspector.html#config_hostAttrs", "access": "", "host": "Inspector", "type": "config", "name": "hostAttrs"}, {"url": "Inspector.html#event_hostAttrsChange", "access": "", "host": "Inspector", "type": "event", "name": "hostAttrsChange"}, {"url": "Inspector.html#event_hostChange", "access": "", "host": "Inspector", "type": "event", "name": "hostChange"}, {"url": "Inspector.html#config_include", "access": "", "host": "Inspector", "type": "config", "name": "include"}, {"url": "Inspector.html#event_includeChange", "access": "", "host": "Inspector", "type": "event", "name": "includeChange"}, {"url": "Inspector.html#config_name", "access": "", "host": "Inspector", "type": "config", "name": "name"}, {"url": "Inspector.html#event_nameChange", "access": "", "host": "Inspector", "type": "event", "name": "nameChange"}, {"url": "Inspector.html#method__onCollapseClick", "access": "protected", "host": "Inspector", "type": "method", "name": "_onCollapseClick"}, {"url": "Inspector.html#method__onFilter", "access": "protected", "host": "Inspector", "type": "method", "name": "_onFilter"}, {"url": "Inspector.html#method__onFilterEscapeKey", "access": "protected", "host": "Inspector", "type": "method", "name": "_onFilterEscapeKey"}, {"url": "Inspector.html#method__onPauseClick", "access": "protected", "host": "Inspector", "type": "method", "name": "_onPauseClick"}, {"url": "Inspector.html#config_paused", "access": "", "host": "Inspector", "type": "config", "name": "paused"}, {"url": "Inspector.html#event_pausedChange", "access": "", "host": "Inspector", "type": "event", "name": "pausedChange"}, {"url": "Inspector.html#method__purgeEvents", "access": "protected", "host": "Inspector", "type": "method", "name": "_purgeEvents"}, {"url": "Inspector.html#method__renderAttr", "access": "protected", "host": "Inspector", "type": "method", "name": "_renderAttr"}, {"url": "Inspector.html#method__renderAttrs", "access": "protected", "host": "Inspector", "type": "method", "name": "_renderAttrs"}, {"url": "Inspector.html#method__renderBody", "access": "protected", "host": "Inspector", "type": "method", "name": "_renderBody"}, {"url": "Inspector.html#method__renderFoot", "access": "protected", "host": "Inspector", "type": "method", "name": "_renderFoot"}, {"url": "Inspector.html#method__renderHead", "access": "protected", "host": "Inspector", "type": "method", "name": "_renderHead"}, {"url": "Inspector.html#config_strings", "access": "", "host": "Inspector", "type": "config", "name": "strings"}, {"url": "Inspector.html#event_stringsChange", "access": "", "host": "Inspector", "type": "event", "name": "stringsChange"}, {"url": "Inspector.html#method__syncAttrs", "access": "protected", "host": "Inspector", "type": "method", "name": "_syncAttrs"}, {"url": "Inspector.html#method__uiFilterAttrs", "access": "protected", "host": "Inspector", "type": "method", "name": "_uiFilterAttrs"}, {"url": "Inspector.html#method__uiSetAttrValue", "access": "protected", "host": "Inspector", "type": "method", "name": "_uiSetAttrValue"}, {"url": "Inspector.html#method__uiSetAttrValues", "access": "protected", "host": "Inspector", "type": "method", "name": "_uiSetAttrValues"}, {"url": "Inspector.html#method__uiSetCollapsed", "access": "protected", "host": "Inspector", "type": "method", "name": "_uiSetCollapsed"}, {"url": "Inspector.html#method__uiSetDraggable", "access": "protected", "host": "Inspector", "type": "method", "name": "_uiSetDraggable"}, {"url": "Inspector.html#method__uiSetFilter", "access": "protected", "host": "Inspector", "type": "method", "name": "_uiSetFilter"}, {"url": "Inspector.html#method__uiSetHeight", "access": "protected", "host": "Inspector", "type": "method", "name": "_uiSetHeight"}, {"url": "Inspector.html#method__uiSetHostDestroyed", "access": "protected", "host": "Inspector", "type": "method", "name": "_uiSetHostDestroyed"}, {"url": "Inspector.html#method__uiSetPaused", "access": "protected", "host": "Inspector", "type": "method", "name": "_uiSetPaused"}, {"url": "Inspector.html#method__uiSetPosition", "access": "protected", "host": "Inspector", "type": "method", "name": "_uiSetPosition"}, {"url": "Inspector.html#method__uiSyncAttrs", "access": "protected", "host": "Inspector", "type": "method", "name": "_uiSyncAttrs"}];
+</script>
+</body>
+</html>

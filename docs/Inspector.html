@@ -1,0 +1,2432 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html xmlns:yui="http://yuilibrary.com/rdf/1.0/yui.rdf#">
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+	<title>API: gallery-inspector  Inspector   (YUI Library)</title>
+
+	<link rel="stylesheet" type="text/css" href="assets/reset-fonts-grids-min.css?stamp=1304104496.41" />
+	<link rel="stylesheet" type="text/css" href="assets/api.css?stamp=1304104496.41" />
+
+    <script type="text/javascript" src="assets/api-js?stamp=1304104496.41"></script>
+    <script type="text/javascript" src="assets/ac-js?stamp=1304104496.41"></script>
+</head>
+
+<body id="yahoo-com">
+
+<div id="doc3" class="yui-t2">
+	<div id="hd">
+        <h1><a href="http://developer.yahoo.com/yui/" title="Yahoo! UI Library">Yahoo! UI Library</a></h1>
+        <h3>gallery-inspector&nbsp; <span class="subtitle">0.1.0</span></h3>
+        <a href="./index.html" title="Yahoo! UI Library">Yahoo! UI Library</a> 
+            &gt; <a href="./module_gallery-inspector.html" title="gallery-inspector">gallery-inspector</a>
+                 &gt; Inspector 
+                
+        <form onsubmit="return false">
+            <div id="propertysearch">
+                Search: <input autocomplete="off" id="searchinput" />
+                <div id="searchresults">
+                    &nbsp;
+                </div>
+            </div>
+        </form>
+	</div>
+
+	<div id="bd">
+		<div id="yui-main">
+			<div class="yui-b">
+            <form action="#" name="yui-classopts-form" method="get" id="yui-classopts-form">
+                <fieldset>
+                    <legend>Filters</legend>
+                <span class="classopts"><input type="checkbox" name="show_private" id="show_private" /> <label for="show_private">Show Private</label></span>
+                <span class="classopts"><input type="checkbox" name="show_protected" id="show_protected" /> <label for="show_protected">Show Protected</label></span>
+                <span class="classopts"><input type="checkbox" name="show_deprecated" id="show_deprecated" /> <label for="show_deprecated">Show Deprecated</label></span>
+                </fieldset>
+            </form>
+
+                    <h2>
+                        
+
+                        
+                        
+                            Class <b property="yui:name">Inspector</b>
+                        <span class="extends">
+                           - extends <a href="Widget.html" title="Widget">Widget</a>
+                        </span>
+
+                            <span class="extends" rel="yui:extends">
+                          - uses 
+                            
+                                <span rel="extend" resource="WidgetStack.html">
+                                <a href="WidgetStack.html" property="yui:name" title="WidgetStack">WidgetStack</a>
+                                </span>
+                            
+                            
+                        </span>
+                    </h2>
+                    <!-- class tree goes here -->
+                    
+                        <dl class="subclasses" rel="yui:subclasses">
+                            <dt>Known Subclasses:</dt>
+                            <dd>
+                                    <span rel="yui:subclass" resource="Plugin.Inspector.html">
+                                    <a href="Plugin.Inspector.html" property="yui:name" title="Plugin.Inspector">Plugin.Inspector</a>
+                                    </span>
+                            </dd>
+                       </dl>
+                
+  
+
+                    <div class="summary description" property="yui:description">
+                        Real-time attribute inspector widget.
+                    </div>
+
+                        <div class="section constructor details" rel="yui:constructor" resource="#constructor">
+                        <h3 id="constructor">Constructor</h3>
+                        <div class="content">
+                            <div class="detail">
+                                <strong property="yui:name">Inspector</strong>
+                                <code>
+                                    (
+  
+                                        
+                                                
+                                                config
+                                    )
+                                </code>
+                                <div class="description">
+                                        <dl rel="yui:parameters">
+                                            <dt>Parameters:</dt>
+                                                <dd rel="yui:parameter">
+                                                    <code><span property="yui:name">config</span>
+                                                    &lt;<span property="yui:type">Object</span>&gt;
+                                                    </code>
+                                                    <span property="yui:description"> Configuration object.</span>
+                                                </dd>
+                                        </dl>
+                                    
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div rel="yui:properties" resource="#properties">
+
+                    </div>
+
+                    <div rel="yui:methods" resource="#methods">
+                        <div class="section method details">
+                            <h3 id="methods">Methods</h3>
+                            <div class="content">
+                                    <div class="protected" rel="yui:method" resource="#method__afterCollapsedChange">
+                                    <h4>
+                                        <a name="method__afterCollapsedChange">_afterCollapsedChange</a></h4>
+                                    <div class="detail" >
+                                        <code>
+                                         protected 
+                                        
+                                        
+                                        void
+                                            <strong property="yui:name">_afterCollapsedChange</strong>
+                                           (
+                                                
+                                                        
+                                                         e
+                                                    
+                                                
+                                            )
+                                        </code>
+                                        
+                                        <div class="description" property="yui:description">
+                                            Handles <code>collaspedChange</code> events.
+                                        </div>
+
+                                        <div class="description">
+
+                                                <dl rel="yui:parameters">
+                                                    <dt>Parameters:</dt>
+                                                        <dd rel="yui:parameter">
+                                                        <code><span property="yui:name">e</span>
+                                                        &lt;<span property="yui:type">EventFacade</span>&gt;
+                                                        </code>
+                                                        <span property="yui:description"></span>
+                                                        </dd>
+                                                </dl>
+
+                                                <dl>
+                                                    <dt>Returns:
+                                                    <code property="yui:return">
+                                                        void
+                                                    </code></dt>
+                                                    <dd property="yui:returnInfo"></dd>
+                                                </dl>
+
+
+             
+
+                                        </div>
+
+                                    </div>
+                                    <hr />
+                                    </div>
+                                    <div class="protected" rel="yui:method" resource="#method__afterDraggableChange">
+                                    <h4>
+                                        <a name="method__afterDraggableChange">_afterDraggableChange</a></h4>
+                                    <div class="detail" >
+                                        <code>
+                                         protected 
+                                        
+                                        
+                                        void
+                                            <strong property="yui:name">_afterDraggableChange</strong>
+                                           (
+                                                
+                                                        
+                                                         e
+                                                    
+                                                
+                                            )
+                                        </code>
+                                        
+                                        <div class="description" property="yui:description">
+                                            Handles <code>draggableChange</code> events.
+                                        </div>
+
+                                        <div class="description">
+
+                                                <dl rel="yui:parameters">
+                                                    <dt>Parameters:</dt>
+                                                        <dd rel="yui:parameter">
+                                                        <code><span property="yui:name">e</span>
+                                                        &lt;<span property="yui:type">EventFacade</span>&gt;
+                                                        </code>
+                                                        <span property="yui:description"></span>
+                                                        </dd>
+                                                </dl>
+
+                                                <dl>
+                                                    <dt>Returns:
+                                                    <code property="yui:return">
+                                                        void
+                                                    </code></dt>
+                                                    <dd property="yui:returnInfo"></dd>
+                                                </dl>
+
+
+             
+
+                                        </div>
+
+                                    </div>
+                                    <hr />
+                                    </div>
+                                    <div class="protected" rel="yui:method" resource="#method__afterExcludeChange">
+                                    <h4>
+                                        <a name="method__afterExcludeChange">_afterExcludeChange</a></h4>
+                                    <div class="detail" >
+                                        <code>
+                                         protected 
+                                        
+                                        
+                                        void
+                                            <strong property="yui:name">_afterExcludeChange</strong>
+                                           (
+                                                
+                                                        
+                                                         e
+                                                    
+                                                
+                                            )
+                                        </code>
+                                        
+                                        <div class="description" property="yui:description">
+                                            Handles <code>excludeChange</code> events.
+                                        </div>
+
+                                        <div class="description">
+
+                                                <dl rel="yui:parameters">
+                                                    <dt>Parameters:</dt>
+                                                        <dd rel="yui:parameter">
+                                                        <code><span property="yui:name">e</span>
+                                                        &lt;<span property="yui:type">EventFacade</span>&gt;
+                                                        </code>
+                                                        <span property="yui:description"></span>
+                                                        </dd>
+                                                </dl>
+
+                                                <dl>
+                                                    <dt>Returns:
+                                                    <code property="yui:return">
+                                                        void
+                                                    </code></dt>
+                                                    <dd property="yui:returnInfo"></dd>
+                                                </dl>
+
+
+             
+
+                                        </div>
+
+                                    </div>
+                                    <hr />
+                                    </div>
+                                    <div class="protected" rel="yui:method" resource="#method__afterFilterChange">
+                                    <h4>
+                                        <a name="method__afterFilterChange">_afterFilterChange</a></h4>
+                                    <div class="detail" >
+                                        <code>
+                                         protected 
+                                        
+                                        
+                                        void
+                                            <strong property="yui:name">_afterFilterChange</strong>
+                                           (
+                                                
+                                                        
+                                                         e
+                                                    
+                                                
+                                            )
+                                        </code>
+                                        
+                                        <div class="description" property="yui:description">
+                                            Handles <code>filterChange</code> events.
+                                        </div>
+
+                                        <div class="description">
+
+                                                <dl rel="yui:parameters">
+                                                    <dt>Parameters:</dt>
+                                                        <dd rel="yui:parameter">
+                                                        <code><span property="yui:name">e</span>
+                                                        &lt;<span property="yui:type">EventFacade</span>&gt;
+                                                        </code>
+                                                        <span property="yui:description"></span>
+                                                        </dd>
+                                                </dl>
+
+                                                <dl>
+                                                    <dt>Returns:
+                                                    <code property="yui:return">
+                                                        void
+                                                    </code></dt>
+                                                    <dd property="yui:returnInfo"></dd>
+                                                </dl>
+
+
+             
+
+                                        </div>
+
+                                    </div>
+                                    <hr />
+                                    </div>
+                                    <div class="protected" rel="yui:method" resource="#method__afterHostAttrsChange">
+                                    <h4>
+                                        <a name="method__afterHostAttrsChange">_afterHostAttrsChange</a></h4>
+                                    <div class="detail" >
+                                        <code>
+                                         protected 
+                                        
+                                        
+                                        void
+                                            <strong property="yui:name">_afterHostAttrsChange</strong>
+                                           (
+                                                
+                                                        
+                                                         e
+                                                    
+                                                
+                                            )
+                                        </code>
+                                        
+                                        <div class="description" property="yui:description">
+                                            Handles <code>hostAttrsChange</code> events.
+                                        </div>
+
+                                        <div class="description">
+
+                                                <dl rel="yui:parameters">
+                                                    <dt>Parameters:</dt>
+                                                        <dd rel="yui:parameter">
+                                                        <code><span property="yui:name">e</span>
+                                                        &lt;<span property="yui:type">EventFacade</span>&gt;
+                                                        </code>
+                                                        <span property="yui:description"></span>
+                                                        </dd>
+                                                </dl>
+
+                                                <dl>
+                                                    <dt>Returns:
+                                                    <code property="yui:return">
+                                                        void
+                                                    </code></dt>
+                                                    <dd property="yui:returnInfo"></dd>
+                                                </dl>
+
+
+             
+
+                                        </div>
+
+                                    </div>
+                                    <hr />
+                                    </div>
+                                    <div class="protected" rel="yui:method" resource="#method__afterHostAttrValueChange">
+                                    <h4>
+                                        <a name="method__afterHostAttrValueChange">_afterHostAttrValueChange</a></h4>
+                                    <div class="detail" >
+                                        <code>
+                                         protected 
+                                        
+                                        
+                                        void
+                                            <strong property="yui:name">_afterHostAttrValueChange</strong>
+                                           (
+                                                
+                                                        
+                                                         name
+                                                    
+                                                
+                                                        , 
+                                                         e
+                                                    
+                                                
+                                            )
+                                        </code>
+                                        
+                                        <div class="description" property="yui:description">
+                                            Handles <code>[attribute]Change</code> events on the host.
+                                        </div>
+
+                                        <div class="description">
+
+                                                <dl rel="yui:parameters">
+                                                    <dt>Parameters:</dt>
+                                                        <dd rel="yui:parameter">
+                                                        <code><span property="yui:name">name</span>
+                                                        &lt;<span property="yui:type">String</span>&gt;
+                                                        </code>
+                                                        <span property="yui:description"> Attribute name.</span>
+                                                        </dd>
+                                                        <dd rel="yui:parameter">
+                                                        <code><span property="yui:name">e</span>
+                                                        &lt;<span property="yui:type">EventFacade</span>&gt;
+                                                        </code>
+                                                        <span property="yui:description"></span>
+                                                        </dd>
+                                                </dl>
+
+                                                <dl>
+                                                    <dt>Returns:
+                                                    <code property="yui:return">
+                                                        void
+                                                    </code></dt>
+                                                    <dd property="yui:returnInfo"></dd>
+                                                </dl>
+
+
+             
+
+                                        </div>
+
+                                    </div>
+                                    <hr />
+                                    </div>
+                                    <div class="protected" rel="yui:method" resource="#method__afterHostDestroyedChange">
+                                    <h4>
+                                        <a name="method__afterHostDestroyedChange">_afterHostDestroyedChange</a></h4>
+                                    <div class="detail" >
+                                        <code>
+                                         protected 
+                                        
+                                        
+                                        void
+                                            <strong property="yui:name">_afterHostDestroyedChange</strong>
+                                           (
+                                                
+                                                        
+                                                         e
+                                                    
+                                                
+                                            )
+                                        </code>
+                                        
+                                        <div class="description" property="yui:description">
+                                            Handles <code>destroyedChange</code> events on the host.
+                                        </div>
+
+                                        <div class="description">
+
+                                                <dl rel="yui:parameters">
+                                                    <dt>Parameters:</dt>
+                                                        <dd rel="yui:parameter">
+                                                        <code><span property="yui:name">e</span>
+                                                        &lt;<span property="yui:type">EventFacade</span>&gt;
+                                                        </code>
+                                                        <span property="yui:description"></span>
+                                                        </dd>
+                                                </dl>
+
+                                                <dl>
+                                                    <dt>Returns:
+                                                    <code property="yui:return">
+                                                        void
+                                                    </code></dt>
+                                                    <dd property="yui:returnInfo"></dd>
+                                                </dl>
+
+
+             
+
+                                        </div>
+
+                                    </div>
+                                    <hr />
+                                    </div>
+                                    <div class="protected" rel="yui:method" resource="#method__afterIncludeChange">
+                                    <h4>
+                                        <a name="method__afterIncludeChange">_afterIncludeChange</a></h4>
+                                    <div class="detail" >
+                                        <code>
+                                         protected 
+                                        
+                                        
+                                        void
+                                            <strong property="yui:name">_afterIncludeChange</strong>
+                                           (
+                                                
+                                                        
+                                                         e
+                                                    
+                                                
+                                            )
+                                        </code>
+                                        
+                                        <div class="description" property="yui:description">
+                                            Handles <code>includeChange</code> events.
+                                        </div>
+
+                                        <div class="description">
+
+                                                <dl rel="yui:parameters">
+                                                    <dt>Parameters:</dt>
+                                                        <dd rel="yui:parameter">
+                                                        <code><span property="yui:name">e</span>
+                                                        &lt;<span property="yui:type">EventFacade</span>&gt;
+                                                        </code>
+                                                        <span property="yui:description"></span>
+                                                        </dd>
+                                                </dl>
+
+                                                <dl>
+                                                    <dt>Returns:
+                                                    <code property="yui:return">
+                                                        void
+                                                    </code></dt>
+                                                    <dd property="yui:returnInfo"></dd>
+                                                </dl>
+
+
+             
+
+                                        </div>
+
+                                    </div>
+                                    <hr />
+                                    </div>
+                                    <div class="protected" rel="yui:method" resource="#method__afterPausedChange">
+                                    <h4>
+                                        <a name="method__afterPausedChange">_afterPausedChange</a></h4>
+                                    <div class="detail" >
+                                        <code>
+                                         protected 
+                                        
+                                        
+                                        void
+                                            <strong property="yui:name">_afterPausedChange</strong>
+                                           (
+                                                
+                                                        
+                                                         e
+                                                    
+                                                
+                                            )
+                                        </code>
+                                        
+                                        <div class="description" property="yui:description">
+                                            Handles <code>pausedChange</code> events.
+                                        </div>
+
+                                        <div class="description">
+
+                                                <dl rel="yui:parameters">
+                                                    <dt>Parameters:</dt>
+                                                        <dd rel="yui:parameter">
+                                                        <code><span property="yui:name">e</span>
+                                                        &lt;<span property="yui:type">EventFacade</span>&gt;
+                                                        </code>
+                                                        <span property="yui:description"></span>
+                                                        </dd>
+                                                </dl>
+
+                                                <dl>
+                                                    <dt>Returns:
+                                                    <code property="yui:return">
+                                                        void
+                                                    </code></dt>
+                                                    <dd property="yui:returnInfo"></dd>
+                                                </dl>
+
+
+             
+
+                                        </div>
+
+                                    </div>
+                                    <hr />
+                                    </div>
+                                    <div class="protected" rel="yui:method" resource="#method__bindHostValueChangeEvents">
+                                    <h4>
+                                        <a name="method__bindHostValueChangeEvents">_bindHostValueChangeEvents</a></h4>
+                                    <div class="detail" >
+                                        <code>
+                                         protected 
+                                        
+                                        
+                                        void
+                                            <strong property="yui:name">_bindHostValueChangeEvents</strong>
+                                           (
+                                            )
+                                        </code>
+                                        
+                                        <div class="description" property="yui:description">
+                                            Sets up event handlers for host attribute value change events.
+                                        </div>
+
+                                        <div class="description">
+
+
+                                                <dl>
+                                                    <dt>Returns:
+                                                    <code property="yui:return">
+                                                        void
+                                                    </code></dt>
+                                                    <dd property="yui:returnInfo"></dd>
+                                                </dl>
+
+
+             
+
+                                        </div>
+
+                                    </div>
+                                    <hr />
+                                    </div>
+                                    <div class="protected" rel="yui:method" resource="#method__formatValue">
+                                    <h4>
+                                        <a name="method__formatValue">_formatValue</a></h4>
+                                    <div class="detail" >
+                                        <code>
+                                         protected 
+                                        
+                                        
+                                        void
+                                            <strong property="yui:name">_formatValue</strong>
+                                           (
+                                                
+                                                        
+                                                         value
+                                                    
+                                                
+                                            )
+                                        </code>
+                                        
+                                        <div class="description" property="yui:description">
+                                            Formats a value for display based on its type.
+                                        </div>
+
+                                        <div class="description">
+
+                                                <dl rel="yui:parameters">
+                                                    <dt>Parameters:</dt>
+                                                        <dd rel="yui:parameter">
+                                                        <code><span property="yui:name">value</span>
+                                                        &lt;<span property="yui:type">Any</span>&gt;
+                                                        </code>
+                                                        <span property="yui:description"> The value to format.</span>
+                                                        </dd>
+                                                </dl>
+
+                                                <dl>
+                                                    <dt>Returns:
+                                                    <code property="yui:return">
+                                                        void
+                                                    </code></dt>
+                                                    <dd property="yui:returnInfo"></dd>
+                                                </dl>
+
+
+             
+
+                                        </div>
+
+                                    </div>
+                                    <hr />
+                                    </div>
+                                    <div class="protected" rel="yui:method" resource="#method__onCollapseClick">
+                                    <h4>
+                                        <a name="method__onCollapseClick">_onCollapseClick</a></h4>
+                                    <div class="detail" >
+                                        <code>
+                                         protected 
+                                        
+                                        
+                                        void
+                                            <strong property="yui:name">_onCollapseClick</strong>
+                                           (
+                                                
+                                                        
+                                                         e
+                                                    
+                                                
+                                            )
+                                        </code>
+                                        
+                                        <div class="description" property="yui:description">
+                                            Handles <code>click</code> events on the collapse button.
+                                        </div>
+
+                                        <div class="description">
+
+                                                <dl rel="yui:parameters">
+                                                    <dt>Parameters:</dt>
+                                                        <dd rel="yui:parameter">
+                                                        <code><span property="yui:name">e</span>
+                                                        &lt;<span property="yui:type">EventFacade</span>&gt;
+                                                        </code>
+                                                        <span property="yui:description"></span>
+                                                        </dd>
+                                                </dl>
+
+                                                <dl>
+                                                    <dt>Returns:
+                                                    <code property="yui:return">
+                                                        void
+                                                    </code></dt>
+                                                    <dd property="yui:returnInfo"></dd>
+                                                </dl>
+
+
+             
+
+                                        </div>
+
+                                    </div>
+                                    <hr />
+                                    </div>
+                                    <div class="protected" rel="yui:method" resource="#method__onFilter">
+                                    <h4>
+                                        <a name="method__onFilter">_onFilter</a></h4>
+                                    <div class="detail" >
+                                        <code>
+                                         protected 
+                                        
+                                        
+                                        void
+                                            <strong property="yui:name">_onFilter</strong>
+                                           (
+                                                
+                                                        
+                                                         e
+                                                    
+                                                
+                                            )
+                                        </code>
+                                        
+                                        <div class="description" property="yui:description">
+                                            Handles <code>valueChange</code> events on the filter input.
+                                        </div>
+
+                                        <div class="description">
+
+                                                <dl rel="yui:parameters">
+                                                    <dt>Parameters:</dt>
+                                                        <dd rel="yui:parameter">
+                                                        <code><span property="yui:name">e</span>
+                                                        &lt;<span property="yui:type">EventFacade</span>&gt;
+                                                        </code>
+                                                        <span property="yui:description"></span>
+                                                        </dd>
+                                                </dl>
+
+                                                <dl>
+                                                    <dt>Returns:
+                                                    <code property="yui:return">
+                                                        void
+                                                    </code></dt>
+                                                    <dd property="yui:returnInfo"></dd>
+                                                </dl>
+
+
+             
+
+                                        </div>
+
+                                    </div>
+                                    <hr />
+                                    </div>
+                                    <div class="protected" rel="yui:method" resource="#method__onFilterEscapeKey">
+                                    <h4>
+                                        <a name="method__onFilterEscapeKey">_onFilterEscapeKey</a></h4>
+                                    <div class="detail" >
+                                        <code>
+                                         protected 
+                                        
+                                        
+                                        void
+                                            <strong property="yui:name">_onFilterEscapeKey</strong>
+                                           (
+                                                
+                                                        
+                                                         e
+                                                    
+                                                
+                                            )
+                                        </code>
+                                        
+                                        <div class="description" property="yui:description">
+                                            Handles <code>esc</code> <code>keyUp</code> events on the filter input.
+                                        </div>
+
+                                        <div class="description">
+
+                                                <dl rel="yui:parameters">
+                                                    <dt>Parameters:</dt>
+                                                        <dd rel="yui:parameter">
+                                                        <code><span property="yui:name">e</span>
+                                                        &lt;<span property="yui:type">EventFacade</span>&gt;
+                                                        </code>
+                                                        <span property="yui:description"></span>
+                                                        </dd>
+                                                </dl>
+
+                                                <dl>
+                                                    <dt>Returns:
+                                                    <code property="yui:return">
+                                                        void
+                                                    </code></dt>
+                                                    <dd property="yui:returnInfo"></dd>
+                                                </dl>
+
+
+             
+
+                                        </div>
+
+                                    </div>
+                                    <hr />
+                                    </div>
+                                    <div class="protected" rel="yui:method" resource="#method__onPauseClick">
+                                    <h4>
+                                        <a name="method__onPauseClick">_onPauseClick</a></h4>
+                                    <div class="detail" >
+                                        <code>
+                                         protected 
+                                        
+                                        
+                                        void
+                                            <strong property="yui:name">_onPauseClick</strong>
+                                           (
+                                                
+                                                        
+                                                         e
+                                                    
+                                                
+                                            )
+                                        </code>
+                                        
+                                        <div class="description" property="yui:description">
+                                            Handles <code>click</code> events on the pause checkbox.
+                                        </div>
+
+                                        <div class="description">
+
+                                                <dl rel="yui:parameters">
+                                                    <dt>Parameters:</dt>
+                                                        <dd rel="yui:parameter">
+                                                        <code><span property="yui:name">e</span>
+                                                        &lt;<span property="yui:type">EventFacade</span>&gt;
+                                                        </code>
+                                                        <span property="yui:description"></span>
+                                                        </dd>
+                                                </dl>
+
+                                                <dl>
+                                                    <dt>Returns:
+                                                    <code property="yui:return">
+                                                        void
+                                                    </code></dt>
+                                                    <dd property="yui:returnInfo"></dd>
+                                                </dl>
+
+
+             
+
+                                        </div>
+
+                                    </div>
+                                    <hr />
+                                    </div>
+                                    <div class="protected" rel="yui:method" resource="#method__purgeEvents">
+                                    <h4>
+                                        <a name="method__purgeEvents">_purgeEvents</a></h4>
+                                    <div class="detail" >
+                                        <code>
+                                         protected 
+                                        
+                                        
+                                        void
+                                            <strong property="yui:name">_purgeEvents</strong>
+                                           (
+                                                
+                                                        
+                                                         events
+                                                    
+                                                
+                                            )
+                                        </code>
+                                        
+                                        <div class="description" property="yui:description">
+                                            Detaches all event handles in the given array.
+                                        </div>
+
+                                        <div class="description">
+
+                                                <dl rel="yui:parameters">
+                                                    <dt>Parameters:</dt>
+                                                        <dd rel="yui:parameter">
+                                                        <code><span property="yui:name">events</span>
+                                                        &lt;<span property="yui:type">Array</span>&gt;
+                                                        </code>
+                                                        <span property="yui:description"> Array of event handles.</span>
+                                                        </dd>
+                                                </dl>
+
+                                                <dl>
+                                                    <dt>Returns:
+                                                    <code property="yui:return">
+                                                        void
+                                                    </code></dt>
+                                                    <dd property="yui:returnInfo"></dd>
+                                                </dl>
+
+
+             
+
+                                        </div>
+
+                                    </div>
+                                    <hr />
+                                    </div>
+                                    <div class="protected" rel="yui:method" resource="#method__renderAttr">
+                                    <h4>
+                                        <a name="method__renderAttr">_renderAttr</a></h4>
+                                    <div class="detail" >
+                                        <code>
+                                         protected 
+                                        
+                                        
+                                        void
+                                            <strong property="yui:name">_renderAttr</strong>
+                                           (
+                                                
+                                                        
+                                                         name
+                                                    
+                                                
+                                                        , 
+                                                         i
+                                                    
+                                                
+                                            )
+                                        </code>
+                                        
+                                        <div class="description" property="yui:description">
+                                            Renders a single row (name column only) for the given attribute name.
+                                        </div>
+
+                                        <div class="description">
+
+                                                <dl rel="yui:parameters">
+                                                    <dt>Parameters:</dt>
+                                                        <dd rel="yui:parameter">
+                                                        <code><span property="yui:name">name</span>
+                                                        &lt;<span property="yui:type">String</span>&gt;
+                                                        </code>
+                                                        <span property="yui:description"> Attribute name.</span>
+                                                        </dd>
+                                                        <dd rel="yui:parameter">
+                                                        <code><span property="yui:name">i</span>
+                                                        &lt;<span property="yui:type">Number</span>&gt;
+                                                        </code>
+                                                        <span property="yui:description"> Index.</span>
+                                                        </dd>
+                                                </dl>
+
+                                                <dl>
+                                                    <dt>Returns:
+                                                    <code property="yui:return">
+                                                        void
+                                                    </code></dt>
+                                                    <dd property="yui:returnInfo"></dd>
+                                                </dl>
+
+
+             
+
+                                        </div>
+
+                                    </div>
+                                    <hr />
+                                    </div>
+                                    <div class="protected" rel="yui:method" resource="#method__renderAttrs">
+                                    <h4>
+                                        <a name="method__renderAttrs">_renderAttrs</a></h4>
+                                    <div class="detail" >
+                                        <code>
+                                         protected 
+                                        
+                                        
+                                        void
+                                            <strong property="yui:name">_renderAttrs</strong>
+                                           (
+                                            )
+                                        </code>
+                                        
+                                        <div class="description" property="yui:description">
+                                            Renders all rows (name column only) for all attributes.
+                                        </div>
+
+                                        <div class="description">
+
+
+                                                <dl>
+                                                    <dt>Returns:
+                                                    <code property="yui:return">
+                                                        void
+                                                    </code></dt>
+                                                    <dd property="yui:returnInfo"></dd>
+                                                </dl>
+
+
+             
+
+                                        </div>
+
+                                    </div>
+                                    <hr />
+                                    </div>
+                                    <div class="protected" rel="yui:method" resource="#method__renderBody">
+                                    <h4>
+                                        <a name="method__renderBody">_renderBody</a></h4>
+                                    <div class="detail" >
+                                        <code>
+                                         protected 
+                                        
+                                        
+                                        void
+                                            <strong property="yui:name">_renderBody</strong>
+                                           (
+                                            )
+                                        </code>
+                                        
+                                        <div class="description" property="yui:description">
+                                            Renders the body section of the UI. Intended for use only during the
+render lifecycle.
+                                        </div>
+
+                                        <div class="description">
+
+
+                                                <dl>
+                                                    <dt>Returns:
+                                                    <code property="yui:return">
+                                                        void
+                                                    </code></dt>
+                                                    <dd property="yui:returnInfo"></dd>
+                                                </dl>
+
+
+             
+
+                                        </div>
+
+                                    </div>
+                                    <hr />
+                                    </div>
+                                    <div class="protected" rel="yui:method" resource="#method__renderFoot">
+                                    <h4>
+                                        <a name="method__renderFoot">_renderFoot</a></h4>
+                                    <div class="detail" >
+                                        <code>
+                                         protected 
+                                        
+                                        
+                                        void
+                                            <strong property="yui:name">_renderFoot</strong>
+                                           (
+                                            )
+                                        </code>
+                                        
+                                        <div class="description" property="yui:description">
+                                            Renders the footer section of the UI. Intended for use only during the
+render lifecycle.
+                                        </div>
+
+                                        <div class="description">
+
+
+                                                <dl>
+                                                    <dt>Returns:
+                                                    <code property="yui:return">
+                                                        void
+                                                    </code></dt>
+                                                    <dd property="yui:returnInfo"></dd>
+                                                </dl>
+
+
+             
+
+                                        </div>
+
+                                    </div>
+                                    <hr />
+                                    </div>
+                                    <div class="protected" rel="yui:method" resource="#method__renderHead">
+                                    <h4>
+                                        <a name="method__renderHead">_renderHead</a></h4>
+                                    <div class="detail" >
+                                        <code>
+                                         protected 
+                                        
+                                        
+                                        void
+                                            <strong property="yui:name">_renderHead</strong>
+                                           (
+                                            )
+                                        </code>
+                                        
+                                        <div class="description" property="yui:description">
+                                            Renders the header section of the UI. Intended for use only during the
+render lifecycle.
+                                        </div>
+
+                                        <div class="description">
+
+
+                                                <dl>
+                                                    <dt>Returns:
+                                                    <code property="yui:return">
+                                                        void
+                                                    </code></dt>
+                                                    <dd property="yui:returnInfo"></dd>
+                                                </dl>
+
+
+             
+
+                                        </div>
+
+                                    </div>
+                                    <hr />
+                                    </div>
+                                    <div class="protected" rel="yui:method" resource="#method__syncAttrs">
+                                    <h4>
+                                        <a name="method__syncAttrs">_syncAttrs</a></h4>
+                                    <div class="detail" >
+                                        <code>
+                                         protected 
+                                        
+                                        
+                                        void
+                                            <strong property="yui:name">_syncAttrs</strong>
+                                           (
+                                            )
+                                        </code>
+                                        
+                                        <div class="description" property="yui:description">
+                                            Syncs the host's attributes with the Inspector instance and applies any
+<code>include</code> or <code>exclude</code> filters.
+                                        </div>
+
+                                        <div class="description">
+
+
+                                                <dl>
+                                                    <dt>Returns:
+                                                    <code property="yui:return">
+                                                        void
+                                                    </code></dt>
+                                                    <dd property="yui:returnInfo"></dd>
+                                                </dl>
+
+
+             
+
+                                        </div>
+
+                                    </div>
+                                    <hr />
+                                    </div>
+                                    <div class="protected" rel="yui:method" resource="#method__uiFilterAttrs">
+                                    <h4>
+                                        <a name="method__uiFilterAttrs">_uiFilterAttrs</a></h4>
+                                    <div class="detail" >
+                                        <code>
+                                         protected 
+                                        
+                                        
+                                        void
+                                            <strong property="yui:name">_uiFilterAttrs</strong>
+                                           (
+                                                
+                                                        
+                                                         value
+                                                    
+                                                
+                                            )
+                                        </code>
+                                        
+                                        <div class="description" property="yui:description">
+                                            Filters visible attributes by the given filter value.
+                                        </div>
+
+                                        <div class="description">
+
+                                                <dl rel="yui:parameters">
+                                                    <dt>Parameters:</dt>
+                                                        <dd rel="yui:parameter">
+                                                        <code><span property="yui:name">value</span>
+                                                        &lt;<span property="yui:type">String</span>&gt;
+                                                        </code>
+                                                        <span property="yui:description"> Filter value.</span>
+                                                        </dd>
+                                                </dl>
+
+                                                <dl>
+                                                    <dt>Returns:
+                                                    <code property="yui:return">
+                                                        void
+                                                    </code></dt>
+                                                    <dd property="yui:returnInfo"></dd>
+                                                </dl>
+
+
+             
+
+                                        </div>
+
+                                    </div>
+                                    <hr />
+                                    </div>
+                                    <div class="protected" rel="yui:method" resource="#method__uiSetAttrValue">
+                                    <h4>
+                                        <a name="method__uiSetAttrValue">_uiSetAttrValue</a></h4>
+                                    <div class="detail" >
+                                        <code>
+                                         protected 
+                                        
+                                        
+                                        void
+                                            <strong property="yui:name">_uiSetAttrValue</strong>
+                                           (
+                                                
+                                                        
+                                                         name
+                                                    
+                                                
+                                                        , 
+                                                         value
+                                                    
+                                                
+                                            )
+                                        </code>
+                                        
+                                        <div class="description" property="yui:description">
+                                            Sets the value for the given attribute name.
+                                        </div>
+
+                                        <div class="description">
+
+                                                <dl rel="yui:parameters">
+                                                    <dt>Parameters:</dt>
+                                                        <dd rel="yui:parameter">
+                                                        <code><span property="yui:name">name</span>
+                                                        &lt;<span property="yui:type">String</span>&gt;
+                                                        </code>
+                                                        <span property="yui:description"> Attribute name.</span>
+                                                        </dd>
+                                                        <dd rel="yui:parameter">
+                                                        <code><span property="yui:name">value</span>
+                                                        &lt;<span property="yui:type">Any</span>&gt;
+                                                        </code>
+                                                        <span property="yui:description"> Attribute value.</span>
+                                                        </dd>
+                                                </dl>
+
+                                                <dl>
+                                                    <dt>Returns:
+                                                    <code property="yui:return">
+                                                        void
+                                                    </code></dt>
+                                                    <dd property="yui:returnInfo"></dd>
+                                                </dl>
+
+
+             
+
+                                        </div>
+
+                                    </div>
+                                    <hr />
+                                    </div>
+                                    <div class="protected" rel="yui:method" resource="#method__uiSetAttrValues">
+                                    <h4>
+                                        <a name="method__uiSetAttrValues">_uiSetAttrValues</a></h4>
+                                    <div class="detail" >
+                                        <code>
+                                         protected 
+                                        
+                                        
+                                        void
+                                            <strong property="yui:name">_uiSetAttrValues</strong>
+                                           (
+                                            )
+                                        </code>
+                                        
+                                        <div class="description" property="yui:description">
+                                            Sets the value for all attributes.
+                                        </div>
+
+                                        <div class="description">
+
+
+                                                <dl>
+                                                    <dt>Returns:
+                                                    <code property="yui:return">
+                                                        void
+                                                    </code></dt>
+                                                    <dd property="yui:returnInfo"></dd>
+                                                </dl>
+
+
+             
+
+                                        </div>
+
+                                    </div>
+                                    <hr />
+                                    </div>
+                                    <div class="protected" rel="yui:method" resource="#method__uiSetCollapsed">
+                                    <h4>
+                                        <a name="method__uiSetCollapsed">_uiSetCollapsed</a></h4>
+                                    <div class="detail" >
+                                        <code>
+                                         protected 
+                                        
+                                        
+                                        void
+                                            <strong property="yui:name">_uiSetCollapsed</strong>
+                                           (
+                                                
+                                                        
+                                                         collapsed
+                                                    
+                                                
+                                            )
+                                        </code>
+                                        
+                                        <div class="description" property="yui:description">
+                                            Sets the UI collapsed state.
+                                        </div>
+
+                                        <div class="description">
+
+                                                <dl rel="yui:parameters">
+                                                    <dt>Parameters:</dt>
+                                                        <dd rel="yui:parameter">
+                                                        <code><span property="yui:name">collapsed</span>
+                                                        &lt;<span property="yui:type">Boolean</span>&gt;
+                                                        </code>
+                                                        <span property="yui:description"> Whether the UI should be collapsed.</span>
+                                                        </dd>
+                                                </dl>
+
+                                                <dl>
+                                                    <dt>Returns:
+                                                    <code property="yui:return">
+                                                        void
+                                                    </code></dt>
+                                                    <dd property="yui:returnInfo"></dd>
+                                                </dl>
+
+
+             
+
+                                        </div>
+
+                                    </div>
+                                    <hr />
+                                    </div>
+                                    <div class="protected" rel="yui:method" resource="#method__uiSetDraggable">
+                                    <h4>
+                                        <a name="method__uiSetDraggable">_uiSetDraggable</a></h4>
+                                    <div class="detail" >
+                                        <code>
+                                         protected 
+                                        
+                                        
+                                        void
+                                            <strong property="yui:name">_uiSetDraggable</strong>
+                                           (
+                                                
+                                                        
+                                                         draggable
+                                                    
+                                                
+                                            )
+                                        </code>
+                                        
+                                        <div class="description" property="yui:description">
+                                            Sets the UI draggable state.
+                                        </div>
+
+                                        <div class="description">
+
+                                                <dl rel="yui:parameters">
+                                                    <dt>Parameters:</dt>
+                                                        <dd rel="yui:parameter">
+                                                        <code><span property="yui:name">draggable</span>
+                                                        &lt;<span property="yui:type">Boolean</span>&gt;
+                                                        </code>
+                                                        <span property="yui:description"> Whether the UI should be draggable.</span>
+                                                        </dd>
+                                                </dl>
+
+                                                <dl>
+                                                    <dt>Returns:
+                                                    <code property="yui:return">
+                                                        void
+                                                    </code></dt>
+                                                    <dd property="yui:returnInfo"></dd>
+                                                </dl>
+
+
+             
+
+                                        </div>
+
+                                    </div>
+                                    <hr />
+                                    </div>
+                                    <div class="protected" rel="yui:method" resource="#method__uiSetFilter">
+                                    <h4>
+                                        <a name="method__uiSetFilter">_uiSetFilter</a></h4>
+                                    <div class="detail" >
+                                        <code>
+                                         protected 
+                                        
+                                        
+                                        void
+                                            <strong property="yui:name">_uiSetFilter</strong>
+                                           (
+                                                
+                                                        
+                                                         value
+                                                    
+                                                
+                                            )
+                                        </code>
+                                        
+                                        <div class="description" property="yui:description">
+                                            Sets the UI filter input witht the given filter value.
+                                        </div>
+
+                                        <div class="description">
+
+                                                <dl rel="yui:parameters">
+                                                    <dt>Parameters:</dt>
+                                                        <dd rel="yui:parameter">
+                                                        <code><span property="yui:name">value</span>
+                                                        &lt;<span property="yui:type">String</span>&gt;
+                                                        </code>
+                                                        <span property="yui:description"> Filter value.</span>
+                                                        </dd>
+                                                </dl>
+
+                                                <dl>
+                                                    <dt>Returns:
+                                                    <code property="yui:return">
+                                                        void
+                                                    </code></dt>
+                                                    <dd property="yui:returnInfo"></dd>
+                                                </dl>
+
+
+             
+
+                                        </div>
+
+                                    </div>
+                                    <hr />
+                                    </div>
+                                    <div class="protected" rel="yui:method" resource="#method__uiSetHeight">
+                                    <h4>
+                                        <a name="method__uiSetHeight">_uiSetHeight</a></h4>
+                                    <div class="detail" >
+                                        <code>
+                                         protected 
+                                        
+                                        
+                                        void
+                                            <strong property="yui:name">_uiSetHeight</strong>
+                                           (
+                                                
+                                                        
+                                                         height
+                                                    
+                                                
+                                            )
+                                        </code>
+                                        
+                                        <div class="description" property="yui:description">
+                                            Sets the height of the UI. Sets the body height to the specified height
+minus the combined heights of the header and footer. Overrides
+<code>Widget.prototype._uiSetHeight</code>.
+                                        </div>
+
+                                        <div class="description">
+
+                                                <dl rel="yui:parameters">
+                                                    <dt>Parameters:</dt>
+                                                        <dd rel="yui:parameter">
+                                                        <code><span property="yui:name">height</span>
+                                                        &lt;<span property="yui:type">Number</span>&gt;
+                                                        </code>
+                                                        <span property="yui:description"> Height.</span>
+                                                        </dd>
+                                                </dl>
+
+                                                <dl>
+                                                    <dt>Returns:
+                                                    <code property="yui:return">
+                                                        void
+                                                    </code></dt>
+                                                    <dd property="yui:returnInfo"></dd>
+                                                </dl>
+
+
+             
+
+                                        </div>
+
+                                    </div>
+                                    <hr />
+                                    </div>
+                                    <div class="protected" rel="yui:method" resource="#method__uiSetHostDestroyed">
+                                    <h4>
+                                        <a name="method__uiSetHostDestroyed">_uiSetHostDestroyed</a></h4>
+                                    <div class="detail" >
+                                        <code>
+                                         protected 
+                                        
+                                        
+                                        void
+                                            <strong property="yui:name">_uiSetHostDestroyed</strong>
+                                           (
+                                            )
+                                        </code>
+                                        
+                                        <div class="description" property="yui:description">
+                                            Sets the host destroyed state in the UI.
+                                        </div>
+
+                                        <div class="description">
+
+
+                                                <dl>
+                                                    <dt>Returns:
+                                                    <code property="yui:return">
+                                                        void
+                                                    </code></dt>
+                                                    <dd property="yui:returnInfo"></dd>
+                                                </dl>
+
+
+             
+
+                                        </div>
+
+                                    </div>
+                                    <hr />
+                                    </div>
+                                    <div class="protected" rel="yui:method" resource="#method__uiSetPaused">
+                                    <h4>
+                                        <a name="method__uiSetPaused">_uiSetPaused</a></h4>
+                                    <div class="detail" >
+                                        <code>
+                                         protected 
+                                        
+                                        
+                                        void
+                                            <strong property="yui:name">_uiSetPaused</strong>
+                                           (
+                                                
+                                                        
+                                                         paused
+                                                    
+                                                
+                                            )
+                                        </code>
+                                        
+                                        <div class="description" property="yui:description">
+                                            Sets the UI paused state.
+                                        </div>
+
+                                        <div class="description">
+
+                                                <dl rel="yui:parameters">
+                                                    <dt>Parameters:</dt>
+                                                        <dd rel="yui:parameter">
+                                                        <code><span property="yui:name">paused</span>
+                                                        &lt;<span property="yui:type">Boolean</span>&gt;
+                                                        </code>
+                                                        <span property="yui:description"> Whether the UI should be paused.</span>
+                                                        </dd>
+                                                </dl>
+
+                                                <dl>
+                                                    <dt>Returns:
+                                                    <code property="yui:return">
+                                                        void
+                                                    </code></dt>
+                                                    <dd property="yui:returnInfo"></dd>
+                                                </dl>
+
+
+             
+
+                                        </div>
+
+                                    </div>
+                                    <hr />
+                                    </div>
+                                    <div class="protected" rel="yui:method" resource="#method__uiSetPosition">
+                                    <h4>
+                                        <a name="method__uiSetPosition">_uiSetPosition</a></h4>
+                                    <div class="detail" >
+                                        <code>
+                                         protected 
+                                        
+                                        
+                                        void
+                                            <strong property="yui:name">_uiSetPosition</strong>
+                                           (
+                                            )
+                                        </code>
+                                        
+                                        <div class="description" property="yui:description">
+                                            Sets the UI position and zIndex, adjusting for the presence of other
+Inspector instances, such that they appear to stack. Intended to be
+called during the syncUI lifecycle event.
+                                        </div>
+
+                                        <div class="description">
+
+
+                                                <dl>
+                                                    <dt>Returns:
+                                                    <code property="yui:return">
+                                                        void
+                                                    </code></dt>
+                                                    <dd property="yui:returnInfo"></dd>
+                                                </dl>
+
+
+             
+
+                                        </div>
+
+                                    </div>
+                                    <hr />
+                                    </div>
+                                    <div class="protected" rel="yui:method" resource="#method__uiSyncAttrs">
+                                    <h4>
+                                        <a name="method__uiSyncAttrs">_uiSyncAttrs</a></h4>
+                                    <div class="detail" >
+                                        <code>
+                                         protected 
+                                        
+                                        
+                                        void
+                                            <strong property="yui:name">_uiSyncAttrs</strong>
+                                           (
+                                            )
+                                        </code>
+                                        
+                                        <div class="description" property="yui:description">
+                                            Mini lifecycle for updating all attributes. Purges existing host events,
+re-renders all attributes, then binds new host events.
+                                        </div>
+
+                                        <div class="description">
+
+
+                                                <dl>
+                                                    <dt>Returns:
+                                                    <code property="yui:return">
+                                                        void
+                                                    </code></dt>
+                                                    <dd property="yui:returnInfo"></dd>
+                                                </dl>
+
+
+             
+
+                                        </div>
+
+                                    </div>
+                                    <hr />
+                                    </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div rel="yui:events" resource="#events">
+                        <div class="section method details">
+                            <h3 id="events">Events</h3>
+                            <div class="content">
+                                    <div class="" rel="yui:event" resource="#event_collapsedChange">
+                                    <h4>
+                                        <a name="event_collapsedChange">collapsedChange</a></h4>
+                                    <div class="detail">
+                                        <code>
+                                        
+                                        
+                                        
+                                            <strong property="yui:name">collapsedChange</strong>
+
+                                            (
+                                                
+                                                        
+                                                         event
+                                                    
+                                                
+                                            )
+
+                                        </code>
+                                        
+                                        <div class="description" property="yui:description">
+                                            Fires when the value for the configuration attribute 'collapsed' is changed. You can listen for the event using the <a href="Attribute.html#method_on">on</a> method if you wish to be notified before the attribute's value has changed, or using the <a href="Event.Target.html#method_after">after</a> method if you wish to be notified after the attribute's value has changed.
+                                        </div>
+
+                                        <div class="description">
+
+
+                                                <dl rel="yui:parameters">
+                                                    <dt>Parameters:</dt>
+                                                        <dd rel="yui:parameter">
+                                                            <code><span property="yui:name">event</span>
+                                                                &lt;<span property="yui:type">Event.Facade</span>&gt;
+                                                            </code>
+                                                            <span property="yui:description">An Event Facade object with      the following attribute specific properties added:	<dl>		<dt>prevVal</dt>		<dd>The value of the attribute, prior to it being set</dd>		<dt>newVal</dt>		<dd>The value the attribute is to be set to</dd>		<dt>attrName</dt>		<dd>The name of the attribute being set</dd>		<dt>subAttrName</dt>		<dd>If setting a property within the attribute's value,           the name of the sub-attribute property being set</dd>	</dl></span>
+                                                        </dd>
+                                                        
+                                                </dl>
+
+
+                                        </div>
+
+                                    </div>
+                                    <hr />
+                                    </div>
+                                    <div class="" rel="yui:event" resource="#event_draggableChange">
+                                    <h4>
+                                        <a name="event_draggableChange">draggableChange</a></h4>
+                                    <div class="detail">
+                                        <code>
+                                        
+                                        
+                                        
+                                            <strong property="yui:name">draggableChange</strong>
+
+                                            (
+                                                
+                                                        
+                                                         event
+                                                    
+                                                
+                                            )
+
+                                        </code>
+                                        
+                                        <div class="description" property="yui:description">
+                                            Fires when the value for the configuration attribute 'draggable' is changed. You can listen for the event using the <a href="Attribute.html#method_on">on</a> method if you wish to be notified before the attribute's value has changed, or using the <a href="Event.Target.html#method_after">after</a> method if you wish to be notified after the attribute's value has changed.
+                                        </div>
+
+                                        <div class="description">
+
+
+                                                <dl rel="yui:parameters">
+                                                    <dt>Parameters:</dt>
+                                                        <dd rel="yui:parameter">
+                                                            <code><span property="yui:name">event</span>
+                                                                &lt;<span property="yui:type">Event.Facade</span>&gt;
+                                                            </code>
+                                                            <span property="yui:description">An Event Facade object with      the following attribute specific properties added:	<dl>		<dt>prevVal</dt>		<dd>The value of the attribute, prior to it being set</dd>		<dt>newVal</dt>		<dd>The value the attribute is to be set to</dd>		<dt>attrName</dt>		<dd>The name of the attribute being set</dd>		<dt>subAttrName</dt>		<dd>If setting a property within the attribute's value,           the name of the sub-attribute property being set</dd>	</dl></span>
+                                                        </dd>
+                                                        
+                                                </dl>
+
+
+                                        </div>
+
+                                    </div>
+                                    <hr />
+                                    </div>
+                                    <div class="" rel="yui:event" resource="#event_excludeChange">
+                                    <h4>
+                                        <a name="event_excludeChange">excludeChange</a></h4>
+                                    <div class="detail">
+                                        <code>
+                                        
+                                        
+                                        
+                                            <strong property="yui:name">excludeChange</strong>
+
+                                            (
+                                                
+                                                        
+                                                         event
+                                                    
+                                                
+                                            )
+
+                                        </code>
+                                        
+                                        <div class="description" property="yui:description">
+                                            Fires when the value for the configuration attribute 'exclude' is changed. You can listen for the event using the <a href="Attribute.html#method_on">on</a> method if you wish to be notified before the attribute's value has changed, or using the <a href="Event.Target.html#method_after">after</a> method if you wish to be notified after the attribute's value has changed.
+                                        </div>
+
+                                        <div class="description">
+
+
+                                                <dl rel="yui:parameters">
+                                                    <dt>Parameters:</dt>
+                                                        <dd rel="yui:parameter">
+                                                            <code><span property="yui:name">event</span>
+                                                                &lt;<span property="yui:type">Event.Facade</span>&gt;
+                                                            </code>
+                                                            <span property="yui:description">An Event Facade object with      the following attribute specific properties added:	<dl>		<dt>prevVal</dt>		<dd>The value of the attribute, prior to it being set</dd>		<dt>newVal</dt>		<dd>The value the attribute is to be set to</dd>		<dt>attrName</dt>		<dd>The name of the attribute being set</dd>		<dt>subAttrName</dt>		<dd>If setting a property within the attribute's value,           the name of the sub-attribute property being set</dd>	</dl></span>
+                                                        </dd>
+                                                        
+                                                </dl>
+
+
+                                        </div>
+
+                                    </div>
+                                    <hr />
+                                    </div>
+                                    <div class="" rel="yui:event" resource="#event_filterChange">
+                                    <h4>
+                                        <a name="event_filterChange">filterChange</a></h4>
+                                    <div class="detail">
+                                        <code>
+                                        
+                                        
+                                        
+                                            <strong property="yui:name">filterChange</strong>
+
+                                            (
+                                                
+                                                        
+                                                         event
+                                                    
+                                                
+                                            )
+
+                                        </code>
+                                        
+                                        <div class="description" property="yui:description">
+                                            Fires when the value for the configuration attribute 'filter' is changed. You can listen for the event using the <a href="Attribute.html#method_on">on</a> method if you wish to be notified before the attribute's value has changed, or using the <a href="Event.Target.html#method_after">after</a> method if you wish to be notified after the attribute's value has changed.
+                                        </div>
+
+                                        <div class="description">
+
+
+                                                <dl rel="yui:parameters">
+                                                    <dt>Parameters:</dt>
+                                                        <dd rel="yui:parameter">
+                                                            <code><span property="yui:name">event</span>
+                                                                &lt;<span property="yui:type">Event.Facade</span>&gt;
+                                                            </code>
+                                                            <span property="yui:description">An Event Facade object with      the following attribute specific properties added:	<dl>		<dt>prevVal</dt>		<dd>The value of the attribute, prior to it being set</dd>		<dt>newVal</dt>		<dd>The value the attribute is to be set to</dd>		<dt>attrName</dt>		<dd>The name of the attribute being set</dd>		<dt>subAttrName</dt>		<dd>If setting a property within the attribute's value,           the name of the sub-attribute property being set</dd>	</dl></span>
+                                                        </dd>
+                                                        
+                                                </dl>
+
+
+                                        </div>
+
+                                    </div>
+                                    <hr />
+                                    </div>
+                                    <div class="" rel="yui:event" resource="#event_hostAttrsChange">
+                                    <h4>
+                                        <a name="event_hostAttrsChange">hostAttrsChange</a></h4>
+                                    <div class="detail">
+                                        <code>
+                                        
+                                        
+                                        
+                                            <strong property="yui:name">hostAttrsChange</strong>
+
+                                            (
+                                                
+                                                        
+                                                         event
+                                                    
+                                                
+                                            )
+
+                                        </code>
+                                        
+                                        <div class="description" property="yui:description">
+                                            Fires when the value for the configuration attribute 'hostAttrs' is changed. You can listen for the event using the <a href="Attribute.html#method_on">on</a> method if you wish to be notified before the attribute's value has changed, or using the <a href="Event.Target.html#method_after">after</a> method if you wish to be notified after the attribute's value has changed.
+                                        </div>
+
+                                        <div class="description">
+
+
+                                                <dl rel="yui:parameters">
+                                                    <dt>Parameters:</dt>
+                                                        <dd rel="yui:parameter">
+                                                            <code><span property="yui:name">event</span>
+                                                                &lt;<span property="yui:type">Event.Facade</span>&gt;
+                                                            </code>
+                                                            <span property="yui:description">An Event Facade object with      the following attribute specific properties added:	<dl>		<dt>prevVal</dt>		<dd>The value of the attribute, prior to it being set</dd>		<dt>newVal</dt>		<dd>The value the attribute is to be set to</dd>		<dt>attrName</dt>		<dd>The name of the attribute being set</dd>		<dt>subAttrName</dt>		<dd>If setting a property within the attribute's value,           the name of the sub-attribute property being set</dd>	</dl></span>
+                                                        </dd>
+                                                        
+                                                </dl>
+
+
+                                        </div>
+
+                                    </div>
+                                    <hr />
+                                    </div>
+                                    <div class="" rel="yui:event" resource="#event_hostChange">
+                                    <h4>
+                                        <a name="event_hostChange">hostChange</a></h4>
+                                    <div class="detail">
+                                        <code>
+                                        
+                                        
+                                        
+                                            <strong property="yui:name">hostChange</strong>
+
+                                            (
+                                                
+                                                        
+                                                         event
+                                                    
+                                                
+                                            )
+
+                                        </code>
+                                        
+                                        <div class="description" property="yui:description">
+                                            Fires when the value for the configuration attribute 'host' is changed. You can listen for the event using the <a href="Attribute.html#method_on">on</a> method if you wish to be notified before the attribute's value has changed, or using the <a href="Event.Target.html#method_after">after</a> method if you wish to be notified after the attribute's value has changed.
+                                        </div>
+
+                                        <div class="description">
+
+
+                                                <dl rel="yui:parameters">
+                                                    <dt>Parameters:</dt>
+                                                        <dd rel="yui:parameter">
+                                                            <code><span property="yui:name">event</span>
+                                                                &lt;<span property="yui:type">Event.Facade</span>&gt;
+                                                            </code>
+                                                            <span property="yui:description">An Event Facade object with      the following attribute specific properties added:	<dl>		<dt>prevVal</dt>		<dd>The value of the attribute, prior to it being set</dd>		<dt>newVal</dt>		<dd>The value the attribute is to be set to</dd>		<dt>attrName</dt>		<dd>The name of the attribute being set</dd>		<dt>subAttrName</dt>		<dd>If setting a property within the attribute's value,           the name of the sub-attribute property being set</dd>	</dl></span>
+                                                        </dd>
+                                                        
+                                                </dl>
+
+
+                                        </div>
+
+                                    </div>
+                                    <hr />
+                                    </div>
+                                    <div class="" rel="yui:event" resource="#event_includeChange">
+                                    <h4>
+                                        <a name="event_includeChange">includeChange</a></h4>
+                                    <div class="detail">
+                                        <code>
+                                        
+                                        
+                                        
+                                            <strong property="yui:name">includeChange</strong>
+
+                                            (
+                                                
+                                                        
+                                                         event
+                                                    
+                                                
+                                            )
+
+                                        </code>
+                                        
+                                        <div class="description" property="yui:description">
+                                            Fires when the value for the configuration attribute 'include' is changed. You can listen for the event using the <a href="Attribute.html#method_on">on</a> method if you wish to be notified before the attribute's value has changed, or using the <a href="Event.Target.html#method_after">after</a> method if you wish to be notified after the attribute's value has changed.
+                                        </div>
+
+                                        <div class="description">
+
+
+                                                <dl rel="yui:parameters">
+                                                    <dt>Parameters:</dt>
+                                                        <dd rel="yui:parameter">
+                                                            <code><span property="yui:name">event</span>
+                                                                &lt;<span property="yui:type">Event.Facade</span>&gt;
+                                                            </code>
+                                                            <span property="yui:description">An Event Facade object with      the following attribute specific properties added:	<dl>		<dt>prevVal</dt>		<dd>The value of the attribute, prior to it being set</dd>		<dt>newVal</dt>		<dd>The value the attribute is to be set to</dd>		<dt>attrName</dt>		<dd>The name of the attribute being set</dd>		<dt>subAttrName</dt>		<dd>If setting a property within the attribute's value,           the name of the sub-attribute property being set</dd>	</dl></span>
+                                                        </dd>
+                                                        
+                                                </dl>
+
+
+                                        </div>
+
+                                    </div>
+                                    <hr />
+                                    </div>
+                                    <div class="" rel="yui:event" resource="#event_nameChange">
+                                    <h4>
+                                        <a name="event_nameChange">nameChange</a></h4>
+                                    <div class="detail">
+                                        <code>
+                                        
+                                        
+                                        
+                                            <strong property="yui:name">nameChange</strong>
+
+                                            (
+                                                
+                                                        
+                                                         event
+                                                    
+                                                
+                                            )
+
+                                        </code>
+                                        
+                                        <div class="description" property="yui:description">
+                                            Fires when the value for the configuration attribute 'name' is changed. You can listen for the event using the <a href="Attribute.html#method_on">on</a> method if you wish to be notified before the attribute's value has changed, or using the <a href="Event.Target.html#method_after">after</a> method if you wish to be notified after the attribute's value has changed.
+                                        </div>
+
+                                        <div class="description">
+
+
+                                                <dl rel="yui:parameters">
+                                                    <dt>Parameters:</dt>
+                                                        <dd rel="yui:parameter">
+                                                            <code><span property="yui:name">event</span>
+                                                                &lt;<span property="yui:type">Event.Facade</span>&gt;
+                                                            </code>
+                                                            <span property="yui:description">An Event Facade object with      the following attribute specific properties added:	<dl>		<dt>prevVal</dt>		<dd>The value of the attribute, prior to it being set</dd>		<dt>newVal</dt>		<dd>The value the attribute is to be set to</dd>		<dt>attrName</dt>		<dd>The name of the attribute being set</dd>		<dt>subAttrName</dt>		<dd>If setting a property within the attribute's value,           the name of the sub-attribute property being set</dd>	</dl></span>
+                                                        </dd>
+                                                        
+                                                </dl>
+
+
+                                        </div>
+
+                                    </div>
+                                    <hr />
+                                    </div>
+                                    <div class="" rel="yui:event" resource="#event_pausedChange">
+                                    <h4>
+                                        <a name="event_pausedChange">pausedChange</a></h4>
+                                    <div class="detail">
+                                        <code>
+                                        
+                                        
+                                        
+                                            <strong property="yui:name">pausedChange</strong>
+
+                                            (
+                                                
+                                                        
+                                                         event
+                                                    
+                                                
+                                            )
+
+                                        </code>
+                                        
+                                        <div class="description" property="yui:description">
+                                            Fires when the value for the configuration attribute 'paused' is changed. You can listen for the event using the <a href="Attribute.html#method_on">on</a> method if you wish to be notified before the attribute's value has changed, or using the <a href="Event.Target.html#method_after">after</a> method if you wish to be notified after the attribute's value has changed.
+                                        </div>
+
+                                        <div class="description">
+
+
+                                                <dl rel="yui:parameters">
+                                                    <dt>Parameters:</dt>
+                                                        <dd rel="yui:parameter">
+                                                            <code><span property="yui:name">event</span>
+                                                                &lt;<span property="yui:type">Event.Facade</span>&gt;
+                                                            </code>
+                                                            <span property="yui:description">An Event Facade object with      the following attribute specific properties added:	<dl>		<dt>prevVal</dt>		<dd>The value of the attribute, prior to it being set</dd>		<dt>newVal</dt>		<dd>The value the attribute is to be set to</dd>		<dt>attrName</dt>		<dd>The name of the attribute being set</dd>		<dt>subAttrName</dt>		<dd>If setting a property within the attribute's value,           the name of the sub-attribute property being set</dd>	</dl></span>
+                                                        </dd>
+                                                        
+                                                </dl>
+
+
+                                        </div>
+
+                                    </div>
+                                    <hr />
+                                    </div>
+                                    <div class="" rel="yui:event" resource="#event_stringsChange">
+                                    <h4>
+                                        <a name="event_stringsChange">stringsChange</a></h4>
+                                    <div class="detail">
+                                        <code>
+                                        
+                                        
+                                        
+                                            <strong property="yui:name">stringsChange</strong>
+
+                                            (
+                                                
+                                                        
+                                                         event
+                                                    
+                                                
+                                            )
+
+                                        </code>
+                                        
+                                        <div class="description" property="yui:description">
+                                            Fires when the value for the configuration attribute 'strings' is changed. You can listen for the event using the <a href="Attribute.html#method_on">on</a> method if you wish to be notified before the attribute's value has changed, or using the <a href="Event.Target.html#method_after">after</a> method if you wish to be notified after the attribute's value has changed.
+                                        </div>
+
+                                        <div class="description">
+
+
+                                                <dl rel="yui:parameters">
+                                                    <dt>Parameters:</dt>
+                                                        <dd rel="yui:parameter">
+                                                            <code><span property="yui:name">event</span>
+                                                                &lt;<span property="yui:type">Event.Facade</span>&gt;
+                                                            </code>
+                                                            <span property="yui:description">An Event Facade object with      the following attribute specific properties added:	<dl>		<dt>prevVal</dt>		<dd>The value of the attribute, prior to it being set</dd>		<dt>newVal</dt>		<dd>The value the attribute is to be set to</dd>		<dt>attrName</dt>		<dd>The name of the attribute being set</dd>		<dt>subAttrName</dt>		<dd>If setting a property within the attribute's value,           the name of the sub-attribute property being set</dd>	</dl></span>
+                                                        </dd>
+                                                        
+                                                </dl>
+
+
+                                        </div>
+
+                                    </div>
+                                    <hr />
+                                    </div>
+                            </div>
+                        </div>
+
+
+                    </div>
+
+                    <div rel="yui:attributes" resource="#configattributes">
+                        <div class="section field details">
+                            <h3 id="configattributes">Configuration Attributes</h3>
+                            <div class="content">
+                                    <div class="" rel="yui:attribute" resource="#config_collapsed">
+                                    <h4><a name="config_collapsed">collapsed</a>
+                                        <code>- <span property="yui:type">Boolean</span></code>
+                                    </h4>
+                                    <div class="detail">
+                                        <div class="description" property="yui:description">
+                                            If <code>true</code>, Inspector will initially render collapsed.
+                                        </div>
+                                    </div>
+ 
+     
+                                    <div class="default">
+                                        Default Value: false
+                                    </div>        
+
+                                    <hr />
+                                    </div>        
+                                    <div class="" rel="yui:attribute" resource="#config_draggable">
+                                    <h4><a name="config_draggable">draggable</a>
+                                        <code>- <span property="yui:type">Boolean</span></code>
+                                    </h4>
+                                    <div class="detail">
+                                        <div class="description" property="yui:description">
+                                            If <code>true</code> Inspector will be draggable, with the header
+node as the drag handle.
+                                        </div>
+                                    </div>
+ 
+     
+                                    <div class="default">
+                                        Default Value: true
+                                    </div>        
+
+                                    <hr />
+                                    </div>        
+                                    <div class="" rel="yui:attribute" resource="#config_exclude">
+                                    <h4><a name="config_exclude">exclude</a>
+                                        <code>- <span property="yui:type">Array</span></code>
+                                    </h4>
+                                    <div class="detail">
+                                        <div class="description" property="yui:description">
+                                            Array of attribute names to exclude from being displayed.
+                                        </div>
+                                    </div>
+ 
+     
+
+                                    <hr />
+                                    </div>        
+                                    <div class="" rel="yui:attribute" resource="#config_filter">
+                                    <h4><a name="config_filter">filter</a>
+                                        <code>- <span property="yui:type">String</span></code>
+                                    </h4>
+                                    <div class="detail">
+                                        <div class="description" property="yui:description">
+                                            Filter text value.
+                                        </div>
+                                    </div>
+ 
+     
+
+                                    <hr />
+                                    </div>        
+                                    <div class="" rel="yui:attribute" resource="#config_host">
+                                    <h4><a name="config_host">host</a>
+                                        <code>- writeonce <span property="yui:type">Object</span></code>
+                                    </h4>
+                                    <div class="detail">
+                                        <div class="description" property="yui:description">
+                                            The object to inspect.
+                                        </div>
+                                    </div>
+ 
+     
+
+                                    <hr />
+                                    </div>        
+                                    <div class="" rel="yui:attribute" resource="#config_hostAttrs">
+                                    <h4><a name="config_hostAttrs">hostAttrs</a>
+                                        <code>- <span property="yui:type">Object</span></code>
+                                    </h4>
+                                    <div class="detail">
+                                        <div class="description" property="yui:description">
+                                            Name/value pairs of the host object's attributes.
+                                        </div>
+                                    </div>
+ 
+     
+
+                                    <hr />
+                                    </div>        
+                                    <div class="" rel="yui:attribute" resource="#config_include">
+                                    <h4><a name="config_include">include</a>
+                                        <code>- <span property="yui:type">Array</span></code>
+                                    </h4>
+                                    <div class="detail">
+                                        <div class="description" property="yui:description">
+                                            Array of attribute names to include. Opposite of, and overrides
+<code>exclude</code>.
+                                        </div>
+                                    </div>
+ 
+     
+
+                                    <hr />
+                                    </div>        
+                                    <div class="" rel="yui:attribute" resource="#config_name">
+                                    <h4><a name="config_name">name</a>
+                                        <code>- writeonce <span property="yui:type">String</span></code>
+                                    </h4>
+                                    <div class="detail">
+                                        <div class="description" property="yui:description">
+                                            Display name of the Inspector instance. If not specified, the host
+object's <code>name</code> property will be used if present.
+                                        </div>
+                                    </div>
+ 
+     
+
+                                    <hr />
+                                    </div>        
+                                    <div class="" rel="yui:attribute" resource="#config_paused">
+                                    <h4><a name="config_paused">paused</a>
+                                        <code>- <span property="yui:type">Boolean</span></code>
+                                    </h4>
+                                    <div class="detail">
+                                        <div class="description" property="yui:description">
+                                            If <code>true</code>, Inspector will intitally be paused.
+                                        </div>
+                                    </div>
+ 
+     
+                                    <div class="default">
+                                        Default Value: false
+                                    </div>        
+
+                                    <hr />
+                                    </div>        
+                                    <div class="" rel="yui:attribute" resource="#config_strings">
+                                    <h4><a name="config_strings">strings</a>
+                                        <code>- <span property="yui:type">Object</span></code>
+                                    </h4>
+                                    <div class="detail">
+                                        <div class="description" property="yui:description">
+                                            Translatable strings used by Inspector.
+                                        </div>
+                                    </div>
+ 
+     
+
+                                    <hr />
+                                    </div>        
+
+                            </div>
+                        </div>
+
+                    </div>
+
+			</div>
+		</div>
+		<div class="yui-b">
+            <div class="nav">
+
+                    <div id="moduleList" class="module">
+                        <h4>Modules</h4>
+                        <ul class="content">
+                                <li class="selected"><a href="module_gallery-inspector.html" title="gallery-inspector">gallery-inspector</a></li>
+                        </ul>
+                    </div>
+
+                    <div id="classList" class="module">
+                        <h4>Classes</h4>
+                        <ul class="content">
+                                <li class="selected"><a href="Inspector.html" title="Inspector">Inspector</a></li>
+                                <li class=""><a href="Plugin.Inspector.html" title="Plugin.Inspector">Plugin.Inspector</a></li>
+                        </ul>
+                    </div>
+
+                    <div id="fileList" class="module">
+                        <h4>Files</h4>
+                        <ul class="content">        
+                                <li class=""><a href="inspector-plugin.js.html" title="inspector-plugin.js">inspector-plugin.js</a></li>
+                                <li class=""><a href="inspector.js.html" title="inspector.js">inspector.js</a></li>
+                        </ul>
+                    </div>
+
+
+                    <div id="methodsList" class="module">
+                        <h4>Methods</h4>
+                        <ul class="content">        
+                                <li class="protected"><a href="#method__afterCollapsedChange" title="_afterCollapsedChange">_afterCollapsedChange</a></li>
+                                <li class="protected"><a href="#method__afterDraggableChange" title="_afterDraggableChange">_afterDraggableChange</a></li>
+                                <li class="protected"><a href="#method__afterExcludeChange" title="_afterExcludeChange">_afterExcludeChange</a></li>
+                                <li class="protected"><a href="#method__afterFilterChange" title="_afterFilterChange">_afterFilterChange</a></li>
+                                <li class="protected"><a href="#method__afterHostAttrsChange" title="_afterHostAttrsChange">_afterHostAttrsChange</a></li>
+                                <li class="protected"><a href="#method__afterHostAttrValueChange" title="_afterHostAttrValueChange">_afterHostAttrValueChange</a></li>
+                                <li class="protected"><a href="#method__afterHostDestroyedChange" title="_afterHostDestroyedChange">_afterHostDestroyedChange</a></li>
+                                <li class="protected"><a href="#method__afterIncludeChange" title="_afterIncludeChange">_afterIncludeChange</a></li>
+                                <li class="protected"><a href="#method__afterPausedChange" title="_afterPausedChange">_afterPausedChange</a></li>
+                                <li class="protected"><a href="#method__bindHostValueChangeEvents" title="_bindHostValueChangeEvents">_bindHostValueChangeEvents</a></li>
+                                <li class="protected"><a href="#method__formatValue" title="_formatValue">_formatValue</a></li>
+                                <li class="protected"><a href="#method__onCollapseClick" title="_onCollapseClick">_onCollapseClick</a></li>
+                                <li class="protected"><a href="#method__onFilter" title="_onFilter">_onFilter</a></li>
+                                <li class="protected"><a href="#method__onFilterEscapeKey" title="_onFilterEscapeKey">_onFilterEscapeKey</a></li>
+                                <li class="protected"><a href="#method__onPauseClick" title="_onPauseClick">_onPauseClick</a></li>
+                                <li class="protected"><a href="#method__purgeEvents" title="_purgeEvents">_purgeEvents</a></li>
+                                <li class="protected"><a href="#method__renderAttr" title="_renderAttr">_renderAttr</a></li>
+                                <li class="protected"><a href="#method__renderAttrs" title="_renderAttrs">_renderAttrs</a></li>
+                                <li class="protected"><a href="#method__renderBody" title="_renderBody">_renderBody</a></li>
+                                <li class="protected"><a href="#method__renderFoot" title="_renderFoot">_renderFoot</a></li>
+                                <li class="protected"><a href="#method__renderHead" title="_renderHead">_renderHead</a></li>
+                                <li class="protected"><a href="#method__syncAttrs" title="_syncAttrs">_syncAttrs</a></li>
+                                <li class="protected"><a href="#method__uiFilterAttrs" title="_uiFilterAttrs">_uiFilterAttrs</a></li>
+                                <li class="protected"><a href="#method__uiSetAttrValue" title="_uiSetAttrValue">_uiSetAttrValue</a></li>
+                                <li class="protected"><a href="#method__uiSetAttrValues" title="_uiSetAttrValues">_uiSetAttrValues</a></li>
+                                <li class="protected"><a href="#method__uiSetCollapsed" title="_uiSetCollapsed">_uiSetCollapsed</a></li>
+                                <li class="protected"><a href="#method__uiSetDraggable" title="_uiSetDraggable">_uiSetDraggable</a></li>
+                                <li class="protected"><a href="#method__uiSetFilter" title="_uiSetFilter">_uiSetFilter</a></li>
+                                <li class="protected"><a href="#method__uiSetHeight" title="_uiSetHeight">_uiSetHeight</a></li>
+                                <li class="protected"><a href="#method__uiSetHostDestroyed" title="_uiSetHostDestroyed">_uiSetHostDestroyed</a></li>
+                                <li class="protected"><a href="#method__uiSetPaused" title="_uiSetPaused">_uiSetPaused</a></li>
+                                <li class="protected"><a href="#method__uiSetPosition" title="_uiSetPosition">_uiSetPosition</a></li>
+                                <li class="protected"><a href="#method__uiSyncAttrs" title="_uiSyncAttrs">_uiSyncAttrs</a></li>
+                        </ul>
+                    </div>
+
+                    <div id="eventsList" class="module">
+                        <h4>Events</h4>
+                        <ul class="content">        
+                                <li class=""><a href="#event_collapsedChange" title="collapsedChange">collapsedChange</a></li>
+                                <li class=""><a href="#event_draggableChange" title="draggableChange">draggableChange</a></li>
+                                <li class=""><a href="#event_excludeChange" title="excludeChange">excludeChange</a></li>
+                                <li class=""><a href="#event_filterChange" title="filterChange">filterChange</a></li>
+                                <li class=""><a href="#event_hostAttrsChange" title="hostAttrsChange">hostAttrsChange</a></li>
+                                <li class=""><a href="#event_hostChange" title="hostChange">hostChange</a></li>
+                                <li class=""><a href="#event_includeChange" title="includeChange">includeChange</a></li>
+                                <li class=""><a href="#event_nameChange" title="nameChange">nameChange</a></li>
+                                <li class=""><a href="#event_pausedChange" title="pausedChange">pausedChange</a></li>
+                                <li class=""><a href="#event_stringsChange" title="stringsChange">stringsChange</a></li>
+                        </ul>
+                    </div>
+
+                    <div id="configList" class="module">
+                        <h4>Configuration Attributes</h4>
+                        <ul class="content">        
+                                <li class=""><a href="#config_collapsed" title="collapsed">collapsed</a></li>
+                                <li class=""><a href="#config_draggable" title="draggable">draggable</a></li>
+                                <li class=""><a href="#config_exclude" title="exclude">exclude</a></li>
+                                <li class=""><a href="#config_filter" title="filter">filter</a></li>
+                                <li class=""><a href="#config_host" title="host">host</a></li>
+                                <li class=""><a href="#config_hostAttrs" title="hostAttrs">hostAttrs</a></li>
+                                <li class=""><a href="#config_include" title="include">include</a></li>
+                                <li class=""><a href="#config_name" title="name">name</a></li>
+                                <li class=""><a href="#config_paused" title="paused">paused</a></li>
+                                <li class=""><a href="#config_strings" title="strings">strings</a></li>
+                        </ul>
+                    </div>
+
+            </div>
+		</div>
+	</div>
+	<div id="ft">
+        <hr />
+        Copyright &copy; 2011 Yahoo! Inc. All rights reserved.
+	</div>
+</div>
+<script type="text/javascript">
+    ALL_YUI_PROPS = [{"url": "Inspector.html#method__afterCollapsedChange", "access": "protected", "host": "Inspector", "type": "method", "name": "_afterCollapsedChange"}, {"url": "Inspector.html#method__afterDraggableChange", "access": "protected", "host": "Inspector", "type": "method", "name": "_afterDraggableChange"}, {"url": "Inspector.html#method__afterExcludeChange", "access": "protected", "host": "Inspector", "type": "method", "name": "_afterExcludeChange"}, {"url": "Inspector.html#method__afterFilterChange", "access": "protected", "host": "Inspector", "type": "method", "name": "_afterFilterChange"}, {"url": "Inspector.html#method__afterHostAttrsChange", "access": "protected", "host": "Inspector", "type": "method", "name": "_afterHostAttrsChange"}, {"url": "Inspector.html#method__afterHostAttrValueChange", "access": "protected", "host": "Inspector", "type": "method", "name": "_afterHostAttrValueChange"}, {"url": "Inspector.html#method__afterHostDestroyedChange", "access": "protected", "host": "Inspector", "type": "method", "name": "_afterHostDestroyedChange"}, {"url": "Inspector.html#method__afterIncludeChange", "access": "protected", "host": "Inspector", "type": "method", "name": "_afterIncludeChange"}, {"url": "Inspector.html#method__afterPausedChange", "access": "protected", "host": "Inspector", "type": "method", "name": "_afterPausedChange"}, {"url": "Inspector.html#method__bindHostValueChangeEvents", "access": "protected", "host": "Inspector", "type": "method", "name": "_bindHostValueChangeEvents"}, {"url": "Inspector.html#config_collapsed", "access": "", "host": "Inspector", "type": "config", "name": "collapsed"}, {"url": "Inspector.html#event_collapsedChange", "access": "", "host": "Inspector", "type": "event", "name": "collapsedChange"}, {"url": "Inspector.html#config_draggable", "access": "", "host": "Inspector", "type": "config", "name": "draggable"}, {"url": "Inspector.html#event_draggableChange", "access": "", "host": "Inspector", "type": "event", "name": "draggableChange"}, {"url": "Inspector.html#config_exclude", "access": "", "host": "Inspector", "type": "config", "name": "exclude"}, {"url": "Inspector.html#event_excludeChange", "access": "", "host": "Inspector", "type": "event", "name": "excludeChange"}, {"url": "Inspector.html#config_filter", "access": "", "host": "Inspector", "type": "config", "name": "filter"}, {"url": "Inspector.html#event_filterChange", "access": "", "host": "Inspector", "type": "event", "name": "filterChange"}, {"url": "Inspector.html#method__formatValue", "access": "protected", "host": "Inspector", "type": "method", "name": "_formatValue"}, {"url": "Inspector.html#config_host", "access": "", "host": "Inspector", "type": "config", "name": "host"}, {"url": "Inspector.html#config_hostAttrs", "access": "", "host": "Inspector", "type": "config", "name": "hostAttrs"}, {"url": "Inspector.html#event_hostAttrsChange", "access": "", "host": "Inspector", "type": "event", "name": "hostAttrsChange"}, {"url": "Inspector.html#event_hostChange", "access": "", "host": "Inspector", "type": "event", "name": "hostChange"}, {"url": "Inspector.html#config_include", "access": "", "host": "Inspector", "type": "config", "name": "include"}, {"url": "Inspector.html#event_includeChange", "access": "", "host": "Inspector", "type": "event", "name": "includeChange"}, {"url": "Inspector.html#config_name", "access": "", "host": "Inspector", "type": "config", "name": "name"}, {"url": "Inspector.html#event_nameChange", "access": "", "host": "Inspector", "type": "event", "name": "nameChange"}, {"url": "Inspector.html#method__onCollapseClick", "access": "protected", "host": "Inspector", "type": "method", "name": "_onCollapseClick"}, {"url": "Inspector.html#method__onFilter", "access": "protected", "host": "Inspector", "type": "method", "name": "_onFilter"}, {"url": "Inspector.html#method__onFilterEscapeKey", "access": "protected", "host": "Inspector", "type": "method", "name": "_onFilterEscapeKey"}, {"url": "Inspector.html#method__onPauseClick", "access": "protected", "host": "Inspector", "type": "method", "name": "_onPauseClick"}, {"url": "Inspector.html#config_paused", "access": "", "host": "Inspector", "type": "config", "name": "paused"}, {"url": "Inspector.html#event_pausedChange", "access": "", "host": "Inspector", "type": "event", "name": "pausedChange"}, {"url": "Inspector.html#method__purgeEvents", "access": "protected", "host": "Inspector", "type": "method", "name": "_purgeEvents"}, {"url": "Inspector.html#method__renderAttr", "access": "protected", "host": "Inspector", "type": "method", "name": "_renderAttr"}, {"url": "Inspector.html#method__renderAttrs", "access": "protected", "host": "Inspector", "type": "method", "name": "_renderAttrs"}, {"url": "Inspector.html#method__renderBody", "access": "protected", "host": "Inspector", "type": "method", "name": "_renderBody"}, {"url": "Inspector.html#method__renderFoot", "access": "protected", "host": "Inspector", "type": "method", "name": "_renderFoot"}, {"url": "Inspector.html#method__renderHead", "access": "protected", "host": "Inspector", "type": "method", "name": "_renderHead"}, {"url": "Inspector.html#config_strings", "access": "", "host": "Inspector", "type": "config", "name": "strings"}, {"url": "Inspector.html#event_stringsChange", "access": "", "host": "Inspector", "type": "event", "name": "stringsChange"}, {"url": "Inspector.html#method__syncAttrs", "access": "protected", "host": "Inspector", "type": "method", "name": "_syncAttrs"}, {"url": "Inspector.html#method__uiFilterAttrs", "access": "protected", "host": "Inspector", "type": "method", "name": "_uiFilterAttrs"}, {"url": "Inspector.html#method__uiSetAttrValue", "access": "protected", "host": "Inspector", "type": "method", "name": "_uiSetAttrValue"}, {"url": "Inspector.html#method__uiSetAttrValues", "access": "protected", "host": "Inspector", "type": "method", "name": "_uiSetAttrValues"}, {"url": "Inspector.html#method__uiSetCollapsed", "access": "protected", "host": "Inspector", "type": "method", "name": "_uiSetCollapsed"}, {"url": "Inspector.html#method__uiSetDraggable", "access": "protected", "host": "Inspector", "type": "method", "name": "_uiSetDraggable"}, {"url": "Inspector.html#method__uiSetFilter", "access": "protected", "host": "Inspector", "type": "method", "name": "_uiSetFilter"}, {"url": "Inspector.html#method__uiSetHeight", "access": "protected", "host": "Inspector", "type": "method", "name": "_uiSetHeight"}, {"url": "Inspector.html#method__uiSetHostDestroyed", "access": "protected", "host": "Inspector", "type": "method", "name": "_uiSetHostDestroyed"}, {"url": "Inspector.html#method__uiSetPaused", "access": "protected", "host": "Inspector", "type": "method", "name": "_uiSetPaused"}, {"url": "Inspector.html#method__uiSetPosition", "access": "protected", "host": "Inspector", "type": "method", "name": "_uiSetPosition"}, {"url": "Inspector.html#method__uiSyncAttrs", "access": "protected", "host": "Inspector", "type": "method", "name": "_uiSyncAttrs"}];
+</script>
+</body>
+</html>

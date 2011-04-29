@@ -1,0 +1,132 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html xmlns:yui="http://yuilibrary.com/rdf/1.0/yui.rdf#">
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+	<title>API: gallery-inspector   inspector-plugin.js  (YUI Library)</title>
+
+	<link rel="stylesheet" type="text/css" href="assets/reset-fonts-grids-min.css?stamp=1304104496.41" />
+	<link rel="stylesheet" type="text/css" href="assets/api.css?stamp=1304104496.41" />
+
+    <script type="text/javascript" src="assets/api-js?stamp=1304104496.41"></script>
+    <script type="text/javascript" src="assets/ac-js?stamp=1304104496.41"></script>
+</head>
+
+<body id="yahoo-com">
+
+<div id="doc3" class="yui-t2">
+	<div id="hd">
+        <h1><a href="http://developer.yahoo.com/yui/" title="Yahoo! UI Library">Yahoo! UI Library</a></h1>
+        <h3>gallery-inspector&nbsp; <span class="subtitle">0.1.0</span></h3>
+        <a href="./index.html" title="Yahoo! UI Library">Yahoo! UI Library</a> 
+            &gt; <a href="./module_gallery-inspector.html" title="gallery-inspector">gallery-inspector</a>
+                
+                 &gt; inspector-plugin.js (source view) 
+        <form onsubmit="return false">
+            <div id="propertysearch">
+                Search: <input autocomplete="off" id="searchinput" />
+                <div id="searchresults">
+                    &nbsp;
+                </div>
+            </div>
+        </form>
+	</div>
+
+	<div id="bd">
+		<div id="yui-main">
+			<div class="yui-b">
+            <form action="#" name="yui-classopts-form" method="get" id="yui-classopts-form">
+                <fieldset>
+                    <legend>Filters</legend>
+                <span class="classopts"><input type="checkbox" name="show_private" id="show_private" /> <label for="show_private">Show Private</label></span>
+                <span class="classopts"><input type="checkbox" name="show_protected" id="show_protected" /> <label for="show_protected">Show Protected</label></span>
+                <span class="classopts"><input type="checkbox" name="show_deprecated" id="show_deprecated" /> <label for="show_deprecated">Show Deprecated</label></span>
+                </fieldset>
+            </form>
+
+                    <div id="srcout">
+                        <style>
+                            #doc3 .classopts { display:none; }
+                        </style>
+<div class="highlight"><pre><span class="cm">/**</span>
+<span class="cm"> * Binds a new Inspector instance to an existing object.</span>
+<span class="cm"> *</span>
+<span class="cm"> * @module gallery-inspector</span>
+<span class="cm"> * @submodule gallery-inspector-plugin</span>
+<span class="cm"> */</span>
+
+<span class="cm">/**</span>
+<span class="cm"> * &lt;p&gt;Binds a new Inspector instance to an existing object.&lt;/p&gt;</span>
+<span class="cm"> *</span>
+<span class="cm"> * &lt;p&gt;Example:&lt;/p&gt;</span>
+<span class="cm"> *</span>
+<span class="cm"> * &lt;pre&gt;</span>
+<span class="cm"> * myWidget.plug(Y.Plugin.Inspector);</span>
+<span class="cm"> * &lt;/pre&gt;</span>
+<span class="cm"> *</span>
+<span class="cm"> * @class Plugin.Inspector</span>
+<span class="cm"> * @extends Inspector</span>
+<span class="cm"> */</span>
+<span class="kd">var</span> <span class="nx">Plugin</span> <span class="o">=</span> <span class="nx">Y</span><span class="p">.</span><span class="nx">Plugin</span><span class="p">;</span>
+
+<span class="kd">function</span> <span class="nx">InspectorPlugin</span><span class="p">(</span><span class="nx">config</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">config</span><span class="p">.</span><span class="nx">render</span> <span class="o">&amp;&amp;</span> <span class="nx">config</span><span class="p">.</span><span class="nx">render</span> <span class="o">!==</span> <span class="kc">false</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">config</span><span class="p">.</span><span class="nx">render</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
+    <span class="p">}</span>
+    
+    <span class="nx">InspectorPlugin</span><span class="p">.</span><span class="nx">superclass</span><span class="p">.</span><span class="nx">constructor</span><span class="p">.</span><span class="nx">apply</span><span class="p">(</span><span class="k">this</span><span class="p">,</span> <span class="nx">arguments</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="nx">Y</span><span class="p">.</span><span class="nx">extend</span><span class="p">(</span><span class="nx">InspectorPlugin</span><span class="p">,</span> <span class="nx">Y</span><span class="p">.</span><span class="nx">Inspector</span><span class="p">,</span> <span class="p">{},</span> <span class="p">{</span>
+    <span class="nx">CSS_PREFIX</span><span class="o">:</span> <span class="nx">Y</span><span class="p">.</span><span class="nx">ClassNameManager</span><span class="p">.</span><span class="nx">getClassName</span><span class="p">(</span><span class="s1">&#39;inspector&#39;</span><span class="p">),</span>
+    <span class="nx">NAME</span>      <span class="o">:</span> <span class="s1">&#39;inspectorPlugin&#39;</span><span class="p">,</span>
+    <span class="nx">NS</span>        <span class="o">:</span> <span class="s1">&#39;inspector&#39;</span>
+<span class="p">});</span>
+
+<span class="nx">Plugin</span><span class="p">.</span><span class="nx">Inspector</span> <span class="o">=</span> <span class="nx">InspectorPlugin</span><span class="p">;</span>
+</pre></div>
+                    </div>
+			</div>
+		</div>
+		<div class="yui-b">
+            <div class="nav">
+
+                    <div id="moduleList" class="module">
+                        <h4>Modules</h4>
+                        <ul class="content">
+                                <li class="selected"><a href="module_gallery-inspector.html" title="gallery-inspector">gallery-inspector</a></li>
+                        </ul>
+                    </div>
+
+                    <div id="classList" class="module">
+                        <h4>Classes</h4>
+                        <ul class="content">
+                                <li class=""><a href="Inspector.html" title="Inspector">Inspector</a></li>
+                                <li class=""><a href="Plugin.Inspector.html" title="Plugin.Inspector">Plugin.Inspector</a></li>
+                        </ul>
+                    </div>
+
+                    <div id="fileList" class="module">
+                        <h4>Files</h4>
+                        <ul class="content">        
+                                <li class="selected"><a href="inspector-plugin.js.html" title="inspector-plugin.js">inspector-plugin.js</a></li>
+                                <li class=""><a href="inspector.js.html" title="inspector.js">inspector.js</a></li>
+                        </ul>
+                    </div>
+
+
+
+
+
+            </div>
+		</div>
+	</div>
+	<div id="ft">
+        <hr />
+        Copyright &copy; 2011 Yahoo! Inc. All rights reserved.
+	</div>
+</div>
+<script type="text/javascript">
+    ALL_YUI_PROPS = [{"url": "Inspector.html#method__afterCollapsedChange", "access": "protected", "host": "Inspector", "type": "method", "name": "_afterCollapsedChange"}, {"url": "Inspector.html#method__afterDraggableChange", "access": "protected", "host": "Inspector", "type": "method", "name": "_afterDraggableChange"}, {"url": "Inspector.html#method__afterExcludeChange", "access": "protected", "host": "Inspector", "type": "method", "name": "_afterExcludeChange"}, {"url": "Inspector.html#method__afterFilterChange", "access": "protected", "host": "Inspector", "type": "method", "name": "_afterFilterChange"}, {"url": "Inspector.html#method__afterHostAttrsChange", "access": "protected", "host": "Inspector", "type": "method", "name": "_afterHostAttrsChange"}, {"url": "Inspector.html#method__afterHostAttrValueChange", "access": "protected", "host": "Inspector", "type": "method", "name": "_afterHostAttrValueChange"}, {"url": "Inspector.html#method__afterHostDestroyedChange", "access": "protected", "host": "Inspector", "type": "method", "name": "_afterHostDestroyedChange"}, {"url": "Inspector.html#method__afterIncludeChange", "access": "protected", "host": "Inspector", "type": "method", "name": "_afterIncludeChange"}, {"url": "Inspector.html#method__afterPausedChange", "access": "protected", "host": "Inspector", "type": "method", "name": "_afterPausedChange"}, {"url": "Inspector.html#method__bindHostValueChangeEvents", "access": "protected", "host": "Inspector", "type": "method", "name": "_bindHostValueChangeEvents"}, {"url": "Inspector.html#config_collapsed", "access": "", "host": "Inspector", "type": "config", "name": "collapsed"}, {"url": "Inspector.html#event_collapsedChange", "access": "", "host": "Inspector", "type": "event", "name": "collapsedChange"}, {"url": "Inspector.html#config_draggable", "access": "", "host": "Inspector", "type": "config", "name": "draggable"}, {"url": "Inspector.html#event_draggableChange", "access": "", "host": "Inspector", "type": "event", "name": "draggableChange"}, {"url": "Inspector.html#config_exclude", "access": "", "host": "Inspector", "type": "config", "name": "exclude"}, {"url": "Inspector.html#event_excludeChange", "access": "", "host": "Inspector", "type": "event", "name": "excludeChange"}, {"url": "Inspector.html#config_filter", "access": "", "host": "Inspector", "type": "config", "name": "filter"}, {"url": "Inspector.html#event_filterChange", "access": "", "host": "Inspector", "type": "event", "name": "filterChange"}, {"url": "Inspector.html#method__formatValue", "access": "protected", "host": "Inspector", "type": "method", "name": "_formatValue"}, {"url": "Inspector.html#config_host", "access": "", "host": "Inspector", "type": "config", "name": "host"}, {"url": "Inspector.html#config_hostAttrs", "access": "", "host": "Inspector", "type": "config", "name": "hostAttrs"}, {"url": "Inspector.html#event_hostAttrsChange", "access": "", "host": "Inspector", "type": "event", "name": "hostAttrsChange"}, {"url": "Inspector.html#event_hostChange", "access": "", "host": "Inspector", "type": "event", "name": "hostChange"}, {"url": "Inspector.html#config_include", "access": "", "host": "Inspector", "type": "config", "name": "include"}, {"url": "Inspector.html#event_includeChange", "access": "", "host": "Inspector", "type": "event", "name": "includeChange"}, {"url": "Inspector.html#config_name", "access": "", "host": "Inspector", "type": "config", "name": "name"}, {"url": "Inspector.html#event_nameChange", "access": "", "host": "Inspector", "type": "event", "name": "nameChange"}, {"url": "Inspector.html#method__onCollapseClick", "access": "protected", "host": "Inspector", "type": "method", "name": "_onCollapseClick"}, {"url": "Inspector.html#method__onFilter", "access": "protected", "host": "Inspector", "type": "method", "name": "_onFilter"}, {"url": "Inspector.html#method__onFilterEscapeKey", "access": "protected", "host": "Inspector", "type": "method", "name": "_onFilterEscapeKey"}, {"url": "Inspector.html#method__onPauseClick", "access": "protected", "host": "Inspector", "type": "method", "name": "_onPauseClick"}, {"url": "Inspector.html#config_paused", "access": "", "host": "Inspector", "type": "config", "name": "paused"}, {"url": "Inspector.html#event_pausedChange", "access": "", "host": "Inspector", "type": "event", "name": "pausedChange"}, {"url": "Inspector.html#method__purgeEvents", "access": "protected", "host": "Inspector", "type": "method", "name": "_purgeEvents"}, {"url": "Inspector.html#method__renderAttr", "access": "protected", "host": "Inspector", "type": "method", "name": "_renderAttr"}, {"url": "Inspector.html#method__renderAttrs", "access": "protected", "host": "Inspector", "type": "method", "name": "_renderAttrs"}, {"url": "Inspector.html#method__renderBody", "access": "protected", "host": "Inspector", "type": "method", "name": "_renderBody"}, {"url": "Inspector.html#method__renderFoot", "access": "protected", "host": "Inspector", "type": "method", "name": "_renderFoot"}, {"url": "Inspector.html#method__renderHead", "access": "protected", "host": "Inspector", "type": "method", "name": "_renderHead"}, {"url": "Inspector.html#config_strings", "access": "", "host": "Inspector", "type": "config", "name": "strings"}, {"url": "Inspector.html#event_stringsChange", "access": "", "host": "Inspector", "type": "event", "name": "stringsChange"}, {"url": "Inspector.html#method__syncAttrs", "access": "protected", "host": "Inspector", "type": "method", "name": "_syncAttrs"}, {"url": "Inspector.html#method__uiFilterAttrs", "access": "protected", "host": "Inspector", "type": "method", "name": "_uiFilterAttrs"}, {"url": "Inspector.html#method__uiSetAttrValue", "access": "protected", "host": "Inspector", "type": "method", "name": "_uiSetAttrValue"}, {"url": "Inspector.html#method__uiSetAttrValues", "access": "protected", "host": "Inspector", "type": "method", "name": "_uiSetAttrValues"}, {"url": "Inspector.html#method__uiSetCollapsed", "access": "protected", "host": "Inspector", "type": "method", "name": "_uiSetCollapsed"}, {"url": "Inspector.html#method__uiSetDraggable", "access": "protected", "host": "Inspector", "type": "method", "name": "_uiSetDraggable"}, {"url": "Inspector.html#method__uiSetFilter", "access": "protected", "host": "Inspector", "type": "method", "name": "_uiSetFilter"}, {"url": "Inspector.html#method__uiSetHeight", "access": "protected", "host": "Inspector", "type": "method", "name": "_uiSetHeight"}, {"url": "Inspector.html#method__uiSetHostDestroyed", "access": "protected", "host": "Inspector", "type": "method", "name": "_uiSetHostDestroyed"}, {"url": "Inspector.html#method__uiSetPaused", "access": "protected", "host": "Inspector", "type": "method", "name": "_uiSetPaused"}, {"url": "Inspector.html#method__uiSetPosition", "access": "protected", "host": "Inspector", "type": "method", "name": "_uiSetPosition"}, {"url": "Inspector.html#method__uiSyncAttrs", "access": "protected", "host": "Inspector", "type": "method", "name": "_uiSyncAttrs"}];
+</script>
+</body>
+</html>
