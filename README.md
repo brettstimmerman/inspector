@@ -1,10 +1,6 @@
 Inspector
 =========
 
-<img
-    src="https://github.com/brettstimmerman/Inspector/raw/master/screenshot.png"
-    style="float: right; margin: -3.6em 0 0 1em" alt="Screenshot" />
-
 Inspector is a real-time attribute inspector widget for YUI 3.
 
 Hook Inspector up to any class that implements the Attribute interface, such as
@@ -19,7 +15,9 @@ Use Inspector's attribute filter to narrow the attribute list.
 Collapse Inspector to get it out of your way, or drag it by the header to a new
 location.
 
-<br clear="all"/>
+<img 
+    src="https://github.com/brettstimmerman/Inspector/raw/master/screenshot.png"
+    alt="Screenshot" />
 
 Usage
 -----
