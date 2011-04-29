@@ -1,0 +1,46 @@
+<!doctype html>
+<html>
+<head>
+    <title>Inspector: Example</title>
+</head>
+<body class="yui3-skin-sam">
+
+<h1>Inspector: Example</h1>
+
+<script src="http://yui.yahooapis.com/3.3.0/build/yui/yui-min.js"></script>
+<script>
+YUI().use('base', 'gallery-inspector', function (Y) {
+    
+// 1. Define an object with attributes. Base is a good place to start.
+var Test = Y.Base.create('test', Y.Base, [], {}, {
+    ATTRS: {
+        foo: {
+            value: 'bar'
+        },
+        
+        baz: {
+            value: true
+        }
+    }
+}),
+
+// 2. Instantiate the object
+test = new Test(),
+
+// 3. Hook it up to Inspector
+inspector = new Y.Inspector({
+    host: test
+}).render();
+
+// 4. Then watch it in real-time as attributes change
+Y.later(2500, test, function () {
+    this.setAttrs({
+        foo: 'not bar',
+        baz: false
+    });
+});
+
+});
+</script>
+</body>
+</html>

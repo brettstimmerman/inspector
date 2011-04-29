@@ -1,0 +1,99 @@
+<!doctype html>
+<html>
+<head>
+    <title>Inspector Manual Test</title>
+    <link rel="stylesheet" href="../../assets/gallery-inspector-core.css"/>
+    <link rel="stylesheet" href="../../assets/skins/sam/gallery-inspector-skin.css"/>
+</head>
+<body class="yui3-skin-sam">
+
+<h1>Inspector Manual Test</h1>
+
+<script type="text/javascript" src="http://yui.yahooapis.com/combo?3.3.0/build/yui/yui-min.js&3.3.0/build/loader/loader-min.js"></script>
+<script src="../../lang/gallery-inspector.js"></script>
+<script src="../../js/inspector.js"></script>
+<script src="../../js/inspector-plugin.js"></script>
+<script>
+var Y = YUI({
+    fetchCSS: false
+}).use('base', 'gallery-inspector-plugin', function(Y) {
+
+var TypeTest, test, inspector;
+
+// Set up attributes for different types.
+TypeTest = Y.Base.create('testObj', Y.Base, [], {}, {
+   ATTRS: {
+       regexpLiteral: {
+           value: /^\s+.*\s+$/i
+       },
+       regexpObject: {
+           value: (new RegExp('^\\s+.*\\s+$', 'i'))
+       },
+       booleanLiteral: {
+           value: false
+       },
+       booleanObject: {
+           value: new Boolean(false)
+       },
+       arrayLiteral: {
+           value: [1, 2, 3, 4]
+       },
+       arrayObject: {
+           value: new Array(1, 2, 3, 4)
+       },
+       objectLiteral: {
+           value: {foo: 'bar'}
+       },
+       objectObject: {
+           value: new Object({foo: 'bar'})
+       },
+       stringLiteral: {
+           value: "foo"
+       },
+       stringObject: {
+           value: new String("foo")
+       },
+       nodeObject: {
+           value: Y.one('body')
+       },
+       numberLiteral: {
+           value: 1
+       },
+       numberObject: {
+           value: new Number(1)
+       },
+       functionLiteral: {
+           value: function foo () { return true; }
+       },
+       functionObject: {
+           value: new Function('x', 'return x + 1;')
+       },
+       dateObject: {
+           value: new Date()
+       },
+       errorObject: {
+           value: new Error('error text')
+       },
+       'null': {
+           value: null
+       },
+       'undefined': {
+           value: undefined
+       }
+   }
+});
+
+test = new TypeTest();
+
+inspector = new Y.Inspector({
+   host: test,
+   exclude: ['initialized','destroyed'] // Ignore these.
+}).render();
+
+// Who watches the watchers?
+inspector.plug(Y.Plugin.Inspector);
+
+});
+</script>
+</body>
+</html>
