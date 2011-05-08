@@ -2,16 +2,49 @@
 <html>
 <head>
     <title>Inspector: Loader Test</title>
+    <style>
+    body { font: 13px Arial; }
+    .error { color: #f00; }
+    </style>
 </head>
 <body class="yui3-skin-sam">
 
 <h1>Inspector: Loader Test</h1>
 
+<h2>Setup</h2>
+<p>Copy this file and local-gallery-config.js into yui3-gallery/src/gallery-inspector/test.</p>
+
+<h2>Test #1</h2>
+<p>Open this file locally in the browser, and notice the JS error: 
+<span class="error">Uncaught TypeError: Object #&lt;Object> has no method 'get'</span>.</p>
+<p>Also, notice the language bundle was not downloaded.</p>
+
+<h2>Test #2</h2>
+<p>Uncomment the local-gallery-config.js script tag, and comment out the
+<code>gallery</code> YUI config.</p>
+<p>Reload the page, and notice the UI loads just fine, and the Inspector UI works.</p>
+
+<h2>Test #3</h2>
+<p>Undo the changes you just made for Test #2.</p>
+<p>Uncomment the <code>intl</code> module in <code>use</code>.</p>
+<p>Notice the Inspector UI loads, but the language token placeholders are not
+localized.</p>
+<p>Also, notice the language bundle was not even attempted to be downloaded.</p>
+
+<h2>Test #4</h2>
+<p>Now, uncomment the <code>lang</code> YUI config.</p>
+<p>Notice the UI does not appear at all.</p>
+<p>Also, notice the language bundle was attempted to be loaded from /3.3.0/build instead of /gallery-*/build.</p>
+
 <!-- Uncomment the following script to load Gallery modules locally. -->
-<!-- <script src="local-gallery-config.js"></script> -->
-<script src="http://yui.yahooapis.com/3.3.0/build/yui/yui-min.js"></script>
+<script src="local-gallery-config.js"></script>
+<script src="http://yui.yahooapis.com/3.3.0/build/yui/yui-debug.js"></script>
 <script>
-YUI().use('base', 'gallery-inspector', function (Y) {
+var Y = YUI({
+    // lang: ['en'],
+    filter: 'debug',
+    // gallery: 'gallery-2011.05.04-20-03'
+}).use(/*'intl',*/ 'base', 'gallery-inspector', function (Y) {
     
 // 1. Define an object with attributes. Base is a good place to start.
 var Test = Y.Base.create('test', Y.Base, [], {}, {

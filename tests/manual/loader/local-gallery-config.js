@@ -1,7 +1,7 @@
 // Test Gallery modules locally with Loader.
 // See: https://gist.github.com/943498
 YUI_config = {
-    lang  : ['en-US'],
+    // lang  : ['en-US'],
     groups: {
         gallery: {
             base    : './../../../../yui3-gallery/build/',
@@ -12,7 +12,7 @@ YUI_config = {
             modules: {
                 'gallery-inspector': {
                     path     :'gallery-inspector/gallery-inspector.js',
-                    lang     : ['en'],
+                    // lang     : ['en'],
                     requires : [
                         'dd-constrain', 'escape', 'event-key', 'event-valuechange',
                         'substitute', 'widget', 'widget-stack'
